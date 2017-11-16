@@ -1,0 +1,8 @@
+.container {
+    padding: 0;
+    padding-top: 100px;
+}
+
+.col-sm-6 {
+    height: 500px;
+}
