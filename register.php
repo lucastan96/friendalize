@@ -5,50 +5,105 @@ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
+
+require_once('includes/connection.php');
+require_once('includes/functions.php');
+
+$countries_array = get_countries($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?php include("includes/head.php"); ?>
-        <title>Register | Friendalize</title>
+        <title>Account Registration | Friendalize</title>
         <link href="styles/register.css" rel="stylesheet">
     </head>
     <body>
         <div class="container-fluid">
             <div class="navbar-fixed-top">
-                <a href="index.php"><div id="logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo">friendalize</div></a>
+                <a href="signin.php"><div id="logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo">friendalize</div></a>
             </div>
         </div>
         <div class="container">
-            <form action="register-p.php" method="post">
-                <div class="row cols">
+            <h1>Account Registration</h1>
+            <h2>Step 1: Enter Your Personal Info</h2>
+            <div class="progress">
+                <div class="progress-bar progress-bar-active" role="progressbar" aria-valuenow="33.3"
+                     aria-valuemin="0" aria-valuemax="100" style="width:33.3%">
+                    Personal Info
+                </div>
+                <div class="progress-bar progress-bar-inactive" role="progressbar" aria-valuenow="33.3"
+                     aria-valuemin="0" aria-valuemax="100" style="width:33.3%">
+                    Institution
+                </div>
+                <div class="progress-bar progress-bar-inactive" role="progressbar" aria-valuenow="33.4"
+                     aria-valuemin="0" aria-valuemax="100" style="width:33.4%">
+                    Get Started
+                </div>
+            </div>
+            <form class="form-horizontal" action="register-p.php" method="post">
+                <div class="row">
                     <div class="col-sm-6">
-                        <label for="email" class="sr-only">Email</label>
-                        <input type="email" name="email" class="form-control no-border input" placeholder="Please enter your email address" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                        
-                        <label for="first_name" class="sr-only">First Name</label>
-                        <input type="text" name="first_name" class="form-control no-border input" placeholder="Please enter your first Name" required>
-                        
-                        <label for="last_name" class="sr-only">Last Name</label>
-                        <input type="text" name="last_name" class="form-control no-border input" placeholder="Please enter your last name" required>
-                        
-                        <label for="age" class="sr-only">Age</label>
-                        <input type="number" name="age" class="form-control no-border input" placeholder="Please enter your age" required>
-                        
-                        <label for="country" class="sr-only">Country</label>
-                        <select class="form-control no-border input" name="country" required>
-                            <option value="" selected="selected">Please select a Country</option>
-                        </select>
-                        
-                        <label for="password" class="sr-only">Password</label>
-                        <input type="password" name="registerpassword" class="form-control no-border input" placeholder="Please enter your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-                       
-                        <label for="password_confirm" class="sr-only">Confirm Password</label>
-                        <input type="password" name="password_confirm" class="form-control no-border input" placeholder="Please confirm your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please enter the same password">
-                        <button class="btn btn-default no-border submit" type="submit">PROCEED</button>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="username">Username:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="username" name="username" placeholder="Enter your username" required autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="email">Email:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="password">Password:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="password_confirm">Confirm Password:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="password_confirm" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-6">
-
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="first_name">First Name:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="last_name">Last Name:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="age">Age:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="number" id="age" name="age" placeholder="Enter your age" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="country">Country:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select" id="country" name="country" required>
+                                    <option value="" selected="selected">Select your country</option>
+                                    <?php foreach ($countries_array as $countries) : ?>
+                                        <option value="<?php echo $countries['country_id']; ?>"><?php echo htmlspecialchars($countries['name']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-submit" type="submit">Continue<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </form>

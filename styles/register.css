@@ -1,8 +1,70 @@
-.container {
-    padding: 0;
-    padding-top: 100px;
+body {
+    background: #f2f2f2;
 }
 
-.col-sm-6 {
-    height: 500px;
+.container {
+    padding: 20px;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.progress {
+    border-radius: 2px;
+}
+
+.progress-bar-active {
+    color: white;
+    background: #454545;
+    font-weight: bold;
+}
+
+.progress-bar-inactive {
+    color: black;
+    background: lightgray;
+}
+
+.progress-bar:nth-of-type(2) {
+    border-left: 0.5px solid white;
+    border-right: 0.5px solid white;
+}
+
+form {
+    background: #454545;
+    color: white;
+    padding: 30px;
+    border-radius: 2px;
+}
+
+.btn-submit {
+    color: white;
+    background: #FF5252;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    color: #454545;
+    background: white;
+}
+
+.option {
+    background: #FF5252;
+}
+
+.btn-option {
+    color: white;
+    background: #454545;
+    width: 100%;
+}
+
+.btn-option:hover {
+    color: #454545;
+    background: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        padding: 0;
+        padding-top: 80px;
+        text-align: left;
+    }
 }

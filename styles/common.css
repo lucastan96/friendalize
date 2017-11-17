@@ -32,6 +32,15 @@ body {
     display: none;
 }
 
+.btn {
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: 0.2s ease;
+    border: none;
+    border-radius: 2px;
+}
+
 .form-control {
     padding: 22px !important;
     padding-left: 15px !important;
@@ -39,15 +48,23 @@ body {
     border-radius: 2px !important;
 }
 
+.form-select {
+    height: 46px;
+}
+
+i {
+    margin-left: 8px;
+}
+
 @media only screen and (min-width: 768px) {
-    .col-sm-2, .col-sm-10 {
+    .nav-desktop, .content {
         height: 100vh;
         overflow-y: scroll;
         padding: 0;
         padding-top: 100px;
     }
 
-    .col-sm-10 {
+    .content {
         background: #F2F2F2;
     }
     

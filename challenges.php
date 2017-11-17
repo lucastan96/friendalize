@@ -14,7 +14,7 @@ session_start();
             <div class="row cols">
                 <?php include("includes/nav-desktop.php"); ?>
                 <!-- <?php include("includes/nav-mobile.php"); ?> -->
-                <div class="col-sm-10">
+                <div class="col-sm-10 content">
                     
                 </div>
             </div>

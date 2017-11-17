@@ -33,15 +33,6 @@ body {
     display: none;
 }
 
-.btn {
-    padding: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    transition: 0.2s ease;
-    border: none;
-    border-radius: 2px;
-}
-
 .btn-register {
     background: white;
     color: #454545;
@@ -50,10 +41,6 @@ body {
 .btn-register:hover {
     color: white;
     background: #454545;
-}
-
-i {
-    margin-left: 8px;
 }
 
 .btn-desktop {
