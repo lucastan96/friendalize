@@ -47,25 +47,25 @@ $countries_array = get_countries($db);
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="username">Username:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" id="username" name="username" placeholder="Enter your username" required autofocus>
+                                <input class="form-control form-input" type="text" id="username" name="username" placeholder="Enter your username" required autofocus>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="email">Email:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
+                                <input class="form-control form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="password">Password:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="password_confirm">Confirm Password:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="password_confirm" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" required>
+                                <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" required>
                             </div>
                         </div>
                     </div>
@@ -73,19 +73,19 @@ $countries_array = get_countries($db);
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="first_name">First Name:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                                <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="last_name">Last Name:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                                <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="age">Age:</label>
                             <div class="col-sm-8">
-                                <input class="form-control" type="number" id="age" name="age" placeholder="Enter your age" required>
+                                <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,7 +97,7 @@ $countries_array = get_countries($db);
                                         <option value="<?php echo $countries['country_id']; ?>"><?php echo htmlspecialchars($countries['name']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>
+                              </div>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.php");
-    exit();
-}
+//if (!isset($_SESSION['user_id'])) {
+//    header("Location: signin.php");
+//    exit();
+//}
 
 require_once('includes/connection.php');
 require_once('includes/functions.php');

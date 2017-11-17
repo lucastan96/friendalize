@@ -48,7 +48,7 @@ if (!isset($message)) {
                         }
                         ?>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="usernamss="form-control"e" id="username" value="<?php echo $username; ?>" placeholder="Username" required autofocus>
+                            <input class="form-control" type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Username" required autofocus>
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="Password" required>
