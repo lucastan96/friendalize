@@ -47,12 +47,13 @@ form {
 }
 
 footer {
-    margin-top: 50px;
+    margin-top: 60px;
     background: #454545;
     color: white;
     text-align: center;
     padding-top: 60px;
     padding-bottom: 60px;
+    font-size: 14px;
 }
 
 footer p {

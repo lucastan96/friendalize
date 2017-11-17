@@ -48,10 +48,10 @@ if (!isset($message)) {
                         }
                         ?>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Username" required autofocus>
+                            <input class="form-control form-input" type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Username" required autofocus>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="Password" required>
+                            <input class="form-control form-input" type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="Password" required>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-signin" type="submit">Sign In<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
