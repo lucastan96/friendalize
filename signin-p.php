@@ -23,7 +23,6 @@ if ($request_method == 'POST') {
 
         if (!password_verify($password, $true_password)) {
             $login_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
-
         } else {
             session_start();
 
@@ -34,8 +33,22 @@ if ($request_method == 'POST') {
 
             $_SESSION['username'] = $username;
 
-            header("Location: index.php");
-            exit();
+            $query2 = "SELECT institution_id FROM user_institutions WHERE user_id = :user_id";
+            $statement2 = $db->prepare($query2);
+            $statement2->bindValue(":user_id", $_SESSION['user_id']);
+            $statement2->execute();
+            $institution_id_array = $statement2->fetch();
+            $statement2->closeCursor();
+
+            $institution_id = $institution_id_array["institution_id"];
+
+            if ($institution_id == NULL) {
+                header("Location: setup-institution.php");
+                exit();
+            } else {
+                header("Location: index.php");
+                exit();
+            }
         }
     } else {
         $login_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";

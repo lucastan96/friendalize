@@ -97,7 +97,7 @@ $countries_array = get_countries($db);
                                         <option value="<?php echo $countries['country_id']; ?>"><?php echo htmlspecialchars($countries['name']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,5 +108,9 @@ $countries_array = get_countries($db);
                 </div>
             </form>
         </div>
+        <footer>
+            <p>&#169; <?php echo date("Y"); ?> All Rights Reserved by LEAF.</p>
+            <p>Terms & Conditions | Privacy Policy</p>
+        </footer>
     </body>
 </html>

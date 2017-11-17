@@ -79,7 +79,14 @@ if ($request_method == 'POST') {
 
             $_SESSION['user_id'] = $result_array3['user_id'];
             $_SESSION['username'] = $username;
+            $_SESSION['first_login'] = 1;
 //            $_SESSION['user_status'] = 0;
+            
+            $query4 = "INSERT INTO user_institutions (user_id) VALUES (:user_id)";
+            $statement4 = $db->prepare($query4);
+            $statement4->bindValue(":user_id", $_SESSION['user_id']);
+            $statement4->execute();
+            $statement4->closeCursor();
 
             header("Location: setup-institution.php");
             exit();

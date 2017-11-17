@@ -47,5 +47,9 @@ session_start();
                 <p>That's okay, you can always join one later!</p>
             </a>
         </div>
+        <footer>
+            <p>&#169; <?php echo date("Y"); ?> All Rights Reserved by LEAF.</p>
+            <p>Terms & Conditions | Privacy Policy</p>
+        </footer>
     </body>
 </html>

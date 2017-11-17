@@ -1,10 +1,20 @@
 <?php
 session_start();
 
-//if (!isset($_SESSION['user_id'])) {
-//    header("Location: signin.php");
-//    exit();
-//}
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signin.php");
+    exit();
+} else {
+    require_once('includes/connection.php');
+    require_once('includes/functions.php');
+
+    $institution_id = get_institution_id($db, $_SESSION['user_id']);
+
+    if ($institution_id != NULL) {
+        header("Location: index.php");
+        exit();
+    }
+}
 
 require_once('includes/connection.php');
 require_once('includes/functions.php');
@@ -60,5 +70,9 @@ $institutions_array = get_institutions($db);
                 </div>
             </form>
         </div>
+        <footer>
+            <p>&#169; <?php echo date("Y"); ?> All Rights Reserved by LEAF.</p>
+            <p>Terms & Conditions | Privacy Policy</p>
+        </footer>
     </body>
 </html>

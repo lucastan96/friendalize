@@ -29,8 +29,8 @@ body {
 }
 
 form {
-    background: #454545;
-    color: white;
+    background: white;
+    color: #454545;
     padding: 30px;
     border-radius: 2px;
 }
@@ -42,8 +42,21 @@ form {
 }
 
 .btn-submit:hover {
-    color: #454545;
-    background: white;
+    color: white;
+    background: #454545;
+}
+
+footer {
+    margin-top: 50px;
+    background: #454545;
+    color: white;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+footer p {
+    line-height: 10px;
 }
 
 h4 {
@@ -86,6 +99,10 @@ h4 {
 .btn-option:hover span {
     color: #454545;
     background: white;
+}
+
+.btn-option p {
+    font-size: 16px;
 }
 
 @media only screen and (min-width: 768px) {

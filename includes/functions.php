@@ -18,3 +18,16 @@ function get_institutions($db) {
 
     return $institutions_array;
 }
+
+function get_institution_id($db, $user_id) {
+    $query = "SELECT institution_id FROM user_institutions WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $institution_id_array = $statement->fetch();
+    $statement->closeCursor();
+    
+    $institution_id = $institution_id_array["institution_id"];
+    
+    return $institution_id;
+}
