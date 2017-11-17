@@ -36,24 +36,16 @@ session_start();
                     Get Started
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="option">
-                        <a href="" class="btn btn-option" role="button">
-                            <h3>Join a Challenge Room (Recommended)</h3>
-                            <p></p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="option">
-                        <a href="" class="btn btn-option" role="button">
-                            <h3>Play Later</h3>
-                            <p></p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <h4>Your registration is complete. We are very pleased and excited to welcome you to Friendalize!<br>Please select one of the options below to proceed...</h4>
+            <a href="challenges.php" class="btn btn-option" role="button">
+                <h4>Join a Challenge Room</h4>
+                <div><span>Recommended</span></div>
+                <p>Start your Friendalize experience now by clicking this button will throw you into a random challenge room. It's a great way to socialize!</p>
+            </a>
+            <a href="index.php" class="btn btn-option" role="button">
+                <h4>Play Later</h4>
+                <p>That's okay, you can always join one later!</p>
+            </a>
         </div>
     </body>
 </html>

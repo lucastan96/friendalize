@@ -46,17 +46,44 @@ form {
     background: white;
 }
 
-.option {
-    background: #FF5252;
+h4 {
+    margin-bottom: 25px;
 }
 
 .btn-option {
-    color: white;
-    background: #454545;
+    color: #454545;
+    background: white;
     width: 100%;
+    padding-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .btn-option:hover {
+    color: white;
+    background: #454545;
+}
+
+.btn-option h4 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.btn-option div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-option span {
+    text-transform: uppercase;
+    background: #454545;
+    color: white;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 10px;
+}
+
+.btn-option:hover span {
     color: #454545;
     background: white;
 }

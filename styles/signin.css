@@ -85,8 +85,11 @@ footer {
     padding-left: 0;
     padding-bottom: 30px;
     font-size: 14px;
-    line-height: 8px;
     text-align: center;
+}
+
+footer p {
+    line-height: 10px;
 }
 
 @media only screen and (min-width: 768px) {
