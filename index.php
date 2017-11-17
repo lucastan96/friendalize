@@ -4,6 +4,16 @@ session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: signin.php");
     exit();
+} else {
+    require_once('includes/connection.php');
+    require_once('includes/functions.php');
+
+    $institution_id = get_institution_id($db, $_SESSION['user_id']);
+
+    if ($institution_id == NULL) {
+        header("Location: setup-institution.php");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -88,17 +88,12 @@ h4 {
 
 .btn-option span {
     text-transform: uppercase;
-    background: #454545;
+    background: red;
     color: white;
     padding: 5px;
     padding-left: 8px;
     padding-right: 8px;
     font-size: 10px;
-}
-
-.btn-option:hover span {
-    color: #454545;
-    background: white;
 }
 
 .btn-option p {
