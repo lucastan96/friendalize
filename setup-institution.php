@@ -58,7 +58,7 @@ $institutions_array = get_institutions($db);
                         <select class="form-control form-select" id="institution" name="institution" required>
                             <option value="" selected="selected">Select your institution</option>
                             <?php foreach ($institutions_array as $institutions) : ?>
-                                <option value="<?php echo $instituions['institution_id']; ?>"><?php echo htmlspecialchars($institutions['name']); ?></option>
+                                <option value="<?php echo $institutions['institution_id']; ?>"><?php echo htmlspecialchars($institutions['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
