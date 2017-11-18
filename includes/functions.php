@@ -24,10 +24,36 @@ function get_institution_id($db, $user_id) {
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();
-    $institution_id_array = $statement->fetch();
+    $results_array = $statement->fetch();
     $statement->closeCursor();
     
-    $institution_id = $institution_id_array["institution_id"];
+    $institution_id = $results_array["institution_id"];
     
     return $institution_id;
+}
+
+function get_profile_pic($db, $user_id) {
+    $query = "SELECT profile_pic FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $results_array = $statement->fetch();
+    $statement->closeCursor();
+    
+    $profile_pic = $results_array["profile_pic"];
+    
+    return $profile_pic;
+}
+
+function get_first_name($db, $user_id) {
+    $query = "SELECT first_name FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $results_array = $statement->fetch();
+    $statement->closeCursor();
+    
+    $first_name = $results_array["first_name"];
+    
+    return $first_name;
 }

@@ -7,28 +7,99 @@ body {
 
 .navbar-fixed-top {
     background: #FF5252;
-    padding-left: 10px;
+    padding-left: 0px !important;
+    height: 70px !important;
+    border-bottom: 0 !important;
+    overflow: hidden;
 }
 
-.navbar-fixed-top a:hover {
-    color: white;
-    text-decoration: none;
-}
-
-#logo {
-    line-height: 70px;
-    font-size: 25px;
+.navbar-fixed-top a {
+    height: 70px !important;
+    color: white !important;
     font-weight: bold;
-    color: white;
 }
 
-#logo img {
+.navbar-brand {
+    font-size: 25px;
+    margin-top: -3px;
+}
+
+.navbar-brand span {
+    display: none;
+}
+
+.navbar-brand-logo img {
     height: 55px;
-    margin-top: -7px;
+    margin-top: -5px;
+}
+
+.navbar-mobile {
+    border: 0 !important;
+    padding: 0;
+    padding-top: 8px;
+}
+
+.navbar-mobile:hover {
+    background: none !important;
+}
+
+.navbar-mobile img {
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 100px;
+    margin-top: -3px;
+}
+
+.navbar-mobile i {
+    line-height: 38px;
+    font-size: 20px;
 }
 
 .nav-desktop {
     display: none;
+}
+
+.nav-mobile {
+    margin-top: 70px;
+    background: #454545;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.nav-mobile a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-left: -4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.nav-mobile a:nth-of-type(1) {
+    margin: 0;
+}
+
+.nav-mobile a:hover {
+    background: #777;
+}
+
+.nav-active {
+    background: white !important;
+    color: #454545 !important;
+}
+
+.content {
+    background: #F2F2F2;
+    padding-top: 20px;
 }
 
 h1 {
@@ -54,6 +125,17 @@ p {
     white-space: normal;
 }
 
+.btn-square {
+    border-radius: 0;
+    color: white;
+    background: #454545;
+}
+
+.btn-square:hover {
+    color: #454545;
+    background: white;
+}
+
 .form-input {
     padding: 22px !important;
     padding-left: 15px !important;
@@ -65,29 +147,72 @@ p {
     height: 46px;
 }
 
+.form-control::-webkit-input-placeholder { color: #454545; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #454545; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #454545; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #454545; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #454545; } 
+
 i {
     margin-left: 8px;
 }
 
 @media only screen and (min-width: 768px) {
-    .navbar-fixed-top {
-        padding-left: 20px;
+    .navbar-brand span {
+        display: inline;
+    }
+
+    .navbar-right {
+        padding-right: 10px;
+    }
+
+    .navbar-right li {
+        padding-top: 10px;
+        height: 70px;
+        transition: 0.2s ease;
+        overflow: hidden;
+    }
+
+    .navbar-right li:hover {
+        background: white;
+    }
+
+    .navbar-right li:hover a {
+        color: #454545 !important;
+    }
+
+    .navbar-right i {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .navbar-profile {
+        margin-top: -4px;
+    }
+
+    .navbar-profile img {
+        height: 35px;
+        width: 35px;
+        object-fit: cover;
+        border-radius: 100px;
+        margin-right: 10px;
+        margin-top: -4px;
     }
 
     .nav-desktop, .content {
         height: 100vh;
         overflow-y: scroll;
         padding: 0;
-        padding-top: 100px;
     }
 
-    .content {
-        background: #F2F2F2;
+    .nav-mobile {
+        display: none;
     }
 
     .nav-desktop {
         display: inline;
         text-align: right;
+        padding-top: 92px;
     }
 
     .nav-desktop ul {
@@ -111,5 +236,11 @@ i {
 
     .nav-active a {
         color: white !important;
+    }
+
+    .content {
+        padding-top: 82px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }

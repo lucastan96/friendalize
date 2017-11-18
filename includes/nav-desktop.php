@@ -6,5 +6,6 @@
         <li><a href="challenges.php">Challenges</a></li>
         <li><a href="messages.php">Messages</a></li>
         <li><a href="notifications.php">Notifications</a></li>
+        <li><a href="settings.php">Settings</a></li>
     </ul>
 </div>
