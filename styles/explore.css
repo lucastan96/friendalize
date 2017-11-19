@@ -1,3 +1,263 @@
 h1 {
     padding-left: 16px;
 }
+.form-post div {
+    border: 1px solid #95989A;
+    border-radius: 0;
+}
+
+.form-post div:nth-of-type(2) {
+    border-top: 0;
+}
+
+.form-post input {
+    border: none;
+}
+
+.form-post-options, .filter-box {
+    position: relative;
+    height: 42px;
+    display: inline-block;
+    width: 100%;
+}
+
+.form-post-options .form-select {
+    width: 86px;
+    height: 41px;
+    border: 0;
+    border-radius: 0;
+    background: #f2f2f2;
+    border-right: 1px solid #95989A;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.form-post-options .btn-images {
+    background: #f2f2f2;
+    color: #454545;
+    border-right: 1px solid #95989A;
+    margin-top: -1px;
+    margin-left: -4px;
+    height: 40px;
+}
+
+.form-post-options .btn-post {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 41px;
+}
+
+
+.filter-box {
+    border: 1px solid #95989A;
+    color: #454545;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.filter-box p {
+    line-height: 39px;
+}
+
+.filter-box .form-select {
+    width: 77px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #454545;
+    color: white;
+    padding-left: 22px;
+    cursor: pointer;
+}
+
+.feed {
+
+    margin-top: -804px;
+    width: 100%;
+    margin-right: 24px;
+}
+
+.feed1 {
+    margin-top: -504px;
+    margin-left: -25px;
+
+}
+.feed3 {
+    margin-top: -34px;
+    margin-left: 0%;
+    height: 10%;
+}
+
+.col {
+    float: right;
+    width: 100%;
+    padding: 0;
+}
+.col3 {
+    float: left;
+    width: 50%;
+    padding: 0;
+}
+
+
+.item {
+    float: right;
+    margin: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    background: #454545;
+    color: white;
+    padding-bottom: 0;
+}
+.item3 {
+    float: right;
+    margin: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    background: #454545;
+    color: white;
+    padding-bottom: 0;
+}
+.item-info {
+
+    display: inline-block;
+    width: 100%;
+}
+
+
+.item-profile-pic {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin: 15px;
+    border-radius: 100px;
+    float: left;
+}
+
+.item-user {
+    clear: both;
+    display: inline-block;
+    margin-top: 9px;
+}
+
+.item-time {
+    margin-top: -18px;
+    font-size: 12px;
+}
+
+.item-likes {
+    position: absolute;
+    right: 15px;
+    top: 6px;
+}
+
+.item-likes i {
+    margin: 0;
+    margin-right:15px;
+}
+
+.item-content {
+    margin-top: 2px;
+}
+.likes
+{
+    margin-top: -54px;
+    margin-left: 90%;
+}
+
+.likes1
+{
+    margin-top: -54px;
+    margin-left: 90%;
+}
+.likes2
+{
+    margin-top: -54px;
+    margin-left: 90%;
+}
+.item-content p {
+    margin-left: 210px;
+    margin-right: 86px;
+    font-size: 20px;
+    padding-top: 8px;
+    padding-bottom: 30px;
+}
+
+.item-content img {
+    width: 100%;
+}
+
+.item-options form {
+    border: 1px solid #454545;
+}
+
+
+.item-options3 input {
+    width: 200px;
+}
+.item-options input {
+    border: none;
+    border-radius: 0 !important;
+}
+
+.item-options div {
+    position: relative;
+    height: 42px;
+    display: inline-block;
+    width: 100%;
+    background: #f2f2f2;
+}
+
+.item-category {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 42px;
+    background: #A5CBFF;
+    font-size: 14px;
+    color: #454545;
+}
+
+.item-category3 {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 42px;
+    background: #A5CBFF;
+    font-size: 14px;
+    color: #454545;
+}
+.btn-like {
+    margin-left: -4px;
+    margin-top: -1px;
+    height: 100%;
+}
+
+.btn-like i {
+    margin: 0;
+    margin-right: 5px;
+}
+
+.item-options .btn-post {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: #FF5252;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-post {
+        padding-top: 10px;
+    }
+
+    .col {
+        width: 49%;
+    }
+}
