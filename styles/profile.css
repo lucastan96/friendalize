@@ -1,79 +1,60 @@
-h1 {
-    display: none;
-}
-
-.form-post div {
-    border: 1px solid #95989A;
-    border-radius: 0;
-}
-
-.form-post div:nth-of-type(2) {
-    border-top: 0;
-}
-
-.form-post input {
-    border: none;
-}
-
-.form-post-options, .filter-box {
-    position: relative;
-    height: 42px;
-    display: inline-block;
-    width: 100%;
-}
-
-.form-post-options .form-select {
-    width: 86px;
-    height: 41px;
-    border: 0;
-    border-radius: 0;
+.content {
+    padding: 0;
+    padding-top: 118px;
     background: #f2f2f2;
-    border-right: 1px solid #95989A;
-    display: inline-block;
-    cursor: pointer;
 }
 
-.form-post-options .btn-images {
-    background: #f2f2f2;
-    color: #454545;
-    border-right: 1px solid #95989A;
-    margin-top: -1px;
-    margin-left: -4px;
-    height: 40px;
-}
-
-.form-post-options .btn-post {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 41px;
-}
-
-.filter-box {
-    border: 1px solid #95989A;
-    color: #454545;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    padding-left: 10px;
-}
-
-.filter-box p {
-    line-height: 39px;
-}
-
-.filter-box .form-select {
-    width: 77px;
-    height: 40px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: 0;
-    border-radius: 0;
+.profile-info {
+    text-align: center;
     background: #454545;
     color: white;
-    padding-left: 22px;
-    cursor: pointer;
+    padding-bottom: 20px;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.profile-posts h2 {
+    margin-top: 35px;;
+    padding-left: 16px;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 200px;
+    object-fit: cover;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.btn-profile {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    color: white;
+    background: #FF5252;
+}
+
+.btn-profile:hover {
+    color: #454545;
+    background: white;
+}
+
+.profile-about {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.profile-about h5 {
+    font-style: italic;
+}
+
+.profile-about p {
+    margin-top: -8px;
+    margin-bottom: 15px;
 }
 
 .feed {
@@ -90,9 +71,10 @@ h1 {
     margin: 10px;
     margin-top: 0;
     margin-bottom: 20px;
-    background: #454545;
-    color: white;
+    background: white;
+    color: #454545;
     padding-bottom: 0;
+    border: 1px solid #95989A;
 }
 
 .item-info {
@@ -149,7 +131,7 @@ h1 {
 }
 
 .item-options form {
-    border: 1px solid #454545;
+    border-top: 1px solid #95989A;
 }
 
 .item-options input {
@@ -195,11 +177,30 @@ h1 {
 }
 
 @media only screen and (min-width: 768px) {
-    .form-post {
-        padding-top: 10px;
+    .content {
+        padding: 0;
     }
-    
-    .col {
-        width: 50%;
+
+    .profile-info, .profile-posts {
+        height: 100vh;
+        overflow-y: scroll;
+        padding-top: 92px;
+    }
+
+    .profile-posts h2 {
+        margin-top: 11px;
+        padding-left: 55px;
+    }
+
+    .feed {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .profile-pic {
+        width: 150px;
+        height: 150px;
     }
 }

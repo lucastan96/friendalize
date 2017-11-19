@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id'])) {
     <head>
         <?php include("includes/head.php"); ?>
         <title>Home | Friendalize</title>
+        <link href="scripts/dead-simple-grid-gh-pages/css/grid.css" rel="stylesheet">
         <link href="styles/index.css" rel="stylesheet">
     </head>
     <body>
@@ -24,16 +25,48 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <h1>Home</h1>
                     <form class="form-horizontal form-post" action='post-p.php' method='post'>
-                        <div>
-                            <input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..." required>
-                        </div>
-                        <div>
-<!--                            <select id="post_category" name="post_category" required>
+                        <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..." required></div>
+                        <div class="form-post-options">
+                            <select class="form-control form-select" id="post_category" name="post_category" required>
                                 <option value="" selected="selected">Category</option>
-                            </select>-->
-                            <button class="btn btn-square btn-submit" type="submit">Post<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </select>
+                            <button class="btn btn-square btn-images">Images</button>
+                            <button class="btn btn-square btn-post" type="submit">Post<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
                     </form>
+                    <div class="filter-box">
+                        <p>Showing all categories</p>
+                        <select class="form-control form-select" id="filter-select" name="filter-select" required>
+                            <option value="" selected="selected">Filter</option>
+                        </select>
+                    </div>
+                    <div class="feed">
+                        <div class="row">
+                            <div class="col">
+                                <div class="item">
+                                    <div class="item-info">
+                                        <img class="item-profile-pic" src="images/profiles/default.png" alt="Profile Pic">
+                                        <div class="item-user">Lucas Tan</div>
+                                        <div class="item-time">Posted on 2017-10-17 12.50pm</div>
+                                        <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>26</div>
+                                    </div>
+                                    <div class="item-content">
+                                        <p>Table tennis on Friday anyone?</p>
+                                    </div>
+                                    <div class="item-options">
+                                        <form class='form-horizontal item-comment' action='comment-add-p.php' method='post'>
+                                            <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
+                                            <div>
+                                                <p class='item-category'>Sports</p>
+                                                <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
+                                                <button class="btn btn-square btn-post" type="submit" title='Post comment'>Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

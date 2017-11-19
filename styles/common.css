@@ -15,8 +15,11 @@ body {
 
 .navbar-fixed-top a {
     height: 70px !important;
-    color: white !important;
     font-weight: bold;
+}
+
+.navbar-default a {
+    color: white !important;
 }
 
 .navbar-brand {
@@ -31,6 +34,14 @@ body {
 .navbar-brand-logo img {
     height: 55px;
     margin-top: -5px;
+}
+
+.navbar-active {
+    background: white !important;
+}
+
+.navbar-active a {
+    color: #454545 !important;
 }
 
 .navbar-mobile {
@@ -61,6 +72,8 @@ body {
 }
 
 .nav-mobile {
+    position: fixed;
+    height: 47px !important;
     margin-top: 70px;
     background: #454545;
     white-space: nowrap;
@@ -74,6 +87,7 @@ body {
 }
 
 .nav-mobile a {
+    font-weight: normal !important;
     display: inline-block;
     color: white;
     text-align: center;
@@ -93,13 +107,13 @@ body {
 }
 
 .nav-active {
-    background: white !important;
     color: #454545 !important;
+    background: #f2f2f2 !important;
 }
 
 .content {
     background: #F2F2F2;
-    padding-top: 20px;
+    padding-top: 135px;
 }
 
 h1 {
@@ -132,8 +146,7 @@ p {
 }
 
 .btn-square:hover {
-    color: #454545;
-    background: white;
+    color: white;
 }
 
 .form-input {
@@ -145,6 +158,10 @@ p {
 
 .form-select {
     height: 46px;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
 }
 
 .form-control::-webkit-input-placeholder { color: #454545; }  /* WebKit, Blink, Edge */
