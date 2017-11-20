@@ -1,0 +1,24 @@
+.right{
+    text-align: right;
+}
+#countdown
+{
+    font-family: 'Digital dream Fat', arial;
+    /*font-size: 92px;*/
+
+     float: right;
+   
+}
+
+.timer
+{
+  -webkit-animation-name: blinker;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+} 
+@-webkit-keyframes blinker { 
+    0% { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1.0; } 
+} 
