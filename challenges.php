@@ -29,6 +29,22 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>Challenges</h1>
+                    <h2>Create a New Room</h2>
+                    <form action="includes/challenge-add-p.php" method="post">
+                        <select id="challenge" name="challenge" required>
+                            <option value="" selected="selected">Select a Challenge</option>
+                            <option value="1">Who's the Ghost?</option>
+                            <option value="2" disabled>Quiz (Coming Soon)</option>
+                        </select>
+                        <input type='text' name='room_name' placeholder="Enter room name">
+                        <select id="member_num" name="member_num" required>
+                            <option value="" selected="selected">Select Number of Players</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type='submit'>Create</button>
+                    </form>
                     <?php
                     foreach ($rooms as $room) {
                         $query2 = 'SELECT  count(*) as num FROM ghost_room_players WHERE room_id  =:room_id';

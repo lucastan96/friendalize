@@ -18,7 +18,7 @@ $statement3->closeCursor();
 $ready = $result["num_ready"];
 
 if ($ready == 3) {
-    $query2 = 'SELECT wp.civilian_word,wp.ghost_word FROM ghost_room r , ghost_word_pair wp WHERE r.room_id = :room_id AND r.room_id = wp.word_pair_id';
+    $query2 = 'SELECT wp.civilian_word,wp.ghost_word FROM ghost_room r , ghost_word_pair wp WHERE r.room_id = :room_id AND r.word_pair_id = wp.word_pair_id';
     $statement2 = $db->prepare($query2);
     $statement2->execute(array(":room_id" => $room_id));
     $room_info = $statement2->fetch();
@@ -43,6 +43,7 @@ if ($ready == 3) {
             $word = $civilian_word;
         } else {
             $word = $ghost_word;
+            echo $word;
         }
         $query4 = 'UPDATE ghost_room_players SET word=:word,game_order=:order WHERE room_id=:room_id AND user_id=:user_id';
         $statement4 = $db->prepare($query4);
@@ -56,4 +57,4 @@ if ($ready == 3) {
     $statement5->execute(array(":room_id" => $room_id, ":start_time" => $curTime));
     $statement5->closeCursor();
 }  
-//echo $ready;
+

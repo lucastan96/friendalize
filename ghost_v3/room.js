@@ -76,7 +76,6 @@ $(document).ready(function ()
     $("#vote-btn").click(function () {
         var voted = $("input[name='voted_id']:checked").val();
 
-        alert(voted);
         $.ajax({
             url: "vote_action.php",
             type: "POST",

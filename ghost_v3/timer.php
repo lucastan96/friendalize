@@ -1,5 +1,4 @@
 <?php
-
 require_once('../includes/connection.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -40,10 +39,10 @@ if ($ready == 3) {
     if (!empty($_SESSION["start_time"])) {
         $start_time = $_SESSION['start_time'];
 
-        $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 30);
-        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 30);
+        $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 10);
+        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 20);
         for ($i = 2; $i <= 3; $i++) {
-            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 30);
+            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 20);
         }
 
 //        $answerTime = date("Y-m-d H:i:s", strtotime($playerTime[5]) + 30);
@@ -81,7 +80,7 @@ if ($ready == 3) {
         $from_time = strtotime($curTime);
         $diff = abs($to_time - $from_time);
         echo '<input type="hidden" id = "diff" value="' . $diff . '">';
-    } 
+    }
 //    else if (!empty($_SESSION['start_time']) && $curTime < $playerTime[4]) {
 //        $queryStart = true;
 //        $query5 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND r.game_order=4 AND p.user_id = r.user_id';
@@ -112,7 +111,7 @@ if ($ready == 3) {
             echo '<button type="button" id="vote-btn" value="Submit">Submit</button>';
             echo '</form>';
         } else {
-            
+
 //    } else if (!empty($_SESSION['start_time']) && $curTime > $answerTime) {
             $query7 = 'SELECT count(*) as count_0 FROM ghost_answer_submit WHERE room_id=:room_id and voted = 0';
             $statement7 = $db->prepare($query7);
@@ -144,6 +143,7 @@ if ($ready == 3) {
                 }
                 if ($draw) {
                     echo "Ghost not found";
+
                 } else if (!$draw) {
                     $query10 = 'SELECT wp.ghost_word FROM ghost_room_players rp, ghost_room r, ghost_word_pair wp WHERE rp.room_id = r.room_id and r.word_pair_id = wp.word_pair_id and rp.user_id = :user_id and rp.room_id = :room_id';
                     $statement10 = $db->prepare($query10);
@@ -164,12 +164,13 @@ if ($ready == 3) {
                         echo "The GHOST is ";
                         echo "<br>";
                         echo $die_user["username"];
+                        
                     } else {
                         echo "GHOST was not found";
                         echo "<br>";
                         echo "BUT";
                         echo "<br>";
-                        echo $die_user["name"];
+                        echo $die_user["usernamex"];
                         echo "<br>";
                         echo "Will be kick out from the room";
                         $query11 = 'UPDATE `ghost_room_players` SET died=1 WHERE user_id=:user_id';
@@ -179,6 +180,7 @@ if ($ready == 3) {
 //                         echo '<input type="hidden" id = "diff" value="30">';
                     }
                 }
+                                        echo '<a href="restart.php" role="button" class="btn btn-default">Next Game</a>';
             } else {
                 echo '<input type="hidden" id = "diff" value="0">';
                 echo "Wait for other players to vote";
@@ -200,7 +202,7 @@ if ($ready == 3) {
         }
     }
     echo '<input type="hidden" id = "diff" value="-1">';
-    
+
 //    <!--<span id="countdown" class="timer"></span>
 //    <script>
 //    var seconds = 30;
@@ -233,11 +235,10 @@ if ($ready == 3) {
 //
 //    var countdownTimer = setInterval('secondPassed()', 1000);
 //    </script>-->
-
-} 
+} else {
     echo '<input type="hidden" id = "diff" value="0">';
     echo 'Waiting everyone to get ready';
-
+}
 ?>
 
 
