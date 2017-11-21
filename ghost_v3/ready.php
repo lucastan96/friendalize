@@ -1,5 +1,4 @@
 <?php
-
 require_once('../includes/connection.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -9,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <?php
 $query2 = 'SELECT * FROM ghost_room_players WHERE user_id=:user_id AND room_id=:room_id';
 $statement2 = $db->prepare($query2);
-$statement2->execute(array(":user_id" => $_SESSION["user_id"],":room_id" => $_SESSION["room_id"]));
+$statement2->execute(array(":user_id" => $_SESSION["user_id"], ":room_id" => $_SESSION["room_id"]));
 $player = $statement2->fetch();
 $statement2->closeCursor();
 //                        $query4 = 'SELECT * FROM room_player WHERE user_id=:user_id';
@@ -30,17 +29,17 @@ $ready = $result["num_ready"];
 if ($player['ready'] != 1 && $ready != 3) {
     ?>
 
-      <input type="hidden"  name ="room_id" id="room_id" value="<?php echo $_SESSION["room_id"] ?>">                                  
-    <button type="button" id="ready-btn">Ready</button>
+    <input type="hidden"  name ="room_id" id="room_id" value="<?php echo $_SESSION["room_id"] ?>">                                  
+    <button type="button" class="btn btn-square" id="ready-btn">Ready</button>
     <?php
 }
 //else if($ready == 3){
 //    header()
 //}
 //else if($player['ready'] == 1 && $ready != 5){
-    ?>
+?>
 <!--    <input type="hidden"  name ="room_id" id="room_id" value="<?php echo $_SESSION["room_id"] ?>">   
-    <button type="button" id="ready-btn" disabled>Waiting for others</button>-->
-    <?php
+<button type="button" id="ready-btn" disabled>Waiting for others</button>-->
+<?php
 //}
 ?>

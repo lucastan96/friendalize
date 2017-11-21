@@ -1,3 +1,75 @@
+.content {
+    padding-top: 125px;
+}
+
 h1 {
-    padding-left: 16px;
+    float: left;
+}
+
+.btn-refresh {
+    float: right;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.filter-box {
+    clear: both;
+    border: 1px solid #95989A;
+    color: #454545;
+    margin-bottom: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.filter-box p {
+    line-height: 39px;
+    margin: 0;
+}
+
+.filter-box .form-select {
+    width: 77px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #454545;
+    color: white;
+    padding-left: 22px;
+    cursor: pointer;
+}
+
+.challenges-list, .challenges-add {
+    padding: 0;
+}
+
+.item {
+    background: white;
+    padding: 10px;
+    position: relative;
+}
+
+.item-name {
+    padding-left: 10px;
+}
+
+.btn-item {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .content {
+        padding-top: 80px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .challenges-add {
+        padding-left: 30px;
+    }
 }

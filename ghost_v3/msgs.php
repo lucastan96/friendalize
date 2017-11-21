@@ -11,10 +11,10 @@ $query = "SELECT m.created_at,m.content,p.username, p.user_id,r.room_name FROM g
  $statement->closeCursor();
  foreach($messages as $msg){
       if ($msg['user_id'] == $_SESSION["user_id"]) {
-        echo "<div class='msg right' title='{$msg['created_at']}'> <span class='msgc'>{$msg['content']}</span></div>";
+        echo "<div class='msg right' title='{$msg['created_at']}'><span class='msg-name'>{$msg['username']}</span><div class='msgc'><span>{$msg['content']}</span></div></div>";
     } else {
 //        echo "<b><span class='name'>{$r['username']}</span></b>";
-        echo "<div class='msg' title='{$msg['created_at']}'><b><span class='name'>{$msg['username']}:</span></b> <span class='msgc'>{$msg['content']}</span></div>";
+        echo "<div class='msg left' title='{$msg['created_at']}'><span class='msg-name'>{$msg['username']}</span><div class='msgc'><span>{$msg['content']}</span></div></div>";
     }
  }
 //while($r=$sql->fetch()){

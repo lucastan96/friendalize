@@ -55,7 +55,7 @@ if ($ready == 3) {
         $diff = abs($to_time - $from_time);
         echo '<input type="hidden" id = "diff" value="' . $diff . '">';
         echo '<br>';
-        echo "Please remember the word given";
+        echo "<p>Please remember the word given!</p>";
         echo '<h1>';
         echo $player["word"];
         echo '</h1>';
@@ -105,10 +105,10 @@ if ($ready == 3) {
             $statement6->closeCursor();
             echo '<form>';
             foreach ($players as $p) {
-
                 echo '<input type="radio" name="voted_id" value="' . $p["user_id"] . '"> ' . $p["username"] . '<br>';
             }
-            echo '<button type="button" id="vote-btn" value="Submit">Submit</button>';
+            echo "<br>";
+            echo '<button type="button" class="btn btn-square" id="vote-btn" value="Submit">Vote</button>';
             echo '</form>';
         } else {
 
@@ -143,7 +143,6 @@ if ($ready == 3) {
                 }
                 if ($draw) {
                     echo "Ghost not found";
-
                 } else if (!$draw) {
                     $query10 = 'SELECT wp.ghost_word FROM ghost_room_players rp, ghost_room r, ghost_word_pair wp WHERE rp.room_id = r.room_id and r.word_pair_id = wp.word_pair_id and rp.user_id = :user_id and rp.room_id = :room_id';
                     $statement10 = $db->prepare($query10);
@@ -159,20 +158,10 @@ if ($ready == 3) {
                     $statement9->closeCursor();
 
                     if ($ghost_word == $die_user["word"]) {
-                        echo "GHOST found";
-                        echo "<br>";
-                        echo "The GHOST is ";
-                        echo "<br>";
-                        echo $die_user["username"];
-                        
+                        echo "<p>The <b>ghost</b> was found, it was " . $die_user["username"] . "!</p>";
                     } else {
-                        echo "GHOST was not found";
-                        echo "<br>";
-                        echo "BUT";
-                        echo "<br>";
-                        echo $die_user["usernamex"];
-                        echo "<br>";
-                        echo "Will be kick out from the room";
+                        echo "<p>The <b>ghost</b> was not found!</p>";
+                        echo "<p>However, " . $die_user["username"] . " will be kicked out from the room!</p>";
                         $query11 = 'UPDATE `ghost_room_players` SET died=1 WHERE user_id=:user_id';
                         $statement11 = $db->prepare($query11);
                         $statement11->execute(array(":user_id" => $die_id));
@@ -180,10 +169,11 @@ if ($ready == 3) {
 //                         echo '<input type="hidden" id = "diff" value="30">';
                     }
                 }
-                                        echo '<a href="restart.php" role="button" class="btn btn-default">Next Game</a>';
+                echo '<br>';
+                echo '<a href="restart.php" role="button" class="btn btn-square">Next Game</a>';
             } else {
                 echo '<input type="hidden" id = "diff" value="0">';
-                echo "Wait for other players to vote";
+                echo "<p>Please wait for the other players to vote...</p>";
             }
         }
     }
@@ -193,12 +183,11 @@ if ($ready == 3) {
         $curr_player = $statement5->fetch();
         $statement5->closeCursor();
         if ($curr_player["user_id"] == $_SESSION["user_id"]) {
-            echo 'Please describe the your word in 1 sentence, it is better not to be too obvious.';
-            echo 'If you think you are the GHOST(the one with different word, it is better to pretend you are not.';
+            echo "<p>Please describe your word in one sentence. Remember, it's better not to be too obvious!</p>";
+            echo '<p>If you think you are the ghost (the person with a different word), you should pretend that you are not!</p>';
         } else if (!empty($curr_player)) {
-            echo 'It is ' . $curr_player["username"] . "'s turn";
-            echo '<br>';
-            echo 'Please wait';
+            echo '<p>It is ' . $curr_player["username"] . "'s turn!</p>";
+            echo '<p>Please wait...</p>';
         }
     }
     echo '<input type="hidden" id = "diff" value="-1">';
@@ -237,10 +226,9 @@ if ($ready == 3) {
 //    </script>-->
 } else {
     echo '<input type="hidden" id = "diff" value="0">';
-    echo 'Waiting everyone to get ready';
+    echo '<p>Waiting for all players to get ready...</p>';
 }
 ?>
-
 
 <script>
     var diff = document.getElementById('diff').value;

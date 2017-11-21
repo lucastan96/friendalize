@@ -1,0 +1,100 @@
+.content {
+    padding: 0;
+    padding-top: 70px;
+    border-left: 1px solid #95989A;
+    height: auto;
+}
+
+.room-info {
+    background: #f2f2f2;
+    border-bottom: 1px solid #95989A;
+    padding: 10px;
+    padding-top: 0;
+    padding-left: 25px;
+}
+
+.ready {
+    position: relative;
+}
+
+#ready-btn {
+    position: absolute;
+    right: 15px;
+    margin-top: -43.5px;
+}
+
+.room-chat {
+    padding: 0;
+    background: white;
+    border-right: 1px solid #95989A;
+    position: relative;
+}
+
+.msgs {
+    height: calc(100vh - 138px);
+    padding: 30px;
+    padding-top: 10px;
+    overflow-y: scroll;
+}
+
+.msgc {
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.msgc span {
+    border: 1px solid #95989A;
+    padding: 6px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 5px;
+}
+
+.msg-name {
+    font-size: 12px;
+}
+
+.right {
+    text-align: right;
+}
+
+#msg_form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #95989A;
+    background: white;
+}
+
+#msg_form input {
+    border: 0;
+}
+
+#msg_form .btn {
+    float: right;
+}
+
+.room-game {
+    height: calc(100vh - 138px);
+}
+
+#countdown {
+    width: 100%;
+}
+
+.timer {
+    -webkit-animation-name: blinker;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    padding: 30px;
+}
+
+@-webkit-keyframes blinker { 
+    0% { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1.0; } 
+} 
+
+@media only screen and (min-width: 768px) {
+
+}

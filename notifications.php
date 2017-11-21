@@ -28,12 +28,8 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <script>
             $(document).ready(function () {
-                $('.nav-desktop li:nth-child(6)').addClass("nav-active");
-                $('.nav-mobile a:nth-child(6)').addClass("nav-active");
+                $('.navbar-right li:nth-child(2)').addClass("navbar-active");
             });
-            
-            var width = $('.nav-mobile a:nth-child(1)').width() + $('.nav-mobile a:nth-child(2)').width() + $('.nav-mobile a:nth-child(3)').width() + $('.nav-mobile a:nth-child(4)').width() + $('.nav-mobile a:nth-child(5)').width();
-            $('.nav-mobile').scrollLeft(width);
         </script>
     </body>
 </html>

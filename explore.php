@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-desktop.php"); ?>
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
-                    <h1>Home <small> &nbsp; Find people in your instistution or others that share same interests as you</small></h1>
+                    <h1>Explore <small> &nbsp; Find people in your instistution or others that share same interests as you</small></h1>
 
                         <form action='explore.php' method='post' >
                             <div>
