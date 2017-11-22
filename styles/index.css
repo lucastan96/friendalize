@@ -146,6 +146,8 @@ h1 {
 
 .item-content img {
     width: 100%;
+    border-left: 1px solid #454545;
+    border-right: 1px solid #454545;
 }
 
 .item-options form {
@@ -179,6 +181,8 @@ h1 {
     margin-left: -4px;
     margin-top: -1px;
     height: 100%;
+    border-left: 1px solid #454545;
+    border-right: 1px solid #454545;
 }
 
 .btn-like i {

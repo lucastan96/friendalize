@@ -59,20 +59,30 @@ if (!isset($_SESSION['user_id'])) {
                     <div class='col-sm-4 challenges-add'>
                         <h2>Create a New Room</h2>
                         <form class="form-horizontal" action="includes/challenge-add-p.php" method="post">
-                            <select class="form-control" id="challenge" name="challenge" required>
-                                <option value="" selected="selected">Select a Challenge</option>
-                                <option value="1">Who's the Ghost?</option>
-                                <option value="2" disabled>Quiz (Coming Soon)</option>
-                            </select>
-                            <input class='form-control' type='text' name='room_name' placeholder="Enter Room Name">
-                            <select class='form-control' id="member_num" name="member_num" required>
-                                <option value="" selected="selected">Select Number of Players</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <br>
-                            <button class='btn btn-square' type='submit'>Create</button>
+                            <div class="form-group">
+                                <label class="control-label" for="challenge">Challenge:</label>
+                                <select class="form-control form-select" id="challenge" name="challenge" required>
+                                    <option value="" selected="selected">What game do you wanna play today?</option>
+                                    <option value="1">Who's the Ghost?</option>
+                                    <option value="2" disabled>Quiz (Coming Soon)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="room_name">Room Name (Optional):</label>
+                                <input class='form-control form-input' type='text' name='room_name' placeholder="Type a name for the room, be creative!">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="member_num">Players Allowed:</label>
+                                <select class='form-control form-select' id="member_num" name="member_num" required>
+                                    <option value="" selected="selected">Game of 3, 4, or 5 person?</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-square" type="submit">Create<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
                         </form>
                     </div>
                 </div>

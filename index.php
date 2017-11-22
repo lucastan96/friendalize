@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>Home</h1>
-                    <form class="form-horizontal form-post" action='post-p.php' method='post'>
+                    <form class="form-horizontal form-post" action='post-add-p.php' method='post'>
                         <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..." required></div>
                         <div class="form-post-options">
                             <select class="form-control form-select" id="post_category" name="post_category" required>

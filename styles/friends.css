@@ -1,5 +1,13 @@
 .content {
-    padding-top: 80px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-top: 120px;
+}
+
+h1 {
+    padding-left: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .content {
+        padding-top: 80px;
+    }
 }

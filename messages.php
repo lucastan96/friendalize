@@ -23,7 +23,6 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>Messages</h1>
-                    Test
                 </div>
             </div>
         </div>

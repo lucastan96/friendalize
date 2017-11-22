@@ -1,9 +1,10 @@
 .content {
-    padding-top: 125px;
+    padding-top: 120px;
 }
 
 h1 {
     float: left;
+    padding-left: 16px;
 }
 
 .btn-refresh {
@@ -62,14 +63,44 @@ h1 {
     height: 100%;
 }
 
+.challenges-add {
+    background: #454545;
+    padding: 20px;
+    padding-top: 3px;
+    padding-bottom: 0;
+}
+
+.challenges-add h2 {
+    color: white;
+}
+
+.challenges-add form {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.challenges-add label {
+    font-size: 14px;
+    color: white;
+}
+
+.challenges-add .btn {
+    background: white;
+    color: #454545;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
 @media only screen and (min-width: 768px) {
     .content {
         padding-top: 80px;
-        padding-left: 30px;
-        padding-right: 30px;
     }
 
     .challenges-add {
-        padding-left: 30px;
+        padding-top: 0;
+    }
+
+    .challenges-add .btn {
+        margin-bottom: 10px;
     }
 }

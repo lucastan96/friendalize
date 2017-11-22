@@ -159,6 +159,9 @@ p {
 .form-select {
     height: 46px;
     border-radius: 2px;
+    padding-left: 15px;
+    appearance: none;
+    -moz-appearance: none;
     -webkit-appearance: none;
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
@@ -259,5 +262,11 @@ i {
         padding-top: 82px;
         padding-left: 20px;
         padding-right: 20px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .nav-desktop ul li a {
+        font-size: 14px;
     }
 }
