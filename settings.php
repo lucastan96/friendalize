@@ -91,6 +91,15 @@ if (!isset($_SESSION['user_id'])) {
                                 <?php endforeach; ?>
                             </select>
                         </div>
+						      <div class="form-group">
+                            <label class="control-label" for="password">Password:</label>
+                                <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password_confirm">Confirm Password:</label>
+                                <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm new password" >
+                        </div>
+
                         <div class="form-group">
                             <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
