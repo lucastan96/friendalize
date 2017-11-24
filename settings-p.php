@@ -13,19 +13,23 @@ if ($request_method == 'POST') {
     $country_id = filter_input(INPUT_POST, 'country', FILTER_VALIDATE_INT);
     $institution_id = filter_input(INPUT_POST, 'institution', FILTER_VALIDATE_INT);
     $interests_array = filter_input(INPUT_POST, 'interests', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    $confirmpassword = filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_STRING);
+    $hashed_password = password_hash($confirmpassword, PASSWORD_DEFAULT);
 
     require_once('includes/connection.php');
 
-    $query1 = "UPDATE users SET first_name = :first_name, last_name = :last_name, age = :age, gender = :gender, country_id = :country_id WHERE user_id = :user_id";
+    $query1 = "UPDATE users SET first_name = :first_name, last_name = :last_name, age = :age, gender = :gender, country_id = :country_id,password=:password WHERE user_id = :user_id";
     $statement1 = $db->prepare($query1);
     $statement1->bindValue(":first_name", $first_name);
     $statement1->bindValue(":last_name", $last_name);
     $statement1->bindValue(":age", $age);
     $statement1->bindValue(":gender", $gender);
     $statement1->bindValue(":country_id", $country_id);
+    $statement1->bindValue(":password", $hashed_password);
     $statement1->bindValue(":user_id", $user_id);
     $statement1->execute();
     $statement1->closeCursor();
+
 
     $query2 = "UPDATE user_institutions SET institution_id = :institution_id WHERE user_id = :user_id";
     $statement2 = $db->prepare($query2);
