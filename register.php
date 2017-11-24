@@ -41,6 +41,7 @@ $countries_array = get_countries($db);
                     Get Started
                 </div>
             </div>
+            <h4>To become a Friendalizer, these following details are required.<br>Please fill in the form below to proceed...</h4>
             <form class="form-horizontal" action="register-p.php" method="post">
                 <div class="row">
                     <div class="col-sm-6">
@@ -51,9 +52,15 @@ $countries_array = get_countries($db);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="email">Email:</label>
+                            <label class="control-label col-sm-4" for="first_name">First Name:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
+                                <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="last_name">Last Name:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -71,21 +78,26 @@ $countries_array = get_countries($db);
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="first_name">First Name:</label>
+                            <label class="control-label col-sm-4" for="email">Email:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="last_name">Last Name:</label>
-                            <div class="col-sm-8">
-                                <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                                <input class="form-control form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="age">Age:</label>
                             <div class="col-sm-8">
                                 <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="gender">Gender:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select" id="gender" name="gender" required>
+                                    <option value="" selected="selected">Select your gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Other</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

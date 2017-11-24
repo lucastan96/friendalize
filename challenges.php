@@ -36,27 +36,7 @@ if (!isset($_SESSION['user_id'])) {
                             <option value="" selected="selected">Filter</option>
                         </select>
                     </div>
-                    <div class='col-sm-8 challenges-list'>
-                        <?php
-                        foreach ($rooms as $room) {
-                            $query2 = 'SELECT  count(*) as num FROM ghost_room_players WHERE room_id  =:room_id';
-                            $statement2 = $db->prepare($query2);
-                            $statement2->execute(array(":room_id" => $room["room_id"]));
-                            $result = $statement2->fetch();
-                            $statement2->closeCursor();
-                            if ($result["num"] < $room["member_num"]) {
-                                echo "<div class='item'>";
-                                echo "<div class='item-name'>Room ID #" . $room["room_id"] . " - " . $room["room_name"] . "</div>";
-                                echo "<form action='ghost_v3/enter_room_action.php' method='post'>";
-                                echo "<input type='hidden' name='room_id' value='" . $room["room_id"] . "'>";
-                                echo "<button type='submit' class='btn btn-square btn-item'>Join</button>";
-                                echo "</form>";
-                                echo "</div>";
-                            }
-                        }
-                        ?>
-                    </div>
-                    <div class='col-sm-4 challenges-add'>
+                    <div class='col-sm-4 col-sm-push-8 challenges-add'>
                         <h2>Create a New Room</h2>
                         <form class="form-horizontal" action="includes/challenge-add-p.php" method="post">
                             <div class="form-group">
@@ -84,6 +64,26 @@ if (!isset($_SESSION['user_id'])) {
                                 <button class="btn btn-square" type="submit">Create<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                             </div>
                         </form>
+                    </div>
+                    <div class='col-sm-8 col-sm-pull-4 challenges-list'>
+                        <?php
+                        foreach ($rooms as $room) {
+                            $query2 = 'SELECT  count(*) as num FROM ghost_room_players WHERE room_id  =:room_id';
+                            $statement2 = $db->prepare($query2);
+                            $statement2->execute(array(":room_id" => $room["room_id"]));
+                            $result = $statement2->fetch();
+                            $statement2->closeCursor();
+                            if ($result["num"] < $room["member_num"]) {
+                                echo "<div class='item'>";
+                                echo "<div class='item-name'>Room ID #" . $room["room_id"] . " - " . $room["room_name"] . "</div>";
+                                echo "<form action='ghost_v3/enter_room_action.php' method='post'>";
+                                echo "<input type='hidden' name='room_id' value='" . $room["room_id"] . "'>";
+                                echo "<button type='submit' class='btn btn-square btn-item'>Join</button>";
+                                echo "</form>";
+                                echo "</div>";
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

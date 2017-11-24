@@ -71,10 +71,10 @@ h2 {
     margin: 10px;
     margin-top: 0;
     margin-bottom: 20px;
-    background: white;
-    color: #454545;
+    background: #454545;
+    color: white;
     padding-bottom: 0;
-    border: 1px solid #95989A;
+    border: 1px solid #454545;
 }
 
 .item-info {
@@ -185,6 +185,7 @@ h2 {
         height: 100vh;
         overflow-y: scroll;
         padding-top: 92px;
+        padding-bottom: 40px;
     }
 
     .profile-posts h2 {

@@ -38,8 +38,8 @@ if ($request_method == 'POST') {
     $firstname = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
     $lastname = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
     $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+    $gender = filter_input(INPUT_POST, 'gender', FILTER_VALIDATE_INT);
     $country_id = filter_input(INPUT_POST, 'country', FILTER_VALIDATE_INT);
-
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
@@ -55,8 +55,8 @@ if ($request_method == 'POST') {
         $statement1->closeCursor();
 
         if (!count($result_array1)) {
-            $query2 = "INSERT INTO users (username, password, email, first_name, last_name, age, country_id)"
-                    . " VALUES (:username, :password, :email, :first_name, :last_name, :age, :country_id  )";
+            $query2 = "INSERT INTO users (username, password, email, first_name, last_name, age, gender, country_id)"
+                    . " VALUES (:username, :password, :email, :first_name, :last_name, :age, :gender, :country_id  )";
             $statement2 = $db->prepare($query2);
             $statement2->bindValue(":username", $username);
             $statement2->bindValue(":email", $register_email);
@@ -64,6 +64,7 @@ if ($request_method == 'POST') {
             $statement2->bindValue(":first_name", $firstname);
             $statement2->bindValue(":last_name", $lastname);
             $statement2->bindValue(":age", $age);
+            $statement2->bindValue(":gender", $gender);
             $statement2->bindValue(":country_id", $country_id);
             $statement2->execute();
             $statement2->closeCursor();
@@ -79,7 +80,6 @@ if ($request_method == 'POST') {
 
             $_SESSION['user_id'] = $result_array3['user_id'];
             $_SESSION['username'] = $username;
-            $_SESSION['first_login'] = 1;
 //            $_SESSION['user_status'] = 0;
             
             $query4 = "INSERT INTO user_institutions (user_id) VALUES (:user_id)";
@@ -88,6 +88,12 @@ if ($request_method == 'POST') {
             $statement4->execute();
             $statement4->closeCursor();
 
+            $query5 = "INSERT INTO user_interests (user_id) VALUES (:user_id)";
+            $statement5 = $db->prepare($query5);
+            $statement5->bindValue(":user_id", $_SESSION['user_id']);
+            $statement5->execute();
+            $statement5->closeCursor();
+            
             header("Location: setup-institution.php");
             exit();
         } else {

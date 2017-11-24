@@ -96,6 +96,10 @@ h1 {
         padding-top: 80px;
     }
 
+    .challenges-list {
+        padding-right: 20px;
+    }
+
     .challenges-add {
         padding-top: 0;
     }

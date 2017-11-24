@@ -57,6 +57,20 @@ form {
     border-radius: 2px;
 }
 
+.ms-container {
+    width: 100%;
+}
+
+.select-header {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 7px;
+}
+
+.ms-elem-selectable:hover, .ms-elem-selection:hover {
+    background: #454545 !important;
+}
+
 .btn-submit {
     color: white;
     background: #FF5252;
