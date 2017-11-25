@@ -239,3 +239,66 @@ function get_friend_count($db, $user_id) {
     
     return 0;
 }
+
+function get_friends($db, $user_id) {
+    $query = 'SELECT friends FROM user_friends WHERE user_id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":user_id" => $user_id));
+    $results = $statement->fetch();
+    $statement->closeCursor();
+    
+    $friend_ids = $results["friends"];
+    
+    if ($friend_ids != NULL) {
+        $friends = explode(",", $friend_ids);
+        return $friends;
+    }
+
+    return NULL;
+}
+
+function get_user_request_status($db, $user_id, $friend_id) {
+    $query1 = "SELECT requests FROM user_friends WHERE user_id = :user_id";
+    $statement1 = $db->prepare($query1);
+    $statement1->bindValue(":user_id", $user_id);
+    $statement1->execute();
+    $results_array1 = $statement1->fetch();
+    $statement1->closeCursor();
+
+    $request_ids = $results_array1["requests"];
+    $requests_array = explode(",", $request_ids);
+
+    if (in_array($friend_id, $requests_array)) {
+        return true;
+    }
+
+    return false;
+}
+
+function get_friend_request_status($db, $user_id, $friend_id) {
+    $query1 = "SELECT requests FROM user_friends WHERE user_id = :user_id";
+    $statement1 = $db->prepare($query1);
+    $statement1->bindValue(":user_id", $friend_id);
+    $statement1->execute();
+    $results_array1 = $statement1->fetch();
+    $statement1->closeCursor();
+
+    $request_ids = $results_array1["requests"];
+    $requests_array = explode(",", $request_ids);
+
+    if (in_array($user_id, $requests_array)) {
+        return true;
+    }
+    
+    return false;
+}
+
+function get_all_users($db) {
+    $query = "SELECT user_id FROM users";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $users = $statement->fetchAll();
+    $statement->closeCursor();
+    
+    return $users;
+}

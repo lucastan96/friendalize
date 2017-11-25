@@ -13,13 +13,13 @@ if (!isset($_SESSION['user_id'])) {
         $user_details_array = get_user_details($db, $_SESSION['user_id']);
         $institution = get_user_institution($db, $_SESSION['user_id']);
         $interests = get_user_interests($db, $_SESSION['user_id']);
-        $friend_count  = get_friend_count($db, $_SESSION['user_id']);
+        $friend_count = get_friend_count($db, $_SESSION['user_id']);
     } else {
         $user_details_array = get_user_details($db, $friend_id);
         $institution = get_user_institution($db, $friend_id);
         $interests = get_user_interests($db, $friend_id);
         $friend_status = get_friend_status($db, $_SESSION['user_id'], $friend_id);
-        $friend_count  = get_friend_count($db, $friend_id);
+        $friend_count = get_friend_count($db, $friend_id);
     }
 
     foreach ($user_details_array as $user_details):
@@ -75,17 +75,35 @@ if (!isset($_SESSION['user_id'])) {
                             <a class='btn btn-default btn-profile' href='settings.php' role='button'>Edit Profile<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                         <?php } else { ?>
                             <?php if ($friend_status == true) { ?>
-                                <form action="friend-delete-p.php" method="post">
+                                <form action="includes/friend-delete-p.php" method="post">
                                     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-                                    <button class="btn btn-default btn-profile" type="submit">Unfriend</button>
+                                    <button class="btn btn-default btn-profile" type="submit" onclick="return confirm('Are you sure you want to unfriend <?php echo $friend_first_name; ?>? This action cannot be undone!')">Unfriend</button>
                                 </form>
                             <?php } else { ?>
-                                <form action="friend-add-p.php" method="post">
-                                    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-                                    <button class="btn btn-default btn-profile" type="submit">Add Friend</button>
-                                </form>
-                            <?php } ?>
-                        <?php } ?>
+                                <?php
+                                $user_request_status = get_user_request_status($db, $_SESSION['user_id'], $friend_id);
+                                $friend_request_status = get_friend_request_status($db, $_SESSION['user_id'], $friend_id);
+
+                                if ($user_request_status == true) {
+                                    ?>
+                                    <button class="btn btn-default btn-profile disabled" title="Please wait for <?php echo $friend_first_name; ?> to accept your friend request">Requested</button>
+                                <?php } else { ?>
+                                    <?php if ($friend_request_status == true) { ?>
+                                        <form action="includes/friend-add-p.php" method="post">
+                                            <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+                                            <button class="btn btn-default btn-profile" type="submit">Accept Request</button>
+                                        </form>
+                                    <?php } else { ?>
+                                        <form action="includes/friend-request-p.php" method="post">
+                                            <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+                                            <button class="btn btn-default btn-profile" type="submit">Add Friend</button>
+                                        </form>
+                                    <?php } ?>
+                                <?php } ?>
+                                <?php
+                            }
+                        }
+                        ?>
                         <div class='profile-about'>
                             <h5>Email</h5>
                             <p><?php echo $email; ?></p>
@@ -164,9 +182,21 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
         <script>
+            var friend_id = "<?php echo $friend_id; ?>";
+
             $(document).ready(function () {
-                $('.navbar-right li:nth-child(1)').addClass("navbar-active");
+                if (friend_id == "") {
+                    $('.navbar-right li:nth-child(1)').addClass("navbar-active");
+                } else {
+                    $('.nav-desktop li:nth-child(3)').addClass("nav-active");
+                    $('.nav-mobile a:nth-child(3)').addClass("nav-active");
+                }
             });
+
+            if (friend_id != "") {
+                var width = $('.nav-mobile a:nth-child(1)').width() + $('.nav-mobile a:nth-child(2)').width();
+                $('.nav-mobile').scrollLeft(width);
+            }
 
             if (jQuery(".nav-mobile").css('display') == 'none') {
                 jQuery.event.add(window, "load", resizeFrame);

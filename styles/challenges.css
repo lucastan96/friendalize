@@ -58,6 +58,7 @@ h1 {
     margin-bottom: 10px;
     position: relative;
     min-height: 70px;
+    border: 1px solid #95989A;
 }
 
 .item-type, .item-name, .item-spaces {
@@ -83,6 +84,8 @@ h1 {
 
 .player {
     width: 35px;
+    height: 35px;
+    object-fit: cover;
     border-radius: 100px;
     border: 1px solid #95989A;
     margin-right: 5px;
@@ -146,6 +149,7 @@ h1 {
 
     .challenges-add {
         padding-top: 0;
+        margin-bottom: 20px;
     }
 
     .challenges-add .btn {

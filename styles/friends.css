@@ -2,12 +2,120 @@
     padding-top: 120px;
 }
 
-h1 {
+h1, h2 {
     padding-left: 16px;
+}
+
+.message {
+    padding: 16px;
+    padding-top: 0;
+}
+
+.message span {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.friends-list {
+    margin-top: 20px;
+    margin-left: -20px;
+    margin-right: -15px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.friends-list-item:nth-child(1) {
+    margin-left: 35px;
+}
+
+.friends-list-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #95989A;
+    border-radius: 100px;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.btn-friend-list {
+    margin-left: 30px;
+    margin-right: 35px;
+    background: #454545;
+    color: white;
+}
+
+.btn-friend-list:hover {
+    background: #FF5252;
+    color: white;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.users-list .row {
+    margin: 0;
+}
+
+.col {
+    width: 100%;
+    padding: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.users-list-item-link {
+    color: #454545;
+}
+
+.users-list-item-link:hover {
+    text-decoration: none;
+    color: #454545;
+}
+
+.users-list-item-container {
+    background: white;
+    border: 1px solid #95989A;
+    position: relative;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+.users-list-item-container img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #95989A;
+    border-radius: 100px;
+    margin: 20px;
+    float: left;
+}
+
+.users-list-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 13px;
+}
+
+.users-list-item-container p {
+    line-height: 16px;
 }
 
 @media only screen and (min-width: 768px) {
     .content {
         padding-top: 80px;
+    }
+    
+    .col {
+        width: 50%;
     }
 }
