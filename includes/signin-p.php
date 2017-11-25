@@ -3,7 +3,7 @@
 $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING);
 
 if ($request_method == 'POST') {
-    require_once('includes/connection.php');
+    require_once('connection.php');
 
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 
@@ -43,10 +43,10 @@ if ($request_method == 'POST') {
             $institution_id = $institution_id_array["institution_id"];
 
             if ($institution_id == NULL) {
-                header("Location: setup-institution.php");
+                header("Location: ../setup-institution.php");
                 exit();
             } else {
-                header("Location: index.php");
+                header("Location: ../index.php");
                 exit();
             }
         }
@@ -55,10 +55,10 @@ if ($request_method == 'POST') {
     }
 
     if (isset($login_message)) {
-        include ("signin.php");
+        include ("../signin.php");
         exit();
     }
 } else {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }

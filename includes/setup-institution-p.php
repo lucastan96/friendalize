@@ -9,7 +9,7 @@ if ($request_method == 'POST') {
     $institution_id = filter_input(INPUT_POST, 'institution', FILTER_VALIDATE_INT);
     $interests_array = filter_input(INPUT_POST, 'interests', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-    require_once('includes/connection.php');
+    require_once('connection.php');
 
     $query1 = "UPDATE user_institutions SET institution_id = :institution_id WHERE user_id = :user_id";
     $statement1 = $db->prepare($query1);
@@ -37,10 +37,10 @@ if ($request_method == 'POST') {
 
     $_SESSION['first_login'] = 1;
 
-    header("Location: get-started.php");
+    header("Location: ../get-started.php");
     exit();
 } else {
-    header("Location: get-started.php");
+    header("Location: ../signin.php");
     exit();
 }
 

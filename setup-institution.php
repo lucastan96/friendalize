@@ -54,7 +54,7 @@ $interests_array = get_interests($db);
                 </div>
             </div>
             <h4>You are required to select your institution too. Interests are optional and can be changed later.<br>Please complete the settings below to proceed...</h4>
-            <form class="form-horizontal" action="setup-institution-p.php" method="post">
+            <form class="form-horizontal" action="includes/setup-institution-p.php" method="post">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="institution">Institution:</label>
                     <div class="col-sm-10">

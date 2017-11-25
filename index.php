@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>Home</h1>
-                    <form class="form-horizontal form-post" action='post-add-p.php' method='post'>
+                    <form class="form-horizontal form-post" action='includes/post-add-p.php' method='post'>
                         <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..." required></div>
                         <div class="form-post-options">
                             <select class="form-control form-select" id="post_category" name="post_category" required>
@@ -59,7 +59,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <p>Table tennis on Friday anyone?</p>
                                     </div>
                                     <div class="item-options">
-                                        <form class='form-horizontal item-comment' action='comment-add-p.php' method='post'>
+                                        <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                             <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                             <div>
                                                 <p class='item-category'>Sports</p>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <img src="images/signin/signin_4.png">
                                     </div>
                                     <div class="item-options">
-                                        <form class='form-horizontal item-comment' action='comment-add-p.php' method='post'>
+                                        <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                             <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                             <div>
                                                 <p class='item-category'>Travel</p>

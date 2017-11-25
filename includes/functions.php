@@ -70,7 +70,7 @@ function get_first_name($db, $user_id) {
 }
 
 function get_user_details($db, $user_id) {
-    $query = "SELECT email, last_name, gender, age, country_id, DATE(join_date) FROM users WHERE user_id = :user_id";
+    $query = "SELECT email, first_name, last_name, gender, age, country_id, DATE(join_date), profile_pic FROM users WHERE user_id = :user_id";
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();
@@ -203,4 +203,39 @@ function check_is_joined($db, $room_id, $user_id) {
     }
 
     return false;
+}
+
+function get_friend_status($db, $user_id, $friend_id) {
+    $query1 = "SELECT friends FROM user_friends WHERE user_id = :user_id";
+    $statement1 = $db->prepare($query1);
+    $statement1->bindValue(":user_id", $user_id);
+    $statement1->execute();
+    $results_array1 = $statement1->fetch();
+    $statement1->closeCursor();
+
+    $friend_ids = $results_array1["friends"];
+    $friends_array = explode(",", $friend_ids);
+
+    if (in_array($friend_id, $friends_array)) {
+        return true;
+    }
+
+    return false;
+}
+
+function get_friend_count($db, $user_id) {
+    $query = 'SELECT friends FROM user_friends WHERE user_id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":user_id" => $user_id));
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    $friend_ids = $results["friends"];
+    
+    if ($friend_ids != NULL) {
+        $friends_array = explode(",", $friend_ids);
+        return sizeof($friends_array);
+    }
+    
+    return 0;
 }

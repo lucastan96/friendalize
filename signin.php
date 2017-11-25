@@ -41,7 +41,7 @@ if (!isset($message)) {
                 <div class="col-sm-5 col-signin">
                     <a href="register.php" class="btn btn-register btn-desktop" role="button">Join Us Today<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                     <h1>Sign In</h1>
-                    <form class="form-horizontal" action="signin-p.php" method="post">
+                    <form class="form-horizontal" action="includes/signin-p.php" method="post">
                         <?php
                         if (isset($message)) {
                             echo "<div id='message'>" . $message . "</div>";

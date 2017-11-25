@@ -43,7 +43,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <h1>Settings</h1>
                     <h2 class="description">Personalize your profile and personal details here.</h2>
-                    <form action="settings-p.php" method="post">
+                    <form action="includes/settings-p.php" method="post">
                         <div class="form-group">
                             <label class="control-label" for="first_name">First Name:</label>
                             <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo $first_name; ?>" required>
@@ -120,7 +120,7 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </form>
                     <h2>Change Password Details</h2>
-                    <form action="password-update-p.php" method="post">
+                    <form action="includes/password-update-p.php" method="post">
                         <div class="form-group">
                             <label class="control-label" for="password">Password:</label>
                             <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >

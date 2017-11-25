@@ -1,4 +1,11 @@
 <?php
+$room_id = filter_input(INPUT_GET, 'room_id', FILTER_SANITIZE_URL);
+
+if ($room_id == "") {
+    header("Location: ../challenges.php");
+    exit();
+}
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -17,8 +24,6 @@ if (!isset($_SESSION['user_id'])) {
 
     $profile_pic = get_profile_pic($db, $_SESSION['user_id']);
     $first_name = get_first_name($db, $_SESSION['user_id']);
-
-    $room_id = $_GET["room_id"];
 
     $query2 = 'SELECT * FROM ghost_room r, ghost_room_players rp, users p WHERE p.user_id = rp.user_id AND r.room_id = rp.room_id AND r.room_id = :room_id AND p.user_id = :user_id';
     $statement2 = $db->prepare($query2);

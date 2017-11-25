@@ -1,4 +1,6 @@
 <?php
+$friend_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_URL);
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -7,27 +9,44 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     require_once('includes/essentials.php');
 
-    $user_details_array = get_user_details($db, $_SESSION['user_id']);
+    if ($friend_id == "") {
+        $user_details_array = get_user_details($db, $_SESSION['user_id']);
+        $institution = get_user_institution($db, $_SESSION['user_id']);
+        $interests = get_user_interests($db, $_SESSION['user_id']);
+        $friend_count  = get_friend_count($db, $_SESSION['user_id']);
+    } else {
+        $user_details_array = get_user_details($db, $friend_id);
+        $institution = get_user_institution($db, $friend_id);
+        $interests = get_user_interests($db, $friend_id);
+        $friend_status = get_friend_status($db, $_SESSION['user_id'], $friend_id);
+        $friend_count  = get_friend_count($db, $friend_id);
+    }
 
     foreach ($user_details_array as $user_details):
         $email = $user_details["email"];
+        $friend_first_name = $user_details["first_name"];
         $last_name = $user_details["last_name"];
         $gender = $user_details["gender"];
         $age = $user_details["age"];
         $country_id = $user_details["country_id"];
         $join_date = $user_details["DATE(join_date)"];
+        $friend_profile_pic = $user_details["profile_pic"];
     endforeach;
 
     $country = get_user_country($db, $country_id);
-    $institution = get_user_institution($db, $_SESSION['user_id']);
-    $interests = get_user_interests($db, $_SESSION['user_id']);
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?php include("includes/head.php"); ?>
-        <title>Profile - <?php echo $first_name . " " . $last_name; ?> | Friendalize</title>
+        <title>Profile - <?php
+            if ($friend_id == "") {
+                echo $first_name;
+            } else {
+                echo $friend_first_name;
+            }
+            ?><?php echo " " . $last_name; ?> | Friendalize</title>
         <link href="styles/profile.css" rel="stylesheet">
     </head>
     <body>
@@ -37,17 +56,43 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-desktop.php"); ?>
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
-                    <div class='col-sm-4 profile-info'>
-                        <img class='profile-pic' src='images/profiles/<?php echo $profile_pic; ?>.png' alt='Profile Picture'>
-                        <h1><?php echo $first_name . " " . $last_name; ?></h1>
-                        <a class='btn btn-default btn-profile' href='settings.php' role='button'>Edit Profile<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class='col-sm-3 profile-info'>
+                        <img class='profile-pic' src='images/profiles/<?php
+                        if ($friend_id == "") {
+                            echo $profile_pic;
+                        } else {
+                            echo $friend_profile_pic;
+                        }
+                        ?>.png' alt='Profile Picture'>
+                        <h1><?php
+                            if ($friend_id == "") {
+                                echo $first_name;
+                            } else {
+                                echo $friend_first_name;
+                            }
+                            ?><?php echo " " . $last_name; ?></h1>
+                        <?php if ($friend_id == "") { ?>
+                            <a class='btn btn-default btn-profile' href='settings.php' role='button'>Edit Profile<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        <?php } else { ?>
+                            <?php if ($friend_status == true) { ?>
+                                <form action="friend-delete-p.php" method="post">
+                                    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+                                    <button class="btn btn-default btn-profile" type="submit">Unfriend</button>
+                                </form>
+                            <?php } else { ?>
+                                <form action="friend-add-p.php" method="post">
+                                    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+                                    <button class="btn btn-default btn-profile" type="submit">Add Friend</button>
+                                </form>
+                            <?php } ?>
+                        <?php } ?>
                         <div class='profile-about'>
                             <h5>Email</h5>
                             <p><?php echo $email; ?></p>
                             <h5>Institute</h5>
                             <p><?php echo $institution; ?></p>
-                            <h5>Friends (FAKE)</h5>
-                            <p>125</p>
+                            <h5>Friends</h5>
+                            <p><?php echo $friend_count; ?></p>
                             <h5>Age</h5>
                             <p><?php echo $age; ?></p>
                             <h5>Country</h5>
@@ -61,7 +106,7 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                         <h5>Member since <?php echo $join_date; ?></h5>
                     </div>
-                    <div class='col-sm-8 profile-posts'>
+                    <div class='col-sm-9 profile-posts'>
                         <h2>Posts</h2>
                         <div class="feed">
                             <div class="row">
@@ -77,7 +122,7 @@ if (!isset($_SESSION['user_id'])) {
                                             <p>Table tennis on Friday anyone?</p>
                                         </div>
                                         <div class="item-options">
-                                            <form class='form-horizontal item-comment' action='comment-add-p.php' method='post'>
+                                            <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                                 <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                                 <div>
                                                     <p class='item-category'>Sports</p>
@@ -101,7 +146,7 @@ if (!isset($_SESSION['user_id'])) {
                                             <img src='images/signin/signin_2.png'>
                                         </div>
                                         <div class="item-options">
-                                            <form class='form-horizontal item-comment' action='comment-add-p.php' method='post'>
+                                            <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                                 <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                                 <div>
                                                     <p class='item-category'>Sports</p>

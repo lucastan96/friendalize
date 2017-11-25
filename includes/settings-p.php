@@ -13,9 +13,8 @@ if ($request_method == 'POST') {
     $country_id = filter_input(INPUT_POST, 'country', FILTER_VALIDATE_INT);
     $institution_id = filter_input(INPUT_POST, 'institution', FILTER_VALIDATE_INT);
     $interests_array = filter_input(INPUT_POST, 'interests', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-    
 
-    require_once('includes/connection.php');
+    require_once('connection.php');
 
     $query1 = "UPDATE users SET first_name = :first_name, last_name = :last_name, age = :age, gender = :gender, country_id = :country_id WHERE user_id = :user_id";
     $statement1 = $db->prepare($query1);
@@ -27,7 +26,6 @@ if ($request_method == 'POST') {
     $statement1->bindValue(":user_id", $user_id);
     $statement1->execute();
     $statement1->closeCursor();
-
 
     $query2 = "UPDATE user_institutions SET institution_id = :institution_id WHERE user_id = :user_id";
     $statement2 = $db->prepare($query2);
@@ -59,10 +57,10 @@ if ($request_method == 'POST') {
         $statement3->closeCursor();
     }
 
-    header("Location: settings.php");
+    header("Location: ../settings.php");
     exit();
 } else {
-    header("Location: settings.php");
+    header("Location: ../settings.php");
     exit();
 }
 
