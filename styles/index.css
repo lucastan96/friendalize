@@ -23,7 +23,7 @@ h1 {
 }
 
 .form-post-options .form-select {
-    width: 86px;
+    width: auto;
     height: 41px;
     border: 0;
     border-radius: 0;
@@ -55,7 +55,7 @@ h1 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 14px;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .filter-box p {

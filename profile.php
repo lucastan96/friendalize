@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
     <head>
         <?php include("includes/head.php"); ?>
-        <title>Profile | Friendalize</title>
+        <title>Profile - <?php echo $first_name . " " . $last_name; ?> | Friendalize</title>
         <link href="styles/profile.css" rel="stylesheet">
     </head>
     <body>

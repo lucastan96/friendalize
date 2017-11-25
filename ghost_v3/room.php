@@ -101,7 +101,7 @@ if (!isset($_SESSION['user_id'])) {
                             <form id="msg_form">
                                 <input name="msg" class="form-control form-input" size="30" type="text" placeholder="Type a message..."/>
                                 <input type="hidden" name ="room_id" id="room_id" value="<?php echo $room_id ?>">
-                                <button class="btn btn-square">Send</button>
+                                <button class="btn btn-square">Send<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                             </form>
                         </div>
                     </div>

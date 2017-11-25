@@ -154,8 +154,53 @@ function get_user_interests_settings($db, $user_id) {
     $statement->execute();
     $user_interests_array = $statement->fetch();
     $statement->closeCursor();
-    
+
     $interest_ids = $user_interests_array["interests"];
 
     return $interest_ids;
+}
+
+function get_rooms($db) {
+    $query = 'SELECT * FROM ghost_room';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $rooms = $statement->fetchAll();
+    $statement->closeCursor();
+
+    return $rooms;
+}
+
+function get_room_players($db, $room_id) {
+    $query = 'SELECT user_id FROM ghost_room_players WHERE room_id = :room_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":room_id" => $room_id));
+    $users = $statement->fetchAll();
+    $statement->closeCursor();
+
+    return $users;
+}
+
+function get_room_player_info($db, $user_id) {
+    $query = "SELECT first_name, last_name, profile_pic FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    return $results;
+}
+
+function check_is_joined($db, $room_id, $user_id) {
+    $query = 'SELECT COUNT(*) as is_joined FROM ghost_room_players WHERE room_id = :room_id AND user_id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":room_id" => $room_id, ":user_id" => $user_id));
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    if ($results["is_joined"] == 1) {
+        return true;
+    }
+
+    return false;
 }

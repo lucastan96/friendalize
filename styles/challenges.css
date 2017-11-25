@@ -19,7 +19,7 @@ h1 {
     color: #454545;
     margin-bottom: 20px;
     font-size: 14px;
-    padding-left: 10px;
+    padding-left: 15px;
     position: relative;
 }
 
@@ -46,21 +46,59 @@ h1 {
     padding: 0;
 }
 
+.challenges-list {
+    padding-bottom: 30px;
+}
+
 .item {
     background: white;
     padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
     position: relative;
+    min-height: 70px;
+}
+
+.item-type, .item-name, .item-spaces {
+    line-height: 20px;
+}
+
+.item-type, .item-spaces {
+    padding-left: 10px;
+}
+
+.item-type {
+    font-weight: bold;
 }
 
 .item-name {
+    color: #FF5252;
+}
+
+.players {
     padding-left: 10px;
+    padding-top: 15px;
+}
+
+.player {
+    width: 35px;
+    border-radius: 100px;
+    border: 1px solid #95989A;
+    margin-right: 5px;
 }
 
 .btn-item {
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
+    right: 15px;
+    top: 15px;
+    background: #454545;
+    color: white;
+}
+
+.btn-item:hover {
+    background: #FF5252;
+    color: white;
 }
 
 .challenges-add {
@@ -100,11 +138,24 @@ h1 {
         padding-right: 20px;
     }
 
+    .players {
+        float: right;
+        margin-top: -55px;
+        margin-right: 110px;
+    }
+
     .challenges-add {
         padding-top: 0;
     }
 
     .challenges-add .btn {
         margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .players {
+        float: none;
+        margin: 0;
     }
 }

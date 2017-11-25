@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-desktop.php"); ?>
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
-                    <h1>Friends</h1>
+                    <h1>Your Friends</h1>
                 </div>
             </div>
         </div>
