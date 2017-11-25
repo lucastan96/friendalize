@@ -66,5 +66,16 @@ if (!isset($message)) {
                 </div>
             </div>
         </div>
+        <script>
+            jQuery.event.add(window, "load", resizeFrame);
+            jQuery.event.add(window, "resize", resizeFrame);
+
+            function resizeFrame() {
+                var h = $(window).height();
+
+                $(".col-intro").css('height', h);
+                $(".col-signin").css('height', h);
+            }
+        </script>
     </body>
 </html>

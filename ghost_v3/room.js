@@ -20,45 +20,42 @@ function load_new_stuff() {
 
 }
 var t;
-function display(){
+function display() {
     document.getElementById("countdown").innerHTML = count;
-} 
+}
 function countdown() {
-   display();
-   var elem = document.getElementById("countdown");
+    display();
+    var elem = document.getElementById("countdown");
     if (count > 20) {
 
         elem.style.color = "green";
         elem.innerHTML = "0" + "0" + ":" + count;
-    }
-    else if (count <= 20  && count >=10) {
+    } else if (count <= 20 && count >= 10) {
         elem.style.color = "orange";
         elem.innerHTML = "0" + "0" + ":" + count;
 
-    }
-    else if (count < 10 && count >=0) {
+    } else if (count < 10 && count >= 0) {
         elem.style.color = "red";
         elem.innerHTML = "0" + "0" + ":0" + count;
 
     }
-    if(count ==-1){
+    if (count == -1) {
         cdpause();
-        elem.innerHTML="";
-    }
-    else if (count ==0) {
+        elem.innerHTML = "";
+    } else if (count == 0) {
 //           alert(count);
-          $(".timer").load("timer.php");
-      elem.innerHTML="";
+        $(".timer").load("timer.php");
+        elem.innerHTML = "";
     } else {
-          count--;
-          t =setTimeout("countdown()",1000);
+        count--;
+        t = setTimeout("countdown()", 1000);
     }
 
 }
-function cdpause(){
+function cdpause() {
     clearTimeout(t);
 }
-function reset(seconds){
+function reset(seconds) {
     cdpause();
     count = seconds;
     display();
@@ -72,7 +69,7 @@ $(document).ready(function ()
 {
 //    alert("ellooo");
     scTop();
-    
+
     $("#vote-btn").click(function () {
         var voted = $("input[name='voted_id']:checked").val();
 
@@ -83,7 +80,7 @@ $(document).ready(function ()
                 voted: voted
             },
             success: function () {
-                
+
 //                $("#ready-btn").text("Waiting for others");
 //                $("#ready-btn").prop('disabled', true);
 //                alert(data);

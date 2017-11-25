@@ -6,9 +6,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 } else {
     require_once('includes/essentials.php');
-    
+
     $user_details_array = get_user_details($db, $_SESSION['user_id']);
-    
+
     foreach ($user_details_array as $user_details):
         $email = $user_details["email"];
         $last_name = $user_details["last_name"];
@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
         $country_id = $user_details["country_id"];
         $join_date = $user_details["DATE(join_date)"];
     endforeach;
-    
+
     $country = get_user_country($db, $country_id);
     $institution = get_user_institution($db, $_SESSION['user_id']);
     $interests = get_user_interests($db, $_SESSION['user_id']);
@@ -54,9 +54,9 @@ if (!isset($_SESSION['user_id'])) {
                             <p><?php echo $country; ?></p>
                             <h5>Interests</h5>
                             <?php if ($interests == "") { ?>
-                            <p>Not Specified</p>
+                                <p>Not Specified</p>
                             <?php } else { ?>
-                            <p><?php echo $interests; ?></p>
+                                <p><?php echo $interests; ?></p>
                             <?php } ?>
                         </div>
                         <h5>Member since <?php echo $join_date; ?></h5>
@@ -122,6 +122,20 @@ if (!isset($_SESSION['user_id'])) {
             $(document).ready(function () {
                 $('.navbar-right li:nth-child(1)').addClass("navbar-active");
             });
+
+            if (jQuery(".nav-mobile").css('display') == 'none') {
+                jQuery.event.add(window, "load", resizeFrame);
+                jQuery.event.add(window, "resize", resizeFrame);
+
+                function resizeFrame() {
+                    var h = $(window).height();
+
+                    $(".nav-desktop").css('height', h);
+                    $(".content").css('height', h);
+                    $(".profile-info").css('height', h);
+                    $(".profile-posts").css('height', h);
+                }
+            }
         </script>
     </body>
 </html>

@@ -10,13 +10,13 @@ if (!isset($_SESSION['user_id'])) {
     $countries_array = get_countries($db);
     $institutions_array = get_institutions($db);
     $interests_array = get_interests($db);
-    
+
     $user_settings_array = get_user_settings($db, $_SESSION['user_id']);
     $institution = get_user_institution($db, $_SESSION['user_id']);
     $interest_ids = get_user_interests_settings($db, $_SESSION['user_id']);
-    
+
     $user_interests = explode(",", $interest_ids);
-    
+
     foreach ($user_settings_array as $user_settings):
         $first_name = $user_settings["first_name"];
         $last_name = $user_settings["last_name"];
@@ -60,17 +60,33 @@ if (!isset($_SESSION['user_id'])) {
                             <label class="control-label" for="gender">Gender:</label>
                             <select class="form-control form-select" id="gender" name="gender" required>
                                 <option value="">Select your gender</option>
-                                <option value="1" <?php if ($gender == "Male") {echo "selected"; } ?>>Male</option>
-                                <option value="2" <?php if ($gender == "Female") {echo "selected"; } ?>>Female</option>
-                                <option value="3" <?php if ($gender == "Other") {echo "selected"; } ?>>Other</option>
+                                <option value="1" <?php
+                                if ($gender == "Male") {
+                                    echo "selected";
+                                }
+                                ?>>Male</option>
+                                <option value="2" <?php
+                                if ($gender == "Female") {
+                                    echo "selected";
+                                }
+                                ?>>Female</option>
+                                <option value="3" <?php
+                                        if ($gender == "Other") {
+                                            echo "selected";
+                                        }
+                                ?>>Other</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="country">Country:</label>
                             <select class="form-control form-select" id="country" name="country" required>
                                 <option value="">Select your country</option>
-                                <?php foreach ($countries_array as $countries) : ?>
-                                    <option value="<?php echo $countries['country_id']; ?>" <?php if ($countries["country_id"] == $country_id) {echo "selected"; } ?>><?php echo htmlspecialchars($countries['name']); ?></option>
+<?php foreach ($countries_array as $countries) : ?>
+                                    <option value="<?php echo $countries['country_id']; ?>" <?php
+    if ($countries["country_id"] == $country_id) {
+        echo "selected";
+    }
+    ?>><?php echo htmlspecialchars($countries['name']); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -78,25 +94,33 @@ if (!isset($_SESSION['user_id'])) {
                             <label class="control-label" for="institution">Institution:</label>
                             <select class="form-control form-select" id="institution" name="institution" required>
                                 <option value="">Select your institution</option>
-                                <?php foreach ($institutions_array as $institutions) : ?>
-                                    <option value="<?php echo $institutions['institution_id']; ?>" <?php if ($institutions["institution_id"] == $institution_id) {echo "selected"; } ?>><?php echo htmlspecialchars($institutions['name']); ?></option>
-                                <?php endforeach; ?>
+<?php foreach ($institutions_array as $institutions) : ?>
+                                    <option value="<?php echo $institutions['institution_id']; ?>" <?php
+                                    if ($institutions["institution_id"] == $institution_id) {
+                                        echo "selected";
+                                    }
+                                    ?>><?php echo htmlspecialchars($institutions['name']); ?></option>
+                                        <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="interests">Interests:</label>
                             <select class="form-control form-select" multiple="multiple" id="interests" name="interests[]">
-                                <?php foreach ($interests_array as $interests) : ?>
-                                    <option value="<?php echo $interests['interest_id']; ?>" <?php if (in_array($interests["interest_id"], $user_interests)) {echo "selected"; } ?>><?php echo htmlspecialchars($interests['name']); ?></option>
-                                <?php endforeach; ?>
+<?php foreach ($interests_array as $interests) : ?>
+                                    <option value="<?php echo $interests['interest_id']; ?>" <?php
+    if (in_array($interests["interest_id"], $user_interests)) {
+        echo "selected";
+    }
+    ?>><?php echo htmlspecialchars($interests['name']); ?></option>
+<?php endforeach; ?>
                             </select>
-
+                        </div>
                         <div class="form-group">
                             <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
                     </form>
-					 <h1>Change Password Details</h1>
-                    <form action="update_password.php" method ="post">
+                    <h2>Change Password Details</h2>
+                    <form action="password-update-p.php" method="post">
                         <div class="form-group">
                             <label class="control-label" for="password">Password:</label>
                             <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
@@ -112,6 +136,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
+        <script src="scripts/viewport-resize.js"></script>
         <script src="scripts/lou-multi-select/js/jquery.multi-select.js"></script>
         <script>
             $(document).ready(function () {

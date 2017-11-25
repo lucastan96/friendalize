@@ -70,6 +70,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
+        <script src="scripts/viewport-resize.js"></script>
         <script>
             $(document).ready(function () {
                 $('.nav-desktop li:nth-child(1)').addClass("nav-active");
