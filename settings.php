@@ -90,16 +90,21 @@ if (!isset($_SESSION['user_id'])) {
                                     <option value="<?php echo $interests['interest_id']; ?>" <?php if (in_array($interests["interest_id"], $user_interests)) {echo "selected"; } ?>><?php echo htmlspecialchars($interests['name']); ?></option>
                                 <?php endforeach; ?>
                             </select>
+
+                        <div class="form-group">
+                            <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
-						      <div class="form-group">
+                    </form>
+					 <h1>Change Password Details</h1>
+                    <form action="update_password.php" method ="post">
+                        <div class="form-group">
                             <label class="control-label" for="password">Password:</label>
-                                <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+                            <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password_confirm">Confirm Password:</label>
-                                <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm new password" >
+                            <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm new password" >
                         </div>
-
                         <div class="form-group">
                             <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
