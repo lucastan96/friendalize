@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $countries_array = get_countries($db);
     $institutions_array = get_institutions($db);
     $interests_array = get_interests($db);
-
+    $user = get_id($db, $_SESSION['user_id']);
     $user_settings_array = get_user_settings($db, $_SESSION['user_id']);
     $institution = get_user_institution($db, $_SESSION['user_id']);
     $interest_ids = get_user_interests_settings($db, $_SESSION['user_id']);
@@ -43,6 +43,15 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <h1>Settings</h1>
                     <h2 class="description">Personalize your profile and personal details here.</h2>
+					  <h2>Change profile picture</h2>
+                    <img  id = "imagePro" class="img-thumbnail" src="images/profiles/<?php echo $profile_pic; ?>" width="304" height="236" position="center">
+                    <form action="includes/profile-picture-update-p.php" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <input type="file"  style="color:transparent" id = "fileToUpload" name="fileToUpload" >
+                            <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
+                            <button type="submit" class="btn btn-submit">Change Profile Picture</button>
+                        </div>
+                    </form>
                     <form action="includes/settings-p.php" method="post">
                         <div class="form-group">
                             <label class="control-label" for="first_name">First Name:</label>
