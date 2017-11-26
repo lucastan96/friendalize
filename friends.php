@@ -11,9 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
     if ($friend_count != 0) {
         $friends = get_friends($db, $_SESSION['user_id']);
+    } else {
+        $friends = [];
     }
 
     $users = get_all_users($db);
+    $requested_ids = check_friend_requests($db, $_SESSION['user_id']);
 }
 ?>
 <!DOCTYPE html>
@@ -65,12 +68,60 @@ if (!isset($_SESSION['user_id'])) {
                     <?php } else { ?>
                         <div class='message'>You have not added any friends just yet. Get <span>friendalized</span> now!</div>
                     <?php } ?>
+                    <?php if (!empty($requested_ids)) { ?>
+                        <h2>Friend Requests</h2>
+                        <div class="users-list">
+                            <div class="row">
+                                <?php
+                                foreach ($users as $user):
+                                    if (in_array($user["user_id"], $requested_ids)) {
+                                        $query1 = "SELECT profile_pic, first_name, last_name FROM users WHERE user_id = :user_id";
+                                        $statement1 = $db->prepare($query1);
+                                        $statement1->bindValue(":user_id", $user["user_id"]);
+                                        $statement1->execute();
+                                        $user_details = $statement1->fetchAll();
+                                        $statement1->closeCursor();
+
+                                        foreach ($user_details as $details):
+                                            $user_profile_pic = $details["profile_pic"];
+                                            $user_first_name = $details["first_name"];
+                                            $user_last_name = $details["last_name"];
+                                        endforeach;
+
+                                        $user_institution = get_user_institution($db, $user["user_id"]);
+                                        $user_interests = get_user_interests($db, $user["user_id"]);
+
+                                        if ($user_interests == "") {
+                                            $user_interests = "No interests yet";
+                                        }
+                                        ?>
+                                        <div class='col'>
+                                            <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class='users-list-item-link'>
+                                                <div class="users-list-item-container">
+                                                    <img src="images/profiles/<?php echo $user_profile_pic; ?>.png">
+                                                    <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
+                                                    <p><?php echo $user_institution; ?></p>
+                                                    <p><?php echo $user_interests; ?></p>
+                                                    <form action="includes/friend-add-p.php" method="post">
+                                                        <input type="hidden" name="friend_id" value="<?php echo $user["user_id"]; ?>">
+                                                        <button class="btn btn-default btn-accept" type="submit">Accept</button>
+                                                    </form>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <?php
+                                    }
+                                endforeach;
+                                ?>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <h2>People You May Know</h2>
                     <div class='users-list'>
                         <div class='row'>
                             <?php
                             foreach ($users as $user):
-                                if (!in_array($user["user_id"], $friends) && $user["user_id"] != $_SESSION['user_id']) {
+                                if (!in_array($user["user_id"], $friends) && $user["user_id"] != $_SESSION['user_id'] && !in_array($user["user_id"], $requested_ids)) {
                                     $query1 = "SELECT profile_pic, first_name, last_name FROM users WHERE user_id = :user_id";
                                     $statement1 = $db->prepare($query1);
                                     $statement1->bindValue(":user_id", $user["user_id"]);
@@ -83,12 +134,12 @@ if (!isset($_SESSION['user_id'])) {
                                         $user_first_name = $details["first_name"];
                                         $user_last_name = $details["last_name"];
                                     endforeach;
-                                    
+
                                     $user_institution = get_user_institution($db, $user["user_id"]);
                                     $user_interests = get_user_interests($db, $user["user_id"]);
-                                    
+
                                     if ($user_interests == "") {
-                                        $user_interests = "No Interests Yet";
+                                        $user_interests = "No interests yet";
                                     }
                                     ?>
                                     <div class='col'>

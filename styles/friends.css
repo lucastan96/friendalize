@@ -110,12 +110,40 @@ h2 {
     line-height: 16px;
 }
 
+.btn-accept {
+    background: #454545;
+    color: white;
+    position: absolute;
+    right: 22px;
+    top: 33px;
+}
+
+.btn-accept:hover {
+    background: #FF5252;
+    color: white;
+
+}
+
 @media only screen and (min-width: 768px) {
     .content {
         padding-top: 80px;
     }
-    
+
     .col {
         width: 50%;
+    }
+}
+
+@media (max-width: 1280px) {
+    .users-list-item-container img {
+        margin-bottom: 50px;
+    }
+
+    .btn-accept {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 }
