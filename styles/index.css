@@ -2,6 +2,24 @@ h1 {
     display: none;
 }
 
+#message {
+    background: #454545;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
+}
+
 .form-post div {
     border: 1px solid #95989A;
     border-radius: 0;
@@ -202,7 +220,7 @@ h1 {
     .form-post {
         padding-top: 10px;
     }
-    
+
     .col {
         width: 50%;
     }

@@ -8,7 +8,6 @@ if (isset($_SESSION['user_id'])) {
 
 if (!isset($message)) {
     $username = "";
-    $password = "";
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +21,7 @@ if (!isset($message)) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-7 col-intro">
-                    <div id="logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo">friendalize</div>
+                    <a href=""><div id="logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo">friendalize</div></a>
                     <div class="images">
                         <div class='col-sm-7 col-img'>
                             <img id="img-signin-1" src='images/signin/signin_1.png' alt='Clubbing'>
@@ -51,7 +50,7 @@ if (!isset($message)) {
                             <input class="form-control form-input" type="text" name="username" id="username" value="<?php echo $username; ?>" placeholder="Username" required autofocus>
                         </div>
                         <div class="form-group">
-                            <input class="form-control form-input" type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="Password" required>
+                            <input class="form-control form-input" type="password" name="password" id="password" placeholder="Password" required>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-signin" type="submit">Sign In<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
@@ -67,14 +66,16 @@ if (!isset($message)) {
             </div>
         </div>
         <script>
-            jQuery.event.add(window, "load", resizeFrame);
-            jQuery.event.add(window, "resize", resizeFrame);
+            if (jQuery(".nav-mobile").css('display') == 'none') {
+                jQuery.event.add(window, "load", resizeFrame);
+                jQuery.event.add(window, "resize", resizeFrame);
 
-            function resizeFrame() {
-                var h = $(window).height();
+                function resizeFrame() {
+                    var h = $(window).height();
 
-                $(".col-intro").css('height', h);
-                $(".col-signin").css('height', h);
+                    $(".col-intro").css('height', h);
+                    $(".col-signin").css('height', h);
+                }
             }
         </script>
     </body>

@@ -16,6 +16,15 @@ body {
     text-align: center;
 }
 
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
 #logo {
     text-align: center;
     line-height: 80px;
@@ -56,6 +65,24 @@ form {
     margin-top: 0;
     padding: 40px;
     clear: both;
+}
+
+#message {
+    background: red;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 35px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
 }
 
 .btn-signin {
@@ -141,7 +168,7 @@ footer p {
     .btn-register {
         float: right;
     }
-    
+
     .btn-desktop {
         display: inline-block;
     }
@@ -151,11 +178,11 @@ footer p {
         margin-top: 60px;
         text-align: left;
     }
-    
+
     #or {
         display: none;
     }
-    
+
     .btn-mobile {
         display: none;
     }
@@ -174,7 +201,7 @@ footer p {
         margin-top: 100px;
         text-align: left;
     }
-    
+
     footer {
         padding-left: 20px;
     }

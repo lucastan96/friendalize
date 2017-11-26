@@ -18,7 +18,7 @@ if ($request_method == 'POST') {
             . "/";
 
     if (!preg_match($regex_email, $register_email)) {
-        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The email format is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The email format is incorrect.";
 
         include ("register.php");
         exit();
@@ -28,7 +28,7 @@ if ($request_method == 'POST') {
     $regex_password = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/";
 
     if (!preg_match($regex_password, $password)) {
-        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The password format is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The password format is incorrect.";
 
         include ("register.php");
         exit();
@@ -46,7 +46,7 @@ if ($request_method == 'POST') {
     if ($password == $confirmpassword) {
         require_once('includes/connection.php');
 
-        $query1 = "SELECT * FROM users where username = :username AND email = :email";
+        $query1 = "SELECT * FROM users where username = :username OR email = :email";
         $statement1 = $db->prepare($query1);
         $statement1->bindValue(":email", $register_email);
         $statement1->bindValue(":username", $username);
@@ -54,7 +54,7 @@ if ($request_method == 'POST') {
         $result_array1 = $statement1->fetchAll();
         $statement1->closeCursor();
 
-        if (!count($result_array1)) {
+        if (empty($result_array1)) {
             $query2 = "INSERT INTO users (username, password, email, first_name, last_name, age, gender, country_id)"
                     . " VALUES (:username, :password, :email, :first_name, :last_name, :age, :gender, :country_id  )";
             $statement2 = $db->prepare($query2);
@@ -103,10 +103,10 @@ if ($request_method == 'POST') {
             header("Location: setup-institution.php");
             exit();
         } else {
-            $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or email is not available.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+            $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or email has already been used.";
         }
     } else {
-        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your passwords does not match.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+        $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your passwords does not match.";
     }
 
     if (isset($register_message)) {

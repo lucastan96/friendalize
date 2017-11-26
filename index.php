@@ -7,6 +7,11 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     require_once('includes/essentials.php');
 
+    if (isset($_SESSION['first_login'])) {
+        $message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Welcome, you are now offically a Friendalizer!";
+        $_SESSION['first_login'] = null;
+    }
+
     $interests_array = get_interests($db);
 }
 ?>
@@ -26,6 +31,11 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>Home</h1>
+                    <?php
+                    if (isset($message)) {
+                        echo "<div id='message'>" . $message . "</div>";
+                    }
+                    ?>
                     <form class="form-horizontal form-post" action='includes/post-add-p.php' method='post'>
                         <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..." required></div>
                         <div class="form-post-options">

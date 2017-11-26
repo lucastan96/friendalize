@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 
     if ($friend_count != 0) {
         $friends = get_friends($db, $_SESSION['user_id']);
+        sort($friends);
     } else {
         $friends = [];
     }
@@ -32,7 +33,48 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <h1>All Added Friends (<?php echo $friend_count; ?>)</h1>
-                    <p>Under Construction</p>
+                    <div class='users-list'>
+                        <div class='row'>
+                            <?php
+                            for ($i = 0; $i < sizeof($friends); $i++) {
+                                $query1 = "SELECT profile_pic, first_name, last_name FROM users WHERE user_id = :user_id";
+                                $statement1 = $db->prepare($query1);
+                                $statement1->bindValue(":user_id", $friends[$i]);
+                                $statement1->execute();
+                                $friend_details = $statement1->fetchAll();
+                                $statement1->closeCursor();
+
+                                foreach ($friend_details as $details):
+                                    $friend_profile_pic = $details["profile_pic"];
+                                    $friend_first_name = $details["first_name"];
+                                    $friend_last_name = $details["last_name"];
+                                endforeach;
+
+                                $friend_institution = get_user_institution($db, $friends[$i]);
+                                $friend_interests = get_user_interests($db, $friends[$i]);
+
+                                if ($friend_interests == "") {
+                                    $friend_interests = "No interests yet";
+                                }
+                                ?>
+                                <div class='col'>
+                                    <a href="profile.php?id=<?php echo $friends[$i]; ?>" class='users-list-item-link'>
+                                        <div class="users-list-item-container">
+                                            <img src="images/profiles/<?php echo $friend_profile_pic; ?>">
+                                            <div class='users-list-item-info'>
+                                                <div class="users-list-name"><?php echo $friend_first_name . " " . $friend_last_name; ?></div>
+                                                <p><?php echo $friend_institution; ?></p>
+                                                <p><?php echo $friend_interests; ?></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>

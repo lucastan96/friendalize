@@ -22,7 +22,7 @@ if ($request_method == 'POST') {
         endforeach;
 
         if (!password_verify($password, $true_password)) {
-            $login_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+            $message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.";
         } else {
             session_start();
 
@@ -51,10 +51,10 @@ if ($request_method == 'POST') {
             }
         }
     } else {
-        $login_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
+        $message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or password is incorrect.";
     }
 
-    if (isset($login_message)) {
+    if (isset($message)) {
         include ("signin.php");
         exit();
     }

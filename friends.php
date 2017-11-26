@@ -66,7 +66,7 @@ if (!isset($_SESSION['user_id'])) {
                             <a class='friends-list-item btn btn-default btn-friend-list' role='button' href='friends-list.php'>View All<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                         </div>
                     <?php } else { ?>
-                        <div class='message'>You have not added any friends just yet. Get <span>friendalized</span> now!</div>
+                        <div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>You have not added any friends just yet. Get <span>friendalized</span> now!</div>
                     <?php } ?>
                     <?php if (!empty($requested_ids)) { ?>
                         <h2>Friend Requests</h2>
@@ -99,9 +99,11 @@ if (!isset($_SESSION['user_id'])) {
                                             <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class='users-list-item-link'>
                                                 <div class="users-list-item-container">
                                                     <img src="images/profiles/<?php echo $user_profile_pic; ?>">
-                                                    <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
-                                                    <p><?php echo $user_institution; ?></p>
-                                                    <p><?php echo $user_interests; ?></p>
+                                                    <div class='users-list-item-info'>
+                                                        <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
+                                                        <p><?php echo $user_institution; ?></p>
+                                                        <p><?php echo $user_interests; ?></p>
+                                                    </div>
                                                     <form action="includes/friend-add-p.php" method="post">
                                                         <input type="hidden" name="friend_id" value="<?php echo $user["user_id"]; ?>">
                                                         <button class="btn btn-default btn-accept" type="submit">Accept</button>
@@ -146,9 +148,11 @@ if (!isset($_SESSION['user_id'])) {
                                         <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class='users-list-item-link'>
                                             <div class="users-list-item-container">
                                                 <img src="images/profiles/<?php echo $user_profile_pic; ?>">
-                                                <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
-                                                <p><?php echo $user_institution; ?></p>
-                                                <p><?php echo $user_interests; ?></p>
+                                                <div class='users-list-item-info'>
+                                                    <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
+                                                    <p><?php echo $user_institution; ?></p>
+                                                    <p><?php echo $user_interests; ?></p>
+                                                </div>    
                                             </div>
                                         </a>
                                     </div>

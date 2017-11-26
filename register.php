@@ -6,6 +6,14 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
+if (!isset($register_message)) {
+    $username = "";
+    $firstname = "";
+    $lastname = "";
+    $register_email = "";
+    $age = "";
+}
+
 require_once('includes/connection.php');
 require_once('includes/functions.php');
 
@@ -41,26 +49,31 @@ $countries_array = get_countries($db);
                     Get Started
                 </div>
             </div>
-            <h4>To become a Friendalizer, these following details are required.<br>Please fill in the form below to proceed...</h4>
+            <h4>To become a <span>Friendalizer</span>, these following details are required.<br>Please fill in the form below to proceed...</h4>
+            <?php
+            if (isset($register_message)) {
+                echo "<div id='message'>" . $register_message . "</div>";
+            }
+            ?>
             <form class="form-horizontal" action="register-p.php" method="post">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="username">Username:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="text" id="username" name="username" placeholder="Enter your username" required autofocus>
+                                <input class="form-control form-input" type="text" id="username" name="username" placeholder="Enter your username" value="<?php echo $username; ?>" required autofocus>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="first_name">First Name:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                                <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo $firstname; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="last_name">Last Name:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                                <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" value="<?php echo $lastname; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,13 +93,13 @@ $countries_array = get_countries($db);
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="email">Email:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" required>
+                                <input class="form-control form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Enter your email address" value="<?php echo $register_email; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="age">Age:</label>
                             <div class="col-sm-8">
-                                <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" required>
+                                <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" value="<?php echo $age; ?>" required>
                             </div>
                         </div>
                         <div class="form-group">

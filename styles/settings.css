@@ -17,28 +17,33 @@ h1 {
 .nav-tabs {
     margin-top: 20px;
     padding-left: 16px;
-    border-bottom: 1px solid #454545;
+    border-bottom: 1px solid #95989A;
 }
 
 .nav-tabs a {
     color: #454545;
-    border-top-left-radius: 2px !important;
-    border-top-right-radius: 2px !important;
-    border: 0 !important;
-    border-bottom: 1px solid #454545 !important;
-    background: white;
+    border-radius: 0px !important;
+    border: 1px solid #95989A !important;
+    border-left: 0 !important;
+    background: #f2f2f2;
     color: #454545;
     font-size: 12px !important;
+    margin-right: 0 !important;
+}
+
+.nav-tabs li:first-of-type a {
+    border-left: 1px solid #95989A !important;
 }
 
 .nav-tabs a:hover {
-    background: #e6e6e6 !important;
-    color: #454546;
+    background: white !important;
+    color: #454545;
 }
 
 .nav-tabs li.active a, .nav-tabs li.active a:hover {
     background: #454545 !important;
     color: white;
+    border: 1px solid #454545 !important;
 }
 
 h3 {
@@ -88,6 +93,7 @@ form {
 #profile-pic img {
     margin-left: 16px;
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 150px;
     height: 150px;
     object-fit: cover;

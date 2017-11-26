@@ -50,6 +50,23 @@ body {
     border-right: 0.5px solid white;
 }
 
+#message {
+    background: red;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
+}
+
 form {
     background: white;
     color: #454545;
@@ -98,6 +115,12 @@ footer p {
 
 h4 {
     margin-bottom: 25px;
+}
+
+h4 span {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .btn-option {
