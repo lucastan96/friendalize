@@ -129,7 +129,7 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                         <div id="profile-pic" class="tab-pane fade">
                             <img src="images/profiles/<?php echo $profile_pic; ?>">
-                            <form action="includes/profile-picture-update-p.php" enctype="multipart/form-data" method="post">
+                            <form action="profile-picture-update-p.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
                                     <input type="file" style="color:transparent" id="fileToUpload" name="fileToUpload" >
                                     <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
@@ -138,7 +138,7 @@ if (!isset($_SESSION['user_id'])) {
                             </form>
                         </div>
                         <div id="password" class="tab-pane fade">
-                            <form action="includes/password-update-p.php" method="post">
+                            <form action="password-update-p.php" method="post">
                                 <div class="form-group">
                                     <label class="control-label" for="password">Password:</label>
                                     <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >

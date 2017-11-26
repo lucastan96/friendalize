@@ -20,7 +20,7 @@ if ($request_method == 'POST') {
     if (!preg_match($regex_email, $register_email)) {
         $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The email format is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
 
-        include ("../register.php");
+        include ("register.php");
         exit();
     }
 
@@ -30,7 +30,7 @@ if ($request_method == 'POST') {
     if (!preg_match($regex_password, $password)) {
         $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The password format is incorrect.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
 
-        include ("../register.php");
+        include ("register.php");
         exit();
     }
 
@@ -44,7 +44,7 @@ if ($request_method == 'POST') {
 
 
     if ($password == $confirmpassword) {
-        require_once('connection.php');
+        require_once('includes/connection.php');
 
         $query1 = "SELECT * FROM users where username = :username AND email = :email";
         $statement1 = $db->prepare($query1);
@@ -100,7 +100,7 @@ if ($request_method == 'POST') {
             $statement6->execute();
             $statement6->closeCursor();
             
-            header("Location: ../setup-institution.php");
+            header("Location: setup-institution.php");
             exit();
         } else {
             $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or email is not available.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
@@ -110,11 +110,11 @@ if ($request_method == 'POST') {
     }
 
     if (isset($register_message)) {
-        include ("../register.php");
+        include ("register.php");
         exit();
     }
 } else {
-    header("Location: ../signin.php");
+    header("Location: signin.php");
     exit();
 }
 

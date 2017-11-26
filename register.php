@@ -42,7 +42,7 @@ $countries_array = get_countries($db);
                 </div>
             </div>
             <h4>To become a Friendalizer, these following details are required.<br>Please fill in the form below to proceed...</h4>
-            <form class="form-horizontal" action="includes/register-p.php" method="post">
+            <form class="form-horizontal" action="register-p.php" method="post">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">

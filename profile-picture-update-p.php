@@ -6,9 +6,9 @@ if ($request_method == 'POST') {
     session_start();
     $user_id = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
 
-    require_once('connection.php');
+    require_once('includes/connection.php');
 
-    $target_dir = "../images/profiles/";
+    $target_dir = "images/profiles/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
     $query1 = "SELECT * FROM users WHERE user_id = :user_id";
@@ -29,8 +29,7 @@ if ($request_method == 'POST') {
         $statement->closeCursor();
     }
 
-
-    header("Location: ../settings.php");
+    header("Location: settings.php");
     exit();
 }
 
