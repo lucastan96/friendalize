@@ -43,105 +43,119 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <h1>Settings</h1>
                     <h2 class="description">Personalize your profile and personal details here.</h2>
-					  <h2>Change profile picture</h2>
-                    <img  id = "imagePro" class="img-thumbnail" src="images/profiles/<?php echo $profile_pic; ?>" width="304" height="236" position="center">
-                    <form action="includes/profile-picture-update-p.php" enctype="multipart/form-data" method="post">
-                        <div class="form-group">
-                            <input type="file"  style="color:transparent" id = "fileToUpload" name="fileToUpload" >
-                            <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
-                            <button type="submit" class="btn btn-submit">Change Profile Picture</button>
-                        </div>
-                    </form>
-                    <form action="includes/settings-p.php" method="post">
-                        <div class="form-group">
-                            <label class="control-label" for="first_name">First Name:</label>
-                            <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo $first_name; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="last_name">Last Name:</label>
-                            <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" value="<?php echo $last_name; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="age">Age:</label>
-                            <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" value="<?php echo $age; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="gender">Gender:</label>
-                            <select class="form-control form-select" id="gender" name="gender" required>
-                                <option value="">Select your gender</option>
-                                <option value="1" <?php
-                                if ($gender == "Male") {
-                                    echo "selected";
-                                }
-                                ?>>Male</option>
-                                <option value="2" <?php
-                                if ($gender == "Female") {
-                                    echo "selected";
-                                }
-                                ?>>Female</option>
-                                <option value="3" <?php
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#details">Account Details</a></li>
+                        <li><a data-toggle="tab" href="#profile-pic">Profile Picture</a></li>
+                        <li><a data-toggle="tab" href="#password">Login Password</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="details" class="tab-pane fade in active">
+                            <h3>Change Personal Details</h3>
+                            <form action="includes/settings-p.php" method="post">
+                                <div class="form-group">
+                                    <label class="control-label" for="first_name">First Name:</label>
+                                    <input class="form-control form-input" type="text" id="first_name" name="first_name" placeholder="Enter your first name" value="<?php echo $first_name; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="last_name">Last Name:</label>
+                                    <input class="form-control form-input" type="text" id="last_name" name="last_name" placeholder="Enter your last name" value="<?php echo $last_name; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="age">Age:</label>
+                                    <input class="form-control form-input" type="number" id="age" name="age" placeholder="Enter your age" value="<?php echo $age; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="gender">Gender:</label>
+                                    <select class="form-control form-select" id="gender" name="gender" required>
+                                        <option value="">Select your gender</option>
+                                        <option value="1" <?php
+                                        if ($gender == "Male") {
+                                            echo "selected";
+                                        }
+                                        ?>>Male</option>
+                                        <option value="2" <?php
+                                        if ($gender == "Female") {
+                                            echo "selected";
+                                        }
+                                        ?>>Female</option>
+                                        <option value="3" <?php
                                         if ($gender == "Other") {
                                             echo "selected";
                                         }
-                                ?>>Other</option>
-                            </select>
+                                        ?>>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="country">Country:</label>
+                                    <select class="form-control form-select" id="country" name="country" required>
+                                        <option value="">Select your country</option>
+                                        <?php foreach ($countries_array as $countries) : ?>
+                                            <option value="<?php echo $countries['country_id']; ?>" <?php
+                                            if ($countries["country_id"] == $country_id) {
+                                                echo "selected";
+                                            }
+                                            ?>><?php echo htmlspecialchars($countries['name']); ?></option>
+                                                <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="institution">Institution:</label>
+                                    <select class="form-control form-select" id="institution" name="institution" required>
+                                        <option value="">Select your institution</option>
+                                        <?php foreach ($institutions_array as $institutions) : ?>
+                                            <option value="<?php echo $institutions['institution_id']; ?>" <?php
+                                            if ($institutions["institution_id"] == $institution_id) {
+                                                echo "selected";
+                                            }
+                                            ?>><?php echo htmlspecialchars($institutions['name']); ?></option>
+                                                <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="interests">Interests:</label>
+                                    <select class="form-control form-select" multiple="multiple" id="interests" name="interests[]">
+                                        <?php foreach ($interests_array as $interests) : ?>
+                                            <option value="<?php echo $interests['interest_id']; ?>" <?php
+                                            if (in_array($interests["interest_id"], $user_interests)) {
+                                                echo "selected";
+                                            }
+                                            ?>><?php echo htmlspecialchars($interests['name']); ?></option>
+                                                <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="country">Country:</label>
-                            <select class="form-control form-select" id="country" name="country" required>
-                                <option value="">Select your country</option>
-<?php foreach ($countries_array as $countries) : ?>
-                                    <option value="<?php echo $countries['country_id']; ?>" <?php
-    if ($countries["country_id"] == $country_id) {
-        echo "selected";
-    }
-    ?>><?php echo htmlspecialchars($countries['name']); ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                        <div id="profile-pic" class="tab-pane fade">
+                            <h3>Change Profile Picture</h3>
+                            <img id = "imagePro" class="img-thumbnail" src="images/profiles/<?php echo $profile_pic; ?>" width="304" height="236" position="center">
+                            <form action="includes/profile-picture-update-p.php" enctype="multipart/form-data" method="post">
+                                <div class="form-group">
+                                    <input type="file"  style="color:transparent" id = "fileToUpload" name="fileToUpload" >
+                                    <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
+                                    <button type="submit" class="btn btn-submit">Change Profile Picture</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="institution">Institution:</label>
-                            <select class="form-control form-select" id="institution" name="institution" required>
-                                <option value="">Select your institution</option>
-<?php foreach ($institutions_array as $institutions) : ?>
-                                    <option value="<?php echo $institutions['institution_id']; ?>" <?php
-                                    if ($institutions["institution_id"] == $institution_id) {
-                                        echo "selected";
-                                    }
-                                    ?>><?php echo htmlspecialchars($institutions['name']); ?></option>
-                                        <?php endforeach; ?>
-                            </select>
+                        <div id="password" class="tab-pane fade">
+                            <h3>Change Login Password</h3>
+                            <form action="includes/password-update-p.php" method="post">
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Password:</label>
+                                    <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="password_confirm">Confirm Password:</label>
+                                    <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm new password" >
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="interests">Interests:</label>
-                            <select class="form-control form-select" multiple="multiple" id="interests" name="interests[]">
-<?php foreach ($interests_array as $interests) : ?>
-                                    <option value="<?php echo $interests['interest_id']; ?>" <?php
-    if (in_array($interests["interest_id"], $user_interests)) {
-        echo "selected";
-    }
-    ?>><?php echo htmlspecialchars($interests['name']); ?></option>
-<?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
-                    <h2>Change Password Details</h2>
-                    <form action="includes/password-update-p.php" method="post">
-                        <div class="form-group">
-                            <label class="control-label" for="password">Password:</label>
-                            <input class="form-control form-input" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter new password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="password_confirm">Confirm Password:</label>
-                            <input class="form-control form-input" type="password" id="password_confirm" name="password_confirm" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm new password" >
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-submit" type="submit">Save<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

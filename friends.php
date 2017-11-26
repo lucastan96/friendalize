@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
                                     $friend_last_name = $details["last_name"];
                                 endforeach;
 
-                                echo "<a class='friends-list-item' href='profile.php?id=" . $friend_id . "' title='" . $friend_first_name . " " . $friend_last_name . "'><img src='images/profiles/" . $friend_profile_pic . ".png'></a>";
+                                echo "<a class='friends-list-item' href='profile.php?id=" . $friend_id . "' title='" . $friend_first_name . " " . $friend_last_name . "'><img src='images/profiles/" . $friend_profile_pic . "'></a>";
                             }
                             ?>
                             <a class='friends-list-item btn btn-default btn-friend-list' role='button' href='friends-list.php'>View All<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <div class='col'>
                                             <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class='users-list-item-link'>
                                                 <div class="users-list-item-container">
-                                                    <img src="images/profiles/<?php echo $user_profile_pic; ?>.png">
+                                                    <img src="images/profiles/<?php echo $user_profile_pic; ?>">
                                                     <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
                                                     <p><?php echo $user_institution; ?></p>
                                                     <p><?php echo $user_interests; ?></p>
@@ -145,7 +145,7 @@ if (!isset($_SESSION['user_id'])) {
                                     <div class='col'>
                                         <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class='users-list-item-link'>
                                             <div class="users-list-item-container">
-                                                <img src="images/profiles/<?php echo $user_profile_pic; ?>.png">
+                                                <img src="images/profiles/<?php echo $user_profile_pic; ?>">
                                                 <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
                                                 <p><?php echo $user_institution; ?></p>
                                                 <p><?php echo $user_interests; ?></p>

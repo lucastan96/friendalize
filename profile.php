@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
                         } else {
                             echo $friend_profile_pic;
                         }
-                        ?>.png' alt='Profile Picture'>
+                        ?>' alt='Profile Picture'>
                         <h1><?php
                             if ($friend_id == "") {
                                 echo $first_name;
