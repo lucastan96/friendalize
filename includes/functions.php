@@ -324,3 +324,14 @@ function check_friend_requests($db, $user_id) {
     
     return $requested_ids;
 }
+
+function get_id($db, $user_id) {
+    $query1 = "SELECT * FROM users WHERE user_id = :user_id";
+    $statement1 = $db->prepare($query1);
+    $statement1->bindValue(":user_id", $user_id);
+    $statement1->execute();
+    $user = $statement1->fetch();
+    $statement1->closeCursor();
+    
+    return $user;
+}
