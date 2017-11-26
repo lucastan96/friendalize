@@ -15,7 +15,36 @@ h1 {
 }
 
 .nav-tabs {
-    
+    margin-top: 20px;
+    padding-left: 16px;
+    border-bottom: 1px solid #454545;
+}
+
+.nav-tabs a {
+    color: #454545;
+    border-top-left-radius: 2px !important;
+    border-top-right-radius: 2px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #454545 !important;
+    background: white;
+    color: #454545;
+    font-size: 12px !important;
+}
+
+.nav-tabs a:hover {
+    background: #e6e6e6 !important;
+    color: #454546;
+}
+
+.nav-tabs li.active a, .nav-tabs li.active a:hover {
+    background: #454545 !important;
+    color: white;
+}
+
+h3 {
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 16px;
 }
 
 form {
@@ -52,8 +81,28 @@ form {
     background: #454545;
 }
 
-h2 {
-    padding-left: 16px;
+#profile-pic {
+    position: relative;
+}
+
+#profile-pic img {
+    margin-left: 16px;
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 300px;
+    display: inline-block;
+}
+
+#profile-pic form {
+    display: inline-block;
+    margin-left: 20px;
+    width: 140px;
+}
+
+#profile-pic .btn-submit {
+    margin-top: 10px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -69,5 +118,14 @@ h2 {
         clear: none;
         margin-top: 30px;
         padding-left: 0;
+    }
+
+    .nav-tabs a {
+        font-size: 14px !important;
+    }
+
+    #profile-pic img {
+        width: 200px;
+        height: 200px;
     }
 }

@@ -44,13 +44,12 @@ if (!isset($_SESSION['user_id'])) {
                     <h1>Settings</h1>
                     <h2 class="description">Personalize your profile and personal details here.</h2>
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#details">Account Details</a></li>
+                        <li class="active"><a data-toggle="tab" href="#details">Details</a></li>
                         <li><a data-toggle="tab" href="#profile-pic">Profile Picture</a></li>
-                        <li><a data-toggle="tab" href="#password">Login Password</a></li>
+                        <li><a data-toggle="tab" href="#password">Password</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="details" class="tab-pane fade in active">
-                            <h3>Change Personal Details</h3>
                             <form action="includes/settings-p.php" method="post">
                                 <div class="form-group">
                                     <label class="control-label" for="first_name">First Name:</label>
@@ -129,18 +128,16 @@ if (!isset($_SESSION['user_id'])) {
                             </form>
                         </div>
                         <div id="profile-pic" class="tab-pane fade">
-                            <h3>Change Profile Picture</h3>
-                            <img id = "imagePro" class="img-thumbnail" src="images/profiles/<?php echo $profile_pic; ?>" width="304" height="236" position="center">
+                            <img src="images/profiles/<?php echo $profile_pic; ?>">
                             <form action="includes/profile-picture-update-p.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
-                                    <input type="file"  style="color:transparent" id = "fileToUpload" name="fileToUpload" >
+                                    <input type="file" style="color:transparent" id="fileToUpload" name="fileToUpload" >
                                     <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
-                                    <button type="submit" class="btn btn-submit">Change Profile Picture</button>
+                                    <button type="submit" class="btn btn-submit">Update<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </div>
                             </form>
                         </div>
                         <div id="password" class="tab-pane fade">
-                            <h3>Change Login Password</h3>
                             <form action="includes/password-update-p.php" method="post">
                                 <div class="form-group">
                                     <label class="control-label" for="password">Password:</label>
