@@ -309,7 +309,7 @@ function check_friend_requests($db, $user_id) {
     $statement->execute();
     $results = $statement->fetchAll();
     $statement->closeCursor();
-    
+
     $requested_ids = [];
 
     foreach ($results as $result):
@@ -321,7 +321,7 @@ function check_friend_requests($db, $user_id) {
             array_push($requested_ids, $stranger_id);
         }
     endforeach;
-    
+
     return $requested_ids;
 }
 
@@ -332,6 +332,25 @@ function get_id($db, $user_id) {
     $statement1->execute();
     $user = $statement1->fetch();
     $statement1->closeCursor();
-    
+
     return $user;
+}
+
+function get_post_filter($db, $category_id) {
+    if ($category_id == 1) {
+        $query = "SELECT * FROM posts";
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result_filter = $statement->fetchAll();
+        $statement->closeCursor();
+    } else {
+        $query = "SELECT * FROM posts WHERE category_id = :category_id";
+        $statement = $db->prepare($query);
+        $statement->bindValue(":category_id", $category_id);
+        $statement->execute();
+        $result_filter = $statement->fetchAll();
+        $statement->closeCursor();
+    }
+
+    return $result_filter;
 }

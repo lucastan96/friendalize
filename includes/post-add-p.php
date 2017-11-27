@@ -1,8 +1,9 @@
 <?php
+session_start();
 
 require_once('connection.php');
 
-$member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_STRING);
+$user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_STRING);
 $content = filter_input(INPUT_POST, 'post', FILTER_SANITIZE_STRING);
 $category_id = filter_input(INPUT_POST, 'post_category', FILTER_SANITIZE_INT);
 
