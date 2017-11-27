@@ -21,7 +21,7 @@ function get_institutions($db) {
 }
 
 function get_interests($db) {
-    $query = "SELECT interest_id, name FROM interests GROUP BY name";
+    $query = "SELECT interest_id, name FROM interests WHERE interest_id != 1 GROUP BY name";
     $statement = $db->prepare($query);
     $statement->execute();
     $interests_array = $statement->fetchAll();
