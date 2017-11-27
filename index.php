@@ -45,16 +45,22 @@ if (!isset($_SESSION['user_id'])) {
                                     <option value="<?php echo $interests['interest_id']; ?>"><?php echo htmlspecialchars($interests['name']); ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <input type="hidden" name="member_id" value="<?php echo htmlspecialchars($_SESSION["user_id"]); ?>">
                             <button class="btn btn-square btn-images">Upload Images</button>
                             <button class="btn btn-square btn-post" type="submit">Post<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                         </div>
                     </form>
-                    <div class="filter-box">
-                        <p>Showing all categories</p>
-                        <select class="form-control form-select" id="filter-select" name="filter-select" required>
-                            <option value="" selected="selected">Filter</option>
-                        </select>
-                    </div>
+                    <form class="form-horizontal form-post" action='includes/view-post-filter-p.php' method='post'>
+                        <div class="filter-box">
+                            <p>Showing all categories</p>
+                            <select class="form-control form-select" id="filter-select" name="filter-select" required>
+                                <option value="" selected="selected">Filter</option>
+                                <?php foreach ($interests_array as $interests) : ?>
+                                    <option value="<?php echo $interests['interest_id']; ?>"><?php echo htmlspecialchars($interests['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </form>
                     <div class="feed">
                         <div class="row">
                             <div class="col">
