@@ -21,9 +21,10 @@ if ($request_method == 'POST') {
     $results2 = $statement2->fetch();
     $statement2->closeCursor();
 
-    $query3 = "SELECT room_id FROM ghost_room_players WHERE user_id = :user_id";
+    $query3 = "SELECT room_id FROM ghost_room_players WHERE user_id = :user_id AND room_id = :room_id";
     $statement3 = $db->prepare($query3);
     $statement3->bindValue(":user_id", $_SESSION["user_id"]);
+    $statement3->bindValue(":room_id", $room_id);
     $statement3->execute();
     $results3 = $statement3->fetch();
     $statement3->closeCursor();
