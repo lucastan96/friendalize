@@ -13,6 +13,8 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     $interests_array = get_interests($db);
+//    echo $_SESSION['filter-select'];
+//    $result_filter = get_post_filter($db, $_SESSION['filter-select']);
 }
 ?>
 <!DOCTYPE html>
