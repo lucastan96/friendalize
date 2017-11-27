@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once('connection.php');
@@ -8,7 +9,7 @@ $content = filter_input(INPUT_POST, 'post', FILTER_SANITIZE_STRING);
 $category_id = filter_input(INPUT_POST, 'post_category', FILTER_SANITIZE_INT);
 
 if (!empty($_FILES['picture']['name'])) {
-    $target_dir = "images/uploads/";
+    $target_dir = "images/posts/";
     $target_name = basename($_FILES["picture"]["name"]);
     $target_file = $target_dir . $target_name;
     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -44,7 +45,6 @@ if (!empty($_FILES['picture']['name'])) {
             exit();
         } else {
             if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-
                 $query3 = "INSERT INTO posts (content, post_image, category_id, member_id) VALUES (:content, :post_image, :category_id, :member_id )";
                 $statement3 = $db->prepare($query3);
                 $statement3->bindValue(":post_content", $content);
@@ -65,17 +65,13 @@ if (!empty($_FILES['picture']['name'])) {
         exit();
     }
 } else {
-
-
     $query3 = "INSERT INTO posts (content, category_id, member_id) VALUES (:content, :category_id, :member_id )";
-                $statement3 = $db->prepare($query3);
-                $statement3->bindValue(":post_content", $content);
-                $statement3->bindValue(":category_id", $category_id);
-                $statement3->bindValue(":member_id", $member_id);
-                $statement3->execute();
-                $statement3->closeCursor();
-    
-
+    $statement3 = $db->prepare($query3);
+    $statement3->bindValue(":post_content", $content);
+    $statement3->bindValue(":category_id", $category_id);
+    $statement3->bindValue(":member_id", $member_id);
+    $statement3->execute();
+    $statement3->closeCursor();
 
     $_SESSION['postAdded'] = 1;
 
