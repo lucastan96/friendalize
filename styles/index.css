@@ -20,17 +20,17 @@ h1 {
     margin-right: 8px;
 }
 
-.form-post div {
-    border: 1px solid #95989A;
-    border-radius: 0;
-}
-
 .form-post div:nth-of-type(2) {
     border-top: 0;
 }
 
 .form-post input {
     border: none;
+}
+
+.form-post-options, .form-post .form-input {
+    border-radius: 0 !important;
+    border: 1px solid #95989A;
 }
 
 .form-post-options, .filter-box {
@@ -70,7 +70,7 @@ h1 {
 .filter-box {
     border: 1px solid #95989A;
     color: #454545;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
     font-size: 14px;
     padding-left: 15px;
