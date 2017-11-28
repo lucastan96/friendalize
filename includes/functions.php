@@ -336,25 +336,6 @@ function get_id($db, $user_id) {
     return $user;
 }
 
-function get_post_filter($db, $category_id) {
-    if ($category_id == 1) {
-        $query = "SELECT * FROM posts";
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $result_filter = $statement->fetchAll();
-        $statement->closeCursor();
-    } else {
-        $query = "SELECT * FROM posts WHERE category_id = :category_id";
-        $statement = $db->prepare($query);
-        $statement->bindValue(":category_id", $category_id);
-        $statement->execute();
-        $result_filter = $statement->fetchAll();
-        $statement->closeCursor();
-    }
-
-    return $result_filter;
-}
-
 function get_post_user_info($db, $user_id) {
     $query = "SELECT first_name, last_name, profile_pic FROM users WHERE user_id = :user_id";
     $statement = $db->prepare($query);
