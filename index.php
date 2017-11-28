@@ -99,35 +99,35 @@ if (!isset($_SESSION['user_id'])) {
         <script src="scripts/viewport-resize.js"></script>
         <script src="scripts/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('.nav-desktop li:nth-child(1)').addClass("nav-active");
-                $('.nav-mobile a:nth-child(1)').addClass("nav-active");
-            });
+                                $(document).ready(function () {
+                                    $('.nav-desktop li:nth-child(1)').addClass("nav-active");
+                                    $('.nav-mobile a:nth-child(1)').addClass("nav-active");
+                                });
 
-            $(".btn-like").click(function (e) {
-                e.preventDefault();
+                                $(".btn-like").click(function (e) {
+                                    e.preventDefault();
 
-                var post_id = $(this).next().val();
-                var action = 1;
+                                    var post_id = $(this).next().val();
+                                    var action = 1;
 
-                if ($(this).hasClass("btn-liked")) {
-                    action = 2;
-                    $(this).removeClass("btn-liked");
-                    $(this).find("span").text("Like");
-                } else {
-                    $(this).addClass("btn-liked");
-                    $(this).find("span").text("Liked");
-                }
+                                    if ($(this).hasClass("btn-liked")) {
+                                        action = 2;
+                                        $(this).removeClass("btn-liked");
+                                        $(this).find("span").text("Like");
+                                    } else {
+                                        $(this).addClass("btn-liked");
+                                        $(this).find("span").text("Liked");
+                                    }
 
-                $.ajax({
-                    url: "includes/post-like-p.php",
-                    type: "POST",
-                    data: {
-                        post_id: post_id,
-                        action: action
-                    }
-                });
-            });
+                                    $.ajax({
+                                        url: "includes/post-like-p.php",
+                                        type: "POST",
+                                        data: {
+                                            post_id: post_id,
+                                            action: action
+                                        }
+                                    });
+                                });
         </script>
     </body>
 </html>

@@ -55,6 +55,7 @@ h1 {
     background: #f2f2f2;
     color: #454545;
     border-right: 1px solid #95989A;
+    border-radius: 0 !important;
     margin-top: -1px;
     margin-left: -4px;
     height: 40px;
@@ -202,16 +203,13 @@ h1 {
     height: 100%;
     border-left: 1px solid #454545;
     border-right: 1px solid #454545;
+    background: #454545 !important;
+    color: white !important;
 }
 
 .btn-like i {
     margin: 0;
     margin-right: 5px;
-}
-
-.btn-like:hover {
-    background: #f2f2f2;
-    color: #454545;
 }
 
 .btn-liked {

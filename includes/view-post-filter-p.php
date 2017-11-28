@@ -37,6 +37,7 @@ if ($request_method == 'POST') {
 
             $post_category = get_post_category($db, $result["category_id"]);
             $post_likes_count = get_post_likes_count($db, $result["post_id"]);
+            $post_like_status = get_post_like_status($db, $result["post_id"], $_SESSION["user_id"]);
 
             echo '<div class="col">';
             echo '<div class="item">';
@@ -60,7 +61,12 @@ if ($request_method == 'POST') {
             echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
             echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
-            echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+            if ($post_like_status == 0) {
+                echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+            } else {
+                echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+            }
+            echo '<input type="hidden" value="' . $result["post_id"] . '">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
@@ -69,7 +75,6 @@ if ($request_method == 'POST') {
             echo '</div>';
         endforeach;
     } else {
-
         echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>";
     }
     echo '</div>';
@@ -93,6 +98,7 @@ if ($request_method == 'POST') {
 
             $post_category = get_post_category($db, $result["category_id"]);
             $post_likes_count = get_post_likes_count($db, $result["post_id"]);
+            $post_like_status = get_post_like_status($db, $result["post_id"], $_SESSION["user_id"]);
 
             echo '<div class="col">';
             echo '<div class="item">';
@@ -116,7 +122,12 @@ if ($request_method == 'POST') {
             echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
             echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
-            echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+            if ($post_like_status == 0) {
+                echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+            } else {
+                echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+            }
+            echo '<input type="hidden" value="' . $result["post_id"] . '">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
@@ -125,7 +136,6 @@ if ($request_method == 'POST') {
             echo '</div>';
         endforeach;
     } else {
-
         echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>";
     }
     echo '</div>';

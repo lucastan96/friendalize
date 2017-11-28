@@ -375,6 +375,26 @@ function get_post_likes_count($db, $post_id) {
     return 0;
 }
 
+function get_post_like_status($db, $post_id, $user_id) {
+    $query = 'SELECT likes FROM posts WHERE post_id = :post_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":post_id" => $post_id));
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    $likes = $results["likes"];
+
+    if ($likes != NULL) {
+        $likes_array = explode(",", $likes);
+        
+        if (in_array($user_id, $likes_array)) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 function search_for_users($db,$user_id,$searchq) {
     $query = "SELECT  user_id,first_name,last_name FROM users WHERE first_name LIKE '%$searchq%' OR last_name LIKE '%$searchq%'";
     $statement = $db->prepare($query);
