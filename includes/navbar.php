@@ -1,21 +1,32 @@
+<?php
+require_once('essentials.php');
+require_once('functions.php');
+$count = count_notifications($db);
+?>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.php"><div class="navbar-brand-logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo"><span>friendalize</span></div></a>
-			<form class ="navbar-search-bar" name ="form1" method ="post" action="search.php">
+            <form class ="navbar-search-bar" name ="form1" method ="post" action="search.php">
                 <input name ="search" id ='search' type ="text" placeholder="search for friendalizers here...."/>
                 <button class ="one" type="submit" name ="Submit" value ="Filter"/>
                 <i class ='fa fa-search'></i></button>
                 <a href="constant.php"></a>
             </form>            
-		   <a href="signout.php" class="navbar-toggle navbar-mobile" title="Sign Out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a>
+            <a href="signout.php" class="navbar-toggle navbar-mobile" title="Sign Out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a>
             <a href="notifications.php" class="navbar-toggle navbar-mobile" title="Notifications"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a>
             <a href="profile.php" class="navbar-toggle navbar-mobile" title="Profile"><img src="images/profiles/<?php echo $profile_pic; ?>" alt="Profile Pic"></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="profile.php" title="Profile"><div class="navbar-profile"><img src="images/profiles/<?php echo $profile_pic; ?>" alt="Profile Pic"><?php echo $first_name; ?></div></a></li>
-                <li><a href="notifications.php" title="Notifications"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a></li>
+                <li><a href = "notifications.php"><i class="fa fa-bell fa-fw" aria-hidden="true"></i>
+                        <?php
+                        if ($count > 0) {
+                            echo $count;
+                        }
+                        ?></a></li>                     
                 <li><a href="signout.php" title="Sign Out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a></li>
             </ul>
         </div>
