@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
     <head>
         <?php include("includes/head.php"); ?>
-        <title>Explore | Friendalize</title>
+        <title>Discover | Friendalize</title>
         <link href="scripts/dead-simple-grid-gh-pages/css/grid.css" rel="stylesheet">
         <link href="styles/discover.css" rel="stylesheet">
 
@@ -40,7 +40,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-desktop.php"); ?>
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
-                    <h1>Explore</h1>
+                    <h1>Discover</h1>
                     <h2 class="description">Find people in your institution or others that share same interests as you.</h2>
 
                     <form class="form-horizontal form-post" action="" method='post'>
