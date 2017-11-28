@@ -10,13 +10,13 @@ $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_S
 if ($request_method == 'POST') {
 
     if ($category_id == 1) {
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM posts ORDER BY post_id DESC";
         $statement = $db->prepare($query);
         $statement->execute();
         $result_filter = $statement->fetchAll();
         $statement->closeCursor();
     } else {
-        $query = "SELECT * FROM posts WHERE category_id = :category_id";
+        $query = "SELECT * FROM posts WHERE category_id = :category_id ORDER BY post_id DESC";
         $statement = $db->prepare($query);
         $statement->bindValue(":category_id", $category_id);
         $statement->execute();
@@ -35,13 +35,16 @@ if ($request_method == 'POST') {
             $post_last_name = $post_user_info["last_name"];
             $post_profile_pic = $post_user_info["profile_pic"];
 
+            $post_category = get_post_category($db, $result["category_id"]);
+            $post_likes_count = get_post_likes_count($db, $result["post_id"]);
+
             echo '<div class="col">';
             echo '<div class="item">';
             echo '<div class="item-info">';
             echo '<img class="item-profile-pic" src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic">';
             echo '<div class="item-user">' . $post_first_name . " " . $post_last_name . '</div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
-            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>26</div>';
+            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>' . $post_likes_count . '</div>';
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
@@ -56,8 +59,8 @@ if ($request_method == 'POST') {
             echo "<form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>";
             echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
-            echo '<p class="item-category">Sports</p>';
-            echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>';
+            echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
+            echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
@@ -72,7 +75,7 @@ if ($request_method == 'POST') {
     echo '</div>';
     echo '</div>';
 } else {
-    $query = "SELECT * FROM posts";
+    $query = "SELECT * FROM posts ORDER BY post_id DESC";
     $statement = $db->prepare($query);
     $statement->execute();
     $result_filter = $statement->fetchAll();
