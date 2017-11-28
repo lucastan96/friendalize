@@ -210,6 +210,16 @@ h1 {
     margin-right: 5px;
 }
 
+.btn-like:hover {
+    background: #f2f2f2;
+    color: #454545;
+}
+
+.btn-liked {
+    background: #FF5252 !important;
+    color: white !important;
+}
+
 .item-options .btn-post {
     position: absolute;
     right: 0;

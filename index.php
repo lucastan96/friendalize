@@ -83,6 +83,9 @@ if (!isset($_SESSION['user_id'])) {
                                     $post_first_name = $post_user_info["first_name"];
                                     $post_last_name = $post_user_info["last_name"];
                                     $post_profile_pic = $post_user_info["profile_pic"];
+
+                                    $post_category = get_post_category($db, $result["category_id"]);
+                                    $post_likes_count = get_post_likes_count($db, $result["post_id"]);
                                     ?>
                                     <div class="col">
                                         <div class="item">
@@ -90,7 +93,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 <img class="item-profile-pic" src="images/profiles/<?php echo $post_profile_pic; ?>" alt="Profile Pic">
                                                 <div class="item-user"><?php echo $post_first_name . " " . $post_last_name; ?></div>
                                                 <div class="item-time">Posted on <?php echo $result["time"]; ?></div>
-                                                <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>26</div>
+                                                <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $post_likes_count; ?></div>
                                             </div>
                                             <div class="item-content">
                                                 <?php if ($result["content"] != "") { ?>
@@ -104,8 +107,9 @@ if (!isset($_SESSION['user_id'])) {
                                                 <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                                     <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                                     <div>
-                                                        <p class='item-category'>Sports</p>
-                                                        <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
+                                                        <p class='item-category' title="Category: <?php echo $post_category; ?>"><?php echo $post_category; ?></p>
+                                                        <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span >Like</span></button>
+                                                        <input type="hidden" name="post_id" value="<?php echo $result["post_id"]; ?>">
                                                         <button class="btn btn-square btn-post" type="submit" title='Post comment'>Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                     </div>
                                                 </form>
@@ -115,7 +119,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <?php endforeach; ?>
                             <?php } else { ?>
                                 <?php
-                                echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>";
+                                echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by sharing your own post!</div>";
                                 ?>
                             <?php } ?>
                         </div>
@@ -129,6 +133,31 @@ if (!isset($_SESSION['user_id'])) {
             $(document).ready(function () {
                 $('.nav-desktop li:nth-child(1)').addClass("nav-active");
                 $('.nav-mobile a:nth-child(1)').addClass("nav-active");
+            });
+
+            $(".btn-like").click(function (e) {
+                e.preventDefault();
+
+                var post_id = $(this).next().val();
+                var action = 1;
+
+                if ($(this).hasClass("btn-liked")) {
+                    action = 2;
+                    $(this).removeClass("btn-liked");
+                    $(this).find("span").text("Like");
+                } else {
+                    $(this).addClass("btn-liked");
+                    $(this).find("span").text("Liked");
+                }
+
+                $.ajax({
+                    url: "includes/post-like-p.php",
+                    type: "POST",
+                    data: {
+                        post_id: post_id,
+                        action: action
+                    }
+                });
             });
         </script>
     </body>

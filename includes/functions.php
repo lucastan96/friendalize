@@ -365,3 +365,31 @@ function get_post_user_info($db, $user_id) {
 
     return $results;
 }
+
+function get_post_category($db, $category_id) {
+    $query = "SELECT name FROM interests WHERE interest_id = :interest_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":interest_id", $category_id);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+    
+    return $results["name"];
+}
+
+function get_post_likes_count($db, $post_id) {
+    $query = 'SELECT likes FROM posts WHERE post_id = :post_id';
+    $statement = $db->prepare($query);
+    $statement->execute(array(":post_id" => $post_id));
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    $likes = $results["likes"];
+
+    if ($likes != NULL) {
+        $likes_array = explode(",", $likes);
+        return sizeof($likes_array);
+    }
+
+    return 0;
+}
