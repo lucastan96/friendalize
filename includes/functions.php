@@ -365,3 +365,13 @@ function get_post_user_info($db, $user_id) {
 
     return $results;
 }
+function search_for_users($db,$user_id,$searchq)
+{
+    $query = "SELECT  user_id,first_name,last_name FROM users WHERE first_name LIKE '%$searchq%' OR last_name LIKE '%$searchq%'";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $search = $statement->fetchAll();
+    $statement->closeCursor();
+    return $search;
+}
