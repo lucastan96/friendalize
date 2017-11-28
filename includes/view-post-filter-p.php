@@ -3,6 +3,10 @@
 require_once('connection.php');
 require_once('functions.php');
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $category_id = filter_input(INPUT_POST, 'filterselect', FILTER_SANITIZE_STRING);
 
 $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING);
