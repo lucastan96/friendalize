@@ -354,3 +354,14 @@ function get_post_filter($db, $category_id) {
 
     return $result_filter;
 }
+
+function get_post_user_info($db, $user_id) {
+    $query = "SELECT first_name, last_name, profile_pic FROM users WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+    return $results;
+}

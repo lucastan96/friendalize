@@ -81,7 +81,8 @@ h1 {
 }
 
 .filter-box .form-select {
-    width: 77px;
+    text-align: right;
+    width: auto;
     height: 40px;
     position: absolute;
     right: 0;
@@ -91,6 +92,7 @@ h1 {
     background: #454545;
     color: white;
     padding-left: 22px;
+    padding-right: 22px;
     cursor: pointer;
 }
 
@@ -214,6 +216,18 @@ h1 {
     top: 0;
     height: 100%;
     background: #FF5252;
+}
+
+.feed #message {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.feed #message a {
+    color: #FF5252;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 @media only screen and (min-width: 768px) {

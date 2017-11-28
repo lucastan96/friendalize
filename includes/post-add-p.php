@@ -6,10 +6,10 @@ require_once('connection.php');
 
 $user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_STRING);
 $content = filter_input(INPUT_POST, 'post', FILTER_SANITIZE_STRING);
-$category_id = filter_input(INPUT_POST, 'post_category', FILTER_SANITIZE_INT);
+$category_id = filter_input(INPUT_POST, 'post_category', FILTER_SANITIZE_STRING);
 
 if (!empty($_FILES['picture']['name'])) {
-    $target_dir = "images/posts/";
+    $target_dir = "../images/posts/";
     $target_name = basename($_FILES["picture"]["name"]);
     $target_file = $target_dir . $target_name;
     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -45,12 +45,12 @@ if (!empty($_FILES['picture']['name'])) {
             exit();
         } else {
             if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-                $query3 = "INSERT INTO posts (content, post_image, category_id, member_id) VALUES (:content, :post_image, :category_id, :member_id )";
+                $query3 = "INSERT INTO posts (content, images, category_id, user_id) VALUES (:content, :images, :category_id, :user_id )";
                 $statement3 = $db->prepare($query3);
-                $statement3->bindValue(":post_content", $content);
-                $statement3->bindValue(":post_image", $target_name);
+                $statement3->bindValue(":content", $content);
+                $statement3->bindValue(":images", $target_name);
                 $statement3->bindValue(":category_id", $category_id);
-                $statement3->bindValue(":member_id", $member_id);
+                $statement3->bindValue(":user_id", $user_id);
                 $statement3->execute();
                 $statement3->closeCursor();
 
@@ -65,11 +65,11 @@ if (!empty($_FILES['picture']['name'])) {
         exit();
     }
 } else {
-    $query3 = "INSERT INTO posts (content, category_id, member_id) VALUES (:content, :category_id, :member_id )";
+    $query3 = "INSERT INTO posts (content, category_id, user_id) VALUES (:content, :category_id, :user_id )";
     $statement3 = $db->prepare($query3);
-    $statement3->bindValue(":post_content", $content);
+    $statement3->bindValue(":content", $content);
     $statement3->bindValue(":category_id", $category_id);
-    $statement3->bindValue(":member_id", $member_id);
+    $statement3->bindValue(":user_id", $user_id);
     $statement3->execute();
     $statement3->closeCursor();
 
