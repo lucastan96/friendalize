@@ -126,57 +126,73 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class='col-sm-9 profile-posts'>
                         <h2>Posts</h2>
+                        <?php
+                        $query = "SELECT * FROM posts WHERE user_id = :user_id ORDER BY post_id DESC";
+                        $statement = $db->prepare($query);
+                        $statement->bindValue(":user_id", $_SESSION['user_id']);
+                        $statement->execute();
+                        $result_filter = $statement->fetchAll();
+                        $statement->closeCursor();
+                        ?>
                         <div class="feed">
                             <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <div class="item-info">
-                                            <img class="item-profile-pic" src="images/profiles/default.png" alt="Profile Pic">
-                                            <div class="item-user">Lucas Tan</div>
-                                            <div class="item-time">Posted on 2017-10-17 12.50pm</div>
-                                            <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>26</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <p>Table tennis on Friday anyone?</p>
-                                        </div>
-                                        <div class="item-options">
-                                            <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
-                                                <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
-                                                <div>
-                                                    <p class='item-category'>Sports</p>
-                                                    <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
-                                                    <button class="btn btn-square btn-post" type="submit" title='Post comment'>Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                <?php
+                                if (!empty($result_filter)) {
+                                    foreach ($result_filter as $result):
+
+                                        $post_user_info = get_post_user_info($db, $result["user_id"]);
+                                        $post_first_name = $post_user_info["first_name"];
+                                        $post_last_name = $post_user_info["last_name"];
+                                        $post_profile_pic = $post_user_info["profile_pic"];
+
+                                        $post_category = get_post_category($db, $result["category_id"]);
+                                        $post_likes_count = get_post_likes_count($db, $result["post_id"]);
+                                        
+                                
+                                        ?>
+                                        <div class="col">
+                                            <div class="item">
+                                                 <div class="item-info">
+                                                    <img class="item-profile-pic" src="images/profiles/<?php echo $post_profile_pic;?>" alt="Profile Pic">
+                                                    <div class="item-user"><?php echo $post_first_name . " " . $post_last_name; ?></div>
+                                                    <div class="item-time">Posted on <?php echo $result["time"]; ?></div>
+                                                    <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $post_likes_count; ?></div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <div class="item-info">
-                                            <img class="item-profile-pic" src="images/profiles/default.png" alt="Profile Pic">
-                                            <div class="item-user">Lucas Tan</div>
-                                            <div class="item-time">Posted on 2017-10-17 12.50pm</div>
-                                            <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>26</div>
-                                        </div>
-                                        <div class="item-content">
-                                            <p>I looooove fruits~</p>
-                                            <img src='images/signin/signin_2.png'>
-                                        </div>
-                                        <div class="item-options">
-                                            <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
-                                                <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
-                                                <div>
-                                                    <p class='item-category'>Sports</p>
-                                                    <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
-                                                    <button class="btn btn-square btn-post" type="submit" title='Post comment'>Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                <div class = "item-content">
+                                                    <?php
+                                                            if ($result["content"] != "") {
+                                                        ?>
+                                                        <p><?php echo $result["content"]; ?></p>
+                                                        <?php
+                                                    }
+                                                    if ($result["images"] != "") {
+                                                        ?>
+                                                        <img src="images/posts/<?php echo $result["images"]; ?>">
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </div>
-                                            </form>
+                                                <div class="item-options">
+                                                    <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
+                                                        <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
+                                                        <div>
+                                                            <p class="item-category" title="' . $post_category . '"><?php echo $post_category; ?></p>
+                                                            <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>
+                                                            <button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                        <?php
+                                    endforeach;
+                                } else {
+                                    ?>
+                                    <div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>
+                                <?php } ?>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

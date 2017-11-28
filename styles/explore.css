@@ -1,3 +1,33 @@
+#message {
+    background: #454545;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
+}
+
+.feed #message {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.feed #message a {
+    color: #FF5252;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .content {
     padding-top: 120px;
 }

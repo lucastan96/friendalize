@@ -13,12 +13,6 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     $interests_array = get_interests($db);
-
-    $query = "SELECT * FROM posts ORDER BY post_id DESC";
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $result_filter = $statement->fetchAll();
-    $statement->closeCursor();
 }
 ?>
 <!DOCTYPE html>
@@ -92,7 +86,7 @@ if (!isset($_SESSION['user_id'])) {
                     </form>
                     <div id="viewList">
                         <?php include 'includes/view-post-filter-p.php'; ?>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
