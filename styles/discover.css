@@ -63,7 +63,7 @@ h1 {
 }
 
 .filter-box .form-select {
-    width: 77px;
+    width: auto;
     height: 40px;
     position: absolute;
     right: 0;
@@ -73,6 +73,7 @@ h1 {
     background: #454545;
     color: white;
     padding-left: 22px;
+    padding-right: 22px;
     cursor: pointer;
 }
 

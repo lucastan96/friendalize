@@ -58,6 +58,14 @@ if (!isset($_SESSION['user_id'])) {
                         <?php include 'includes/view-post-filter-p.php'; ?>
                     </div>
 
+                    <!-- USE THIS CODE -->
+<!--                    <div class="item-options">
+                        <div>
+                            <p class='item-category'>Sports</p>
+                            <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
+                            <button class="btn btn-square btn-add" type="submit" title='Be friendalized!'>Add Elaine<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>-->
                 </div>
             </div>
         </div>

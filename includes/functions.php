@@ -406,7 +406,6 @@ function search_for_users($db,$user_id,$searchq) {
 }
 
 function count_notifications($db) {
-
     $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0';
     $res = $db->prepare($sql);
     $res->execute();

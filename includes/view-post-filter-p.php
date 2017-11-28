@@ -70,8 +70,8 @@ if ($request_method == 'POST') {
             } else {
                 echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
-            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
+            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
@@ -132,8 +132,8 @@ if ($request_method == 'POST') {
             } else {
                 echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
-            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
+            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
