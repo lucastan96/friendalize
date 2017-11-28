@@ -14,7 +14,7 @@ if ($request_method == 'POST') {
     $pass = true;
 
     for ($i = 0; $i < sizeof($prohibited_words); $i++) {
-	if (strpos($comment_text, $prohibited_words[$i]) !== false) {
+	if (strpos($comment, $prohibited_words[$i]) !== false) {
 	    $pass = false;
 	}
     }
@@ -25,7 +25,7 @@ if ($request_method == 'POST') {
 	header("Location: ../index.php");
 	exit();
     } else {
-	$query2 = "INSERT INTO comment (comment , user_id , post_id) VALUES (:comment , :id , :post_id);";
+	$query2 = "INSERT INTO post_comments (comment , user_id , post_id) VALUES (:comment , :id , :post_id);";
 	$statement2 = $db->prepare($query2);
 	$statement2->bindValue(":comment", $comment);
 	$statement2->bindValue(":id", $user_id);
