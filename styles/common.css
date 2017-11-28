@@ -145,6 +145,23 @@ p {
     background: #454545;
 }
 
+.navbar-search-bar {
+    padding-left:90px;
+    padding-top: 13px;
+    overflow: hidden;
+}
+.one
+{
+    overflow: hidden;
+    height: 41px;
+}
+#search
+{
+    height: 40px;
+    width:500px;
+
+}
+
 .btn-square:hover {
     color: white;
 }
