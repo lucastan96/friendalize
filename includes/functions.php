@@ -336,25 +336,6 @@ function get_id($db, $user_id) {
     return $user;
 }
 
-function get_post_filter($db, $category_id) {
-    if ($category_id == 1) {
-        $query = "SELECT * FROM posts";
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $result_filter = $statement->fetchAll();
-        $statement->closeCursor();
-    } else {
-        $query = "SELECT * FROM posts WHERE category_id = :category_id";
-        $statement = $db->prepare($query);
-        $statement->bindValue(":category_id", $category_id);
-        $statement->execute();
-        $result_filter = $statement->fetchAll();
-        $statement->closeCursor();
-    }
-
-    return $result_filter;
-}
-
 function get_post_user_info($db, $user_id) {
     $query = "SELECT first_name, last_name, profile_pic FROM users WHERE user_id = :user_id";
     $statement = $db->prepare($query);
@@ -392,4 +373,14 @@ function get_post_likes_count($db, $post_id) {
     }
 
     return 0;
+}
+
+function search_for_users($db,$user_id,$searchq) {
+    $query = "SELECT  user_id,first_name,last_name FROM users WHERE first_name LIKE '%$searchq%' OR last_name LIKE '%$searchq%'";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $search = $statement->fetchAll();
+    $statement->closeCursor();
+    return $search;
 }
