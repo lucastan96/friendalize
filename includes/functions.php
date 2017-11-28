@@ -404,3 +404,12 @@ function search_for_users($db,$user_id,$searchq) {
     $statement->closeCursor();
     return $search;
 }
+
+function count_notifications($db) {
+
+    $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0';
+    $res = $db->prepare($sql);
+    $res->execute();
+    $count = $res->fetchColumn();
+    return $count;
+}
