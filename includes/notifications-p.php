@@ -1,6 +1,6 @@
 <?php
 
-require_once('includes/connection.php');
+require_once('connection.php');
 
 $sql = "UPDATE post_comments SET status=1 WHERE status=0";
 $statement1 = $db->prepare($sql);

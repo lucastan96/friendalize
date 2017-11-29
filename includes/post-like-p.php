@@ -21,7 +21,7 @@ if ($request_method == 'POST') {
 
     if ($action == 1) {
         if ($likes != NULL) {
-            $likes_new = $like . "," . $user_id;
+            $likes_new = $likes . "," . $user_id;
         } else {
             $likes_new = $user_id;
         }

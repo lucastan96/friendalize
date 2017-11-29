@@ -12,3 +12,4 @@ if ($institution_id == NULL) {
 
 $profile_pic = get_profile_pic($db, $_SESSION['user_id']);
 $first_name = get_first_name($db, $_SESSION['user_id']);
+$notifications_count = get_notifications_count($db);

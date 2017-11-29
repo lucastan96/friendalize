@@ -8,8 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     require_once('includes/essentials.php');
 
     $searchq = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-    $search = search_for_users($db, $_SESSION['user_id'], $searchq);
-
+    $search = search_users($db, $_SESSION['user_id'], $searchq);
 }
 ?>
 
@@ -30,7 +29,6 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
                     <div class='profile-about'>
-
                         <?php
                         foreach ($search as $f):
                             $first_name = $f['first_name'];

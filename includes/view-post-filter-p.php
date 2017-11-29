@@ -49,7 +49,7 @@ if ($request_method == 'POST') {
             echo '<img class="item-profile-pic" src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic">';
             echo '<div class="item-user">' . $post_first_name . " " . $post_last_name . '</div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
-            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>' . $post_likes_count . '</div>';
+            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
@@ -66,9 +66,9 @@ if ($request_method == 'POST') {
             echo '<div>';
             echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
-                echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+                echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
             } else {
-                echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+                echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
             echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
@@ -111,7 +111,7 @@ if ($request_method == 'POST') {
             echo '<img class="item-profile-pic" src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic">';
             echo '<div class="item-user">' . $post_first_name . " " . $post_last_name . '</div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
-            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i>' . $post_likes_count . '</div>';
+            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
@@ -128,9 +128,9 @@ if ($request_method == 'POST') {
             echo '<div>';
             echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
-                echo '<button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+                echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
             } else {
-                echo '<button class="btn btn-square btn-like btn-liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+                echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
             echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';

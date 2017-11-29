@@ -1,5 +1,4 @@
 <?php
-//
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -8,8 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     require_once('includes/essentials.php');
     require_once('includes/functions.php');
-
-    $count = count_notifications($db);
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
             function myFunction() {
                 $.ajax({
-                    url: "view_notification.php",
+                    url: "includes/notifications-p.php",
                     type: "POST",
                     processData: false,
                     success: function (data) {
@@ -56,8 +53,8 @@ if (!isset($_SESSION['user_id'])) {
                     <div id="notification-header">
                         <div style="position:relative">
                             <button id="notification-icon" name="button" class='btn btn-default' onclick="myFunction()"><span id="notification-count"><?php
-                                    if ($count > 0) {
-                                        echo $count;
+                                    if ($notifications_count > 0) {
+                                        echo $notifications_count;
                                     }
                                     ?><i class="fa fa-bell fa-fw" aria-hidden="true"></i>  Click to see All notifications!!</span></button>
                             <div id="notification-latest"></div>

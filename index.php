@@ -57,7 +57,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..."></div>
                         <div class="form-post-options">
                             <select class="form-control form-select" id="post_category" name="post_category">
-                                <option value="1" selected="selected">Category (Optional)</option>
+                                <option value="1" selected="selected">Category</option>
                                 <?php foreach ($interests_array as $interests) : ?>
                                     <option value="<?php echo $interests['interest_id']; ?>"><?php echo htmlspecialchars($interests['name']); ?></option>
                                 <?php endforeach; ?>
@@ -65,8 +65,8 @@ if (!isset($_SESSION['user_id'])) {
                             <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION["user_id"]); ?>">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div>
-                                    <span class="btn btn-default btn-file btn-images"><span class="fileinput-new">Upload Image</span><span class="fileinput-exists">Change Image</span><input type="file" name="picture"></span>
-                                    <a href="#" class="btn btn-default fileinput-exists btn-images" data-dismiss="fileinput">Cancel Image Upload</a>
+                                    <span class="btn btn-default btn-file btn-images"><span class="fileinput-new">Upload Image</span><span class="fileinput-exists">Change</span><input type="file" name="picture"></span>
+                                    <a href="#" class="btn btn-default fileinput-exists btn-images" data-dismiss="fileinput">Cancel</a>
                                 </div>
                             </div>
                             <button class="btn btn-square btn-post" type="submit">Post<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
@@ -108,9 +108,15 @@ if (!isset($_SESSION['user_id'])) {
                                         action = 2;
                                         $(this).removeClass("btn-liked");
                                         $(this).find("span").text("Like");
+                                        var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                                        post_likes_count--;
+                                        $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
                                     } else {
                                         $(this).addClass("btn-liked");
                                         $(this).find("span").text("Liked");
+                                        var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                                        post_likes_count++;
+                                        $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
                                     }
 
                                     $.ajax({

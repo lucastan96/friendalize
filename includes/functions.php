@@ -395,7 +395,7 @@ function get_post_like_status($db, $post_id, $user_id) {
     return 0;
 }
 
-function search_for_users($db,$user_id,$searchq) {
+function search_users($db, $user_id, $searchq) {
     $query = "SELECT  user_id,first_name,last_name FROM users WHERE first_name LIKE '%$searchq%' OR last_name LIKE '%$searchq%'";
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
@@ -405,7 +405,7 @@ function search_for_users($db,$user_id,$searchq) {
     return $search;
 }
 
-function count_notifications($db) {
+function get_notifications_count($db) {
     $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0';
     $res = $db->prepare($sql);
     $res->execute();
