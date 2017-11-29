@@ -27,11 +27,16 @@ if (!isset($_SESSION['user_id'])) {
         <script>
             function viewBy(filterselect) {
                 $.ajax({
-                    url: "includes/view-post-filter-p.php",
+                    url: "includes/post-view-filter-p.php",
                     type: "post",
                     data: {'filterselect': filterselect},
                     success: function (data) {
                         $("#viewList").html(data);
+                        if ($("#filter-select option:selected").text() != "Filter") {
+                            $(".filter-box p").text('Showing category: ' + $("#filter-select option:selected").text());
+                        } else {
+                            $(".filter-box p").text('Showing all categories');
+                        }
                     },
                     error: function () {
                         $("#viewList").html("Error with AJAX.");
@@ -56,7 +61,7 @@ if (!isset($_SESSION['user_id'])) {
                     <form class="form-horizontal form-post" action='includes/post-add-p.php' enctype="multipart/form-data" method='post'>
                         <div><input class="form-control form-input" type="text" name="post" id="post" placeholder="Share a post..."></div>
                         <div class="form-post-options">
-                            <select class="form-control form-select" id="post_category" name="post_category">
+                            <select class="form-control form-select" id="post_category" name="post_category" dir="rtl">
                                 <option value="1" selected="selected">Category</option>
                                 <?php foreach ($interests_array as $interests) : ?>
                                     <option value="<?php echo $interests['interest_id']; ?>"><?php echo htmlspecialchars($interests['name']); ?></option>
@@ -76,7 +81,7 @@ if (!isset($_SESSION['user_id'])) {
                     <form class="form-horizontal form-post" action="" method='post'>
                         <div class="filter-box">
                             <p>Showing all categories</p>
-                            <select class="form-control form-select" id="filter-select" name="filterselect" onchange="viewBy(this.value)" dir="rtl" required>
+                            <select class="form-control form-select" id="filter-select" name="filterselect" onchange="viewBy(this.value)" required>
                                 <option value="1" selected="selected">Filter</option>
                                 <?php foreach ($interests_array as $interests) : ?>
                                     <option value="<?php echo $interests['interest_id']; ?>"><?php echo htmlspecialchars($interests['name']); ?></option>
@@ -85,7 +90,7 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </form>
                     <div id="viewList">
-                        <?php include 'includes/view-post-filter-p.php'; ?>
+                        <?php include 'includes/post-view-filter-p.php'; ?>
                     </div>
                 </div>
             </div>
@@ -96,6 +101,13 @@ if (!isset($_SESSION['user_id'])) {
                                 $(document).ready(function () {
                                     $('.nav-desktop li:nth-child(1)').addClass("nav-active");
                                     $('.nav-mobile a:nth-child(1)').addClass("nav-active");
+                                });
+
+                                $(".form-post").submit(function () {
+                                    if ($(this).find("input[type='text']").val() == "" && $(this).find("input[type='file']").val() == "") {
+                                        alert("Please type a status or upload an image to continue!");
+                                        return false;
+                                    }
                                 });
 
                                 $(".btn-like").click(function (e) {
@@ -110,14 +122,15 @@ if (!isset($_SESSION['user_id'])) {
                                         $(this).find("span").text("Like");
                                         var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
                                         post_likes_count--;
-                                        $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
                                     } else {
                                         $(this).addClass("btn-liked");
                                         $(this).find("span").text("Liked");
                                         var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
                                         post_likes_count++;
-                                        $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
                                     }
+
+                                    $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
+                                    $(this).closest(".item").find(".item-info").find(".item-likes").prop('title', post_likes_count += " Likes");
 
                                     $.ajax({
                                         url: "includes/post-like-p.php",

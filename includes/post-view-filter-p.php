@@ -33,7 +33,6 @@ if ($request_method == 'POST') {
     echo '<div class="row">';
     if (!empty($result_filter)) {
         foreach ($result_filter as $result):
-
             $post_user_info = get_post_user_info($db, $result["user_id"]);
             $post_first_name = $post_user_info["first_name"];
             $post_last_name = $post_user_info["last_name"];
@@ -46,8 +45,8 @@ if ($request_method == 'POST') {
             echo '<div class="col">';
             echo '<div class="item">';
             echo '<div class="item-info">';
-            echo '<img class="item-profile-pic" src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic">';
-            echo '<div class="item-user">' . $post_first_name . " " . $post_last_name . '</div>';
+            echo '<a href="profile.php?id=' . $result["user_id"] . '" class="item-profile-pic"><img src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic"></a>';
+            echo '<div class="item-user"><a href="profile.php?id=' . $result["user_id"] . '">' . $post_first_name . " " . $post_last_name . '</a></div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
             echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
             echo '</div>';
@@ -64,7 +63,7 @@ if ($request_method == 'POST') {
             echo "<form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>";
             echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
-            echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
+            echo '<p class="item-category" title="Category: ' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
                 echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
             } else {
@@ -95,7 +94,6 @@ if ($request_method == 'POST') {
     echo '<div class="row">';
     if (!empty($result_filter)) {
         foreach ($result_filter as $result):
-
             $post_user_info = get_post_user_info($db, $result["user_id"]);
             $post_first_name = $post_user_info["first_name"];
             $post_last_name = $post_user_info["last_name"];
@@ -108,10 +106,10 @@ if ($request_method == 'POST') {
             echo '<div class="col">';
             echo '<div class="item">';
             echo '<div class="item-info">';
-            echo '<img class="item-profile-pic" src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic">';
-            echo '<div class="item-user">' . $post_first_name . " " . $post_last_name . '</div>';
+            echo '<a href="profile.php?id=' . $result["user_id"] . '" class="item-profile-pic"><img src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic"></a>';
+            echo '<div class="item-user"><a href="profile.php?id=' . $result["user_id"] . '">' . $post_first_name . " " . $post_last_name . '</a></div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
-            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
+            echo '<div class="item-likes" title="' . $post_likes_count . ' Likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
@@ -126,7 +124,7 @@ if ($request_method == 'POST') {
             echo "<form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>";
             echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
-            echo '<p class="item-category" title="' . $post_category . '">' . $post_category . '</p>';
+            echo '<p class="item-category" title="Category: ' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
                 echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
             } else {
