@@ -1,4 +1,6 @@
 <?php
+$search = filter_input(INPUT_GET, 'query');
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -7,19 +9,20 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     require_once('includes/essentials.php');
 
-    $searchq = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-    $search = search_users($db, $_SESSION['user_id'], $searchq);
+    if ($search != "") {
+        $result_users = search_users($db, $search, $_SESSION["user_id"]);
+        $search_description = sizeof($result_users) . " person found with the query '" . $search . "'.";
+    } else {
+        $search_description = "Find Friendalizers using the search function above you!";
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?php include("includes/head.php"); ?>
-        <title>Home | Friendalize</title>
-        <link href="scripts/dead-simple-grid-gh-pages/css/grid.css" rel="stylesheet">
-        <link href="scripts/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="styles/index.css" rel="stylesheet">
+        <title>Search | Friendalize</title>
+        <link href="styles/search.css" rel="stylesheet">
     </head>
     <body>
         <div class="container-fluid">
@@ -28,35 +31,50 @@ if (!isset($_SESSION['user_id'])) {
                 <?php include("includes/nav-desktop.php"); ?>
                 <?php include("includes/nav-mobile.php"); ?>
                 <div class="col-sm-10 content">
-                    <div class='profile-about'>
-                        <?php
-                        foreach ($search as $f):
-                            $first_name = $f['first_name'];
-                            $last_name = $f['last_name'];
-                            $id = $f['user_id'];
-                            header("Location: profile.php?id=$id");
-//                            echo "First Name: " . $first_name . "<br> ";
-//                            echo "Last Name: " . $last_name . "<br>";
-//                            echo "Email: " . $f['email'] . "<br>";
-//                            echo "Age: " . $f['age'] . "<br>";
-//                            echo "Date Joined: " . $f['join_date'] . "<br>";
-//                            echo "Gender " . $f['gender'] . "<br>";
-//                            echo $f["profile_pic"];
-//                          
-                        endforeach;
-                        ?>
+                    <h1>Search</h1>
+                    <h2 class="description"><?php echo $search_description; ?></h2>
+                    <div class='users-list'>
+                        <div class='row'>
+                            <?php
+                            foreach ($result_users as $result_user):
+                                $user_id = $result_user["user_id"];
+                                $user_profile_pic = $result_user["profile_pic"];
+                                $user_first_name = $result_user["first_name"];
+                                $user_last_name = $result_user["last_name"];
 
+                                $user_institution = get_user_institution($db, $user_id);
+                                $user_interests = get_user_interests($db, $user_id);
+
+                                if ($user_interests == "") {
+                                    $user_interests = "No interests yet";
+                                }
+                                ?>
+                                <div class='col'>
+                                    <a href="profile.php?id=<?php echo $user_id; ?>" class='users-list-item-link'>
+                                        <div class="users-list-item-container">
+                                            <img src="images/profiles/<?php echo $user_profile_pic; ?>">
+                                            <div class='users-list-item-info'>
+                                                <div class="users-list-name"><?php echo $user_first_name . " " . $user_last_name; ?></div>
+                                                <p><?php echo $user_institution; ?></p>
+                                                <p><?php echo $user_interests; ?></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
         <script src="scripts/viewport-resize.js"></script>
-        <script src="scripts/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('.nav-desktop li:nth-child(1)').addClass("nav-active");
-                $('.nav-mobile a:nth-child(1)').addClass("nav-active");
-            });
+            var query = "<?php echo $search; ?>";
+
+            if (query != "") {
+                $("#query").val(query);
+            }
         </script>
     </body>
 </html>

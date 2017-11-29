@@ -32,6 +32,7 @@ if (!isset($_SESSION['user_id'])) {
         <?php include("includes/head.php"); ?>
         <title>Settings | Friendalize</title>
         <link href="scripts/lou-multi-select/css/multi-select.dist.css" rel="stylesheet">
+        <link href="scripts/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="styles/settings.css" rel="stylesheet">
     </head>
     <body>
@@ -131,7 +132,12 @@ if (!isset($_SESSION['user_id'])) {
                             <img src="images/profiles/<?php echo $profile_pic; ?>">
                             <form action="profile-picture-update-p.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
-                                    <input type="file" style="color:transparent" id="fileToUpload" name="fileToUpload" >
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                            <span class="btn btn-default btn-file btn-images"><span class="fileinput-new">Choose</span><span class="fileinput-exists">Change</span><input type="file" name="fileToUpload"></span>
+                                            <a href="#" class="btn btn-default fileinput-exists btn-images" data-dismiss="fileinput">Cancel</a>
+                                        </div>
+                                    </div>
                                     <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"]; ?>">
                                     <button type="submit" class="btn btn-submit">Update<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </div>
@@ -158,6 +164,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <script src="scripts/viewport-resize.js"></script>
         <script src="scripts/lou-multi-select/js/jquery.multi-select.js"></script>
+        <script src="scripts/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('.nav-desktop li:nth-child(6)').addClass("nav-active");

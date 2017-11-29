@@ -91,8 +91,8 @@ form {
 
 #profile-pic img {
     margin-left: 16px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 50px;
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -103,7 +103,14 @@ form {
 #profile-pic form {
     display: inline-block;
     margin-left: 20px;
-    width: 140px;
+    width: 200px;
+}
+
+#profile-pic .btn-images {
+    background: #454545;
+    color: white;
+    height: 40px;
+    margin-top: 60px;
 }
 
 #profile-pic .btn-submit {
@@ -132,5 +139,11 @@ form {
     #profile-pic img {
         width: 200px;
         height: 200px;
+        margin-top: 20px;
+    }
+
+
+    #profile-pic .btn-images {
+        margin-top: 20px;
     }
 }

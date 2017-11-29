@@ -354,7 +354,7 @@ function get_post_category($db, $category_id) {
     $statement->execute();
     $results = $statement->fetch();
     $statement->closeCursor();
-    
+
     return $results["name"];
 }
 
@@ -386,7 +386,7 @@ function get_post_like_status($db, $post_id, $user_id) {
 
     if ($likes != NULL) {
         $likes_array = explode(",", $likes);
-        
+
         if (in_array($user_id, $likes_array)) {
             return 1;
         }
@@ -395,14 +395,15 @@ function get_post_like_status($db, $post_id, $user_id) {
     return 0;
 }
 
-function search_users($db, $user_id, $searchq) {
-    $query = "SELECT  user_id,first_name,last_name FROM users WHERE first_name LIKE '%$searchq%' OR last_name LIKE '%$searchq%'";
+function search_users($db, $search_query, $user_id) {
+    $query = "SELECT user_id, first_name, last_name, profile_pic FROM users WHERE (first_name LIKE '%$search_query%' OR last_name LIKE '%$search_query%' OR username LIKE '%$search_query%' OR CONCAT_WS(' ', first_name, last_name) LIKE '%$search_query%') OR (email = '$search_query')";
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();
-    $search = $statement->fetchAll();
+    $results = $statement->fetchAll();
     $statement->closeCursor();
-    return $search;
+
+    return $results;
 }
 
 function get_notifications_count($db) {
@@ -410,5 +411,6 @@ function get_notifications_count($db) {
     $res = $db->prepare($sql);
     $res->execute();
     $count = $res->fetchColumn();
+
     return $count;
 }

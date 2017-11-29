@@ -1,0 +1,111 @@
+.content {
+    padding-top: 120px;
+}
+
+h1 {
+    float: left;
+    padding-left: 16px;
+}
+
+.description {
+    clear: both;
+    font-size: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.users-list {
+    margin-top: 20px;
+}
+
+.users-list .row {
+    margin: 0;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.col {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.users-list-item-link {
+    color: #454545;
+}
+
+.users-list-item-link:hover {
+    text-decoration: none;
+    color: #454545;
+}
+
+.users-list-item-container {
+    background: white;
+    border: 1px solid #95989A;
+    position: relative;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 20px;
+}
+
+.users-list-item-container img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #95989A;
+    border-radius: 100px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.users-list-item-info {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+    margin-left: 15px;
+    overflow: hidden;
+    position: absolute;
+    padding-right: 20px;
+}
+
+.users-list-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.users-list-item-container p {
+    line-height: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .content {
+        padding-top: 80px;
+    }
+
+    h1 {
+        padding-right: 10px;
+    }
+
+    .description {
+        clear: none;
+        margin-top: 30px;
+        padding-left: 0;
+    }
+    
+    .users-list-item-info {
+        margin-top: 11px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .users-list-item-info {
+        margin-top: 14px;
+    }
+
+    .users-list-item-container p {
+        font-size: 14px;
+        line-height: 12px;
+    }
+}
