@@ -414,3 +414,12 @@ function get_notifications_count($db) {
 
     return $count;
 }
+
+function get_notification_comments($db) {
+    $sql2 = "SELECT * FROM post_comments ORDER BY time DESC";
+    $statement2 = $db->prepare($sql2);
+    $statement2->execute();
+    $result2 = $statement2->fetchAll();
+    
+    return $result2;
+}
