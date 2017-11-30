@@ -8,7 +8,7 @@ $statement1->execute();
 $result = $statement1->fetchAll();
 $statement1->closeCursor();
 
-$sql2 = "select * from post_comments ORDER BY post_id DESC limit 5";
+$sql2 = "SELECT * FROM post_comments ORDER BY time DESC";
 $statement2 = $db->prepare($sql2);
 $statement2->execute();
 $result2 = $statement2->fetchAll();
