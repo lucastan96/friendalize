@@ -26,29 +26,30 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="profile.php" title="Profile"><div class="navbar-profile"><img src="images/profiles/<?php echo $profile_pic; ?>" alt="Profile Pic"><?php echo $first_name; ?></div></a></li>
-                <li>
-                     <div class="dropdown">
-                        <a href="notifications.php" title="<?php echo $notifications_count; ?> New Notifications">
+                  <li>
+                      <div class="dropdown">
+                        <a href="?clicked"  title="<?php echo $notifications_count; ?> New Notifications">
                             <i class="fa fa-bell fa-fw" aria-hidden="true"></i>
+
                             <?php
                             if ($notifications_count > 0) {
                                 echo "<span class='badge'>" . $notifications_count . "</span>";
                             }
                             ?>
+
                         </a>
                         <div class="dropdown-content">
                             <a href="">
-                                    <?php
-                                    foreach ($result2 as $row):
-
-                                     echo  $row["comment"] ."<br>";
-                                    endforeach;
-                                    ?>
+                                <?php
+                                foreach ($result2 as $row):
+                                    echo $row["comment"] . "<br>";
+                                endforeach;
+                                ?>
                             </a>
 
                         </div>
                     </div>
-                </li>                     
+                </li>                            
                 <li><a href="signout.php" title="Sign Out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a></li>
             </ul>
         </div>
