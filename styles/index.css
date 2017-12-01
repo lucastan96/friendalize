@@ -213,7 +213,10 @@ h1 {
 
 .btn-like i {
     margin: 0;
-    margin-right: 5px;
+}
+
+.btn-like span {
+    display: none;
 }
 
 .btn-liked {
@@ -230,6 +233,7 @@ h1 {
 }
 
 .feed #message {
+    margin-top: 0;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -248,5 +252,13 @@ h1 {
 
     .col {
         width: 50%;
+    }
+
+    .btn-like i {
+        margin-right: 5px;
+    }
+
+    .btn-like span {
+        display: inline-block;
     }
 }

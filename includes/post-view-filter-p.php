@@ -52,11 +52,10 @@ if ($request_method == 'POST') {
             echo '<a href="profile.php?id=' . $result["user_id"] . '" class="item-profile-pic"><img src="images/profiles/' . $post_profile_pic . '" alt="Profile Pic"></a>';
             echo '<div class="item-user"><a href="profile.php?id=' . $result["user_id"] . '">' . $post_first_name . " " . $post_last_name . '</a></div>';
             echo '<div class="item-time">Posted on ' . $result["time"] . '</div>';
-            echo '<div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
+            echo '<div class="item-likes" title="' . $post_likes_count . ' Likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>' . $post_likes_count . '</span></div>';
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
-
                 echo '<p>' . $result["content"] . '</p>';
             }
             if ($result["images"] != "") {
@@ -117,7 +116,6 @@ if ($request_method == 'POST') {
             echo '</div>';
             echo '<div class = "item-content">';
             if ($result["content"] != "") {
-
                 echo '<p>' . $result["content"] . '</p>';
             }
             if ($result["images"] != "") {

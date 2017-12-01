@@ -16,18 +16,6 @@
     margin-right: 8px;
 }
 
-.feed #message {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.feed #message a {
-    color: #FF5252;
-    font-style: italic;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
 .content {
     padding-top: 120px;
 }
@@ -207,6 +195,19 @@ h1 {
     top: 0;
     height: 100%;
     background: #FF5252;
+}
+
+.feed #message {
+    margin-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.feed #message a {
+    color: #FF5252;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 @media only screen and (min-width: 768px) {

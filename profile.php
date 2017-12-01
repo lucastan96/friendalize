@@ -139,7 +139,6 @@ if (!isset($_SESSION['user_id'])) {
                                 <?php
                                 if (!empty($result_filter)) {
                                     foreach ($result_filter as $result):
-
                                         $post_user_info = get_post_user_info($db, $result["user_id"]);
                                         $post_first_name = $post_user_info["first_name"];
                                         $post_last_name = $post_user_info["last_name"];
@@ -147,20 +146,19 @@ if (!isset($_SESSION['user_id'])) {
 
                                         $post_category = get_post_category($db, $result["category_id"]);
                                         $post_likes_count = get_post_likes_count($db, $result["post_id"]);
-                                        
-                                
+                                        $post_like_status = get_post_like_status($db, $result["post_id"], $_SESSION["user_id"]);
                                         ?>
                                         <div class="col">
                                             <div class="item">
-                                                 <div class="item-info">
-                                                    <img class="item-profile-pic" src="images/profiles/<?php echo $post_profile_pic;?>" alt="Profile Pic">
+                                                <div class="item-info">
+                                                    <img class="item-profile-pic" src="images/profiles/<?php echo $post_profile_pic; ?>" alt="Profile Pic">
                                                     <div class="item-user"><?php echo $post_first_name . " " . $post_last_name; ?></div>
                                                     <div class="item-time">Posted on <?php echo $result["time"]; ?></div>
-                                                    <div class="item-likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $post_likes_count; ?></div>
+                                                    <div class="item-likes" title="<?php echo $post_likes_count; ?> Likes"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span><?php echo $post_likes_count; ?></span></div>
                                                 </div>
                                                 <div class = "item-content">
                                                     <?php
-                                                            if ($result["content"] != "") {
+                                                    if ($result["content"] != "") {
                                                         ?>
                                                         <p><?php echo $result["content"]; ?></p>
                                                         <?php
@@ -176,8 +174,14 @@ if (!isset($_SESSION['user_id'])) {
                                                     <form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>
                                                         <input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>
                                                         <div>
-                                                            <p class="item-category" title="' . $post_category . '"><?php echo $post_category; ?></p>
-                                                            <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>
+                                                            <p class="item-category" title="Category: <?php echo $post_category; ?>"><?php echo $post_category; ?></p>
+                                                            <?php if ($post_like_status == 0) { ?>
+                                                            <button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>
+                                                            <?php } else { ?>
+                                                            <button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>
+                                                            <?php } ?>
+                                                            <input type="hidden" name="post_id" value="<?php echo $result["post_id"]; ?>">
+                                                            <input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"]; ?>">
                                                             <button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                         </div>
                                                     </form>
@@ -207,6 +211,38 @@ if (!isset($_SESSION['user_id'])) {
                     $('.nav-desktop li:nth-child(3)').addClass("nav-active");
                     $('.nav-mobile a:nth-child(3)').addClass("nav-active");
                 }
+            });
+
+            $(".btn-like").click(function (e) {
+                e.preventDefault();
+
+                var post_id = $(this).next().val();
+                var action = 1;
+
+                if ($(this).hasClass("btn-liked")) {
+                    action = 2;
+                    $(this).removeClass("btn-liked");
+                    $(this).find("span").text("Like");
+                    var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                    post_likes_count--;
+                } else {
+                    $(this).addClass("btn-liked");
+                    $(this).find("span").text("Liked");
+                    var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                    post_likes_count++;
+                }
+
+                $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
+                $(this).closest(".item").find(".item-info").find(".item-likes").prop('title', post_likes_count += " Likes");
+
+                $.ajax({
+                    url: "includes/post-like-p.php",
+                    type: "POST",
+                    data: {
+                        post_id: post_id,
+                        action: action
+                    }
+                });
             });
 
             if (friend_id != "") {
