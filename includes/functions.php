@@ -406,20 +406,40 @@ function search_users($db, $search_query, $user_id) {
     return $results;
 }
 
-function get_notifications_count($db) {
-    $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0';
+function get_notifications_count($db, $user_id) {
+    $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0 && user_id !=:user_id';
     $res = $db->prepare($sql);
+    $res->bindValue(":user_id", $user_id);
     $res->execute();
-    $count = $res->fetchColumn();
+    $notifications_count = $res->fetchColumn();
 
-    return $count;
+    return $notifications_count;
 }
 
-function get_notification_comments($db) {
-    $sql2 = "SELECT * FROM post_comments ORDER BY time DESC";
-    $statement2 = $db->prepare($sql2);
-    $statement2->execute();
-    $result2 = $statement2->fetchAll();
-    
+function get_notification_comments($db, $user_id) {
+    $query = "SELECT comment_id FROM post_comments WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+
+
+    if ($results['comment_id'] != $user_id) {
+        $sql2 = "SELECT * FROM post_comments WHERE user_id != $user_id ORDER BY time DESC";
+        $statement2 = $db->prepare($sql2);
+        $statement2->execute();
+        $result2 = $statement2->fetchAll();
+    }
+
     return $result2;
 }
+
+function update_comment_status($db)
+{
+    $sql = "UPDATE post_comments SET status=1 WHERE status=0";
+    $statement1 = $db->prepare($sql);
+    $statement1->execute();
+    $statement1->closeCursor();
+}
+
