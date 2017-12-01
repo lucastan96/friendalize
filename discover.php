@@ -25,6 +25,11 @@ if (!isset($_SESSION['user_id'])) {
                     data: {'filterselect': filterselect},
                     success: function (data) {
                         $("#viewList").html(data);
+                        if ($("#filter-select option:selected").text() != "Filter") {
+                            $(".filter-box p").text('Showing category: ' + $("#filter-select option:selected").text());
+                        } else {
+                            $(".filter-box p").text('Showing all categories');
+                        }
                     },
                     error: function () {
                         $("#viewList").html("Error with AJAX.");
@@ -59,13 +64,13 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
 
                     <!-- USE THIS CODE -->
-<!--                    <div class="item-options">
-                        <div>
-                            <p class='item-category'>Sports</p>
-                            <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
-                            <button class="btn btn-square btn-add" type="submit" title='Be friendalized!'>Add Elaine<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="item-options">
+                                            <div>
+                                                <p class='item-category'>Sports</p>
+                                                <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
+                                                <button class="btn btn-square btn-add" type="submit" title='Be friendalized!'>Add Elaine<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>

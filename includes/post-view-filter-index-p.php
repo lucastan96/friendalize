@@ -7,25 +7,27 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$friend_array = get_friends($db, $_SESSION['user_id']);
+  $friend_array= get_friends($db,$_SESSION['user_id']);
+  
+ $friend_array_to_string = implode(" OR user_id = ", $friend_array);
 
-$friend_array_to_string = implode(" AND user_id != ", $friend_array);
-
-$category_id = filter_input(INPUT_POST, 'filterselect', FILTER_SANITIZE_STRING);
+  $category_id = filter_input(INPUT_POST, 'filterselect', FILTER_SANITIZE_STRING);
 
 $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING);
 
 if ($request_method == 'POST') {
 
     if ($category_id == 1) {
-        $query = "SELECT * FROM posts where (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+        $query = "SELECT * FROM posts WHERE (user_id = :user_id or user_id = " . $friend_array_to_string . ") ORDER BY post_id DESC";
         $statement = $db->prepare($query);
+        $statement->bindValue(":user_id", $_SESSION['user_id']);
         $statement->execute();
         $result_filter = $statement->fetchAll();
         $statement->closeCursor();
     } else {
-        $query = "SELECT * FROM posts WHERE category_id = :category_id AND (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+        $query = "SELECT * FROM posts WHERE category_id = :category_id AND (user_id = :user_id or user_id = " . $friend_array_to_string . ") ORDER BY post_id DESC";
         $statement = $db->prepare($query);
+        $statement->bindValue(":user_id", $_SESSION['user_id']);
         $statement->bindValue(":category_id", $category_id);
         $statement->execute();
         $result_filter = $statement->fetchAll();
@@ -74,7 +76,7 @@ if ($request_method == 'POST') {
                 echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
-            echo '<input type="hidden" name="user_id" value="' . htmlspecialchars($_SESSION["user_id"]) . '">';
+            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';
@@ -88,12 +90,13 @@ if ($request_method == 'POST') {
     echo '</div>';
     echo '</div>';
 } else {
-    $query = "SELECT * FROM posts WHERE (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+    $query = "SELECT * FROM posts WHERE (user_id = :user_id or user_id = " . $friend_array_to_string . ") ORDER BY post_id DESC";
     $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $_SESSION['user_id']);
     $statement->execute();
     $result_filter = $statement->fetchAll();
     $statement->closeCursor();
-
+  
     echo '<div class="feed">';
     echo '<div class="row">';
     if (!empty($result_filter)) {
@@ -135,7 +138,7 @@ if ($request_method == 'POST') {
                 echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
             }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
-            echo '<input type="hidden" name="user_id" value="' . htmlspecialchars($_SESSION["user_id"]) . '">';
+            echo '<input type="hidden" name="user_id" value="'. htmlspecialchars($_SESSION["user_id"]).'">';
             echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
             echo '</div>';
             echo '</form>';

@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
         <script>
             function viewBy(filterselect) {
                 $.ajax({
-                    url: "includes/post-view-filter-p.php",
+                    url: "includes/post-view-filter-index-p.php",
                     type: "post",
                     data: {'filterselect': filterselect},
                     success: function (data) {
@@ -90,7 +90,7 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </form>
                     <div id="viewList">
-                        <?php include 'includes/post-view-filter-p.php'; ?>
+                        <?php include 'includes/post-view-filter-index-p.php'; ?>
                     </div>
                 </div>
             </div>
