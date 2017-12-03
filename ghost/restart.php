@@ -8,8 +8,12 @@ $statement6 = $db->prepare($query6);
 $statement6->execute(array(":room_id" => $_SESSION["room_id"]));
 $r3 = $statement6->fetch();
 $statement6->closeCursor();
- unset($_SESSION["start_time"]);
-  unset($_SESSION["vote"]);
+unset($_SESSION["start_time"]);
+unset($_SESSION["vote"]);
+unset($_SESSION["next_round"]);
+unset( $_SESSION['die']);
+unset( $_SESSION['result_message']);
+$_SESSION['die_num']=0;
 $id = $r3["room_id"];
 if ($id == $_SESSION["room_id"]) {
     $query = 'DELETE FROM ghost_game_time WHERE room_id = :room_id';
@@ -17,16 +21,16 @@ if ($id == $_SESSION["room_id"]) {
     $statement->execute(array(":room_id" => $_SESSION["room_id"]));
     $statement->closeCursor();
 
-    $query1 = 'UPDATE ghost_room_players SET ready=0 WHERE room_id = :room_id';
+    $query1 = 'UPDATE ghost_room_players SET ready=0, died=0,game_order=0 WHERE room_id = :room_id';
     $statement1 = $db->prepare($query1);
     $statement1->execute(array(":room_id" => $_SESSION["room_id"]));
     $statement1->closeCursor();
 
-    $query2 = 'UPDATE ghost_answer_submit SET voted=0 WHERE room_id = :room_id';
+    $query2 = 'UPDATE ghost_answer_submit SET voted=0,vote_order=0 WHERE room_id = :room_id';
     $statement2 = $db->prepare($query2);
     $statement2->execute(array(":room_id" => $_SESSION["room_id"]));
     $statement2->closeCursor();
-   
+
 
     $query4 = 'SELECT * from ghost_word_pair';
     $statement4 = $db->prepare($query4);
@@ -35,7 +39,7 @@ if ($id == $_SESSION["room_id"]) {
     $statement4->closeCursor();
     $word_pair = array();
     foreach ($r1 as $value) {
- 
+
         array_push($word_pair,$value["word_pair_id"]);
     }
 

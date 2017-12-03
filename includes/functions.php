@@ -407,7 +407,7 @@ function search_users($db, $search_query, $user_id) {
 }
 
 function get_notifications_count($db, $user_id) {
-    $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0 && user_id !=:user_id';
+    $sql = 'SELECT COUNT(*) FROM post_comments WHERE status = 0 AND user_id !=:user_id';
     $res = $db->prepare($sql);
     $res->bindValue(":user_id", $user_id);
     $res->execute();
@@ -417,16 +417,16 @@ function get_notifications_count($db, $user_id) {
 }
 
 function get_notification_comments($db, $user_id) {
-    $query = "SELECT comment_id FROM post_comments WHERE user_id = :user_id";
+    $query = "SELECT comment_id FROM post_comments pc, posts p WHERE pc.post_id = p.post_id AND  p.user_id != :user_id AND p.user_id = :id";
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
+    $statement->bindValue(":id", $user_id);
     $statement->execute();
     $results = $statement->fetch();
     $statement->closeCursor();
 
-
     if ($results['comment_id'] != $user_id) {
-        $sql2 = "SELECT * FROM post_comments WHERE user_id != $user_id ORDER BY time DESC";
+        $sql2 = "SELECT * FROM post_comments pc, posts p WHERE p.post_id = pc.post_id AND p.user_id = $user_id ORDER BY pc.time DESC";
         $statement2 = $db->prepare($sql2);
         $statement2->execute();
         $result2 = $statement2->fetchAll();

@@ -3,7 +3,7 @@ session_start();
 require_once('../includes/connection.php');
 
 $room_id = $_POST["room_id"];
-
+$_SESSION["die_num"] = 0;
 $query = 'UPDATE ghost_room_players SET ready=1 WHERE room_id=:room_id AND user_id=:user_id';
 $statement = $db->prepare($query);
 $statement->execute(array(":room_id" => $room_id, ":user_id" => $_SESSION["user_id"]));

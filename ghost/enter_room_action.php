@@ -4,9 +4,7 @@ $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_S
 
 if ($request_method == 'POST') {
     session_start();
-
     require_once('../includes/connection.php');
-
     $room_id = filter_input(INPUT_POST, 'room_id', FILTER_VALIDATE_INT);
 
     $query1 = 'SELECT member_num FROM ghost_room WHERE room_id = :room_id';
@@ -47,6 +45,7 @@ if ($request_method == 'POST') {
             header("Location: challenges.php");
             exit();
         }
+        unset($_SESSION["start_time"]);
     } else {
         header("Location: room.php?room_id=" . $room_id);
         exit();

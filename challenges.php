@@ -91,7 +91,7 @@ if (!isset($_SESSION['user_id'])) {
                                     echo "<img class='player' src='images/profiles/" . $player_info["profile_pic"] . "' title='" . $player_info["first_name"] . " " . $player_info["last_name"] . "' alt='" . $player_info["first_name"] . " " . $player_info["last_name"] . "'>";
                                 endforeach;
                                 echo "</div>";
-                                echo "<form action='ghost_v3/enter_room_action.php' method='post'>";
+                                echo "<form action='ghost/enter_room_action.php' method='post'>";
                                 echo "<input type='hidden' name='room_id' value='" . $room_id . "'>";
                                 echo "<button type='submit' class='btn btn-item'>" . $btn_join . "<i class='fa fa-chevron-right' aria-hidden='true'></i></button>";
                                 echo "</form>";

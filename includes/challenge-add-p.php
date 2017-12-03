@@ -43,7 +43,9 @@ if ($request_method == 'POST') {
         $statement4->execute(array(":voter" => $_SESSION["user_id"], ":room_id" => $room_id));
         $statement4->closeCursor();
 
-        header("Location: ../ghost_v3/room.php?room_id=" . $room_id);
+        $_SESSION["die_num"] = 0;
+        
+        header("Location: ../ghost/room.php?room_id=" . $room_id);
         exit();
     }
 } else {
