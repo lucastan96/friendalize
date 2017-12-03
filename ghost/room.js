@@ -1,5 +1,4 @@
 
-
 var ready_button_interval = setInterval(function () {
   checkReady();
 }, 1000);
@@ -12,15 +11,15 @@ function checkReady() {
     url: "ready.php",
     success: function (data) {
       var response = jQuery.parseJSON(data);
-      if (response["user_ready"] != 1 && response["num_ready"] != 3)
+      if (response["user_ready"] == 0 && response["num_ready"] != 3)
       {
         var s = '<input type="hidden"  name ="room_id" id="room_id" value=' + response["room_id"] + '><br><button type="button" class="btn btn-square" onclick="readyButton()" id="ready-btn">Ready</button>';
         $('.ready').html(s);
-      } else if (response["num_ready"] != 3) {
+      }
+          else if (response["num_ready"] != 3) {
         $(".timer-container").html('<p>Please wait others to ready </p>');
 
       } else if (response["num_ready"] == 3) {
-        // $(".timer-container").html('<p>HIII</p>');
         clearInterval(ready_button_interval);
         $(".timer-container").load("timer.php");
       }
@@ -41,10 +40,8 @@ function readyButton() {
     data: {
       room_id: room_id
     },
-    success: function () {
+    success: function (data) {
       $("#ready-btn").text("");
-      //                $("#ready-btn").prop('disabled', true);
-      //                alert(data);
     },
     error: function ()
     {
@@ -63,15 +60,9 @@ function voteButton(){
       voted: voted
     },
     success: function (data) {
-//        alert(data);
       var response = jQuery.parseJSON(data);
-      // if(response["r"] == 3){
-      //   $(".timer-container").load("t_timer.php");
-      // }
-      // else{
         var s = "room.php?room_id="+ response["room_id"];
         window.location.href = s;
-      // }
     },
     error: function ()
     {

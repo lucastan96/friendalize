@@ -9,12 +9,22 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $friend_array = get_friends($db, $_SESSION['user_id']);
 
-$friend_array_to_string = implode(" AND user_id != ", $friend_array);
-
 $category_id = filter_input(INPUT_POST, 'filterselect', FILTER_SANITIZE_STRING);
 
 $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING);
 
+$query = "SELECT * FROM posts WHERE user_id = :user_id";
+$statement = $db->prepare($query);
+$statement->bindValue(":user_id", $_SESSION['user_id']);
+$statement->execute();
+$result_filter = $statement->fetchAll();
+$statement->closeCursor();
+
+
+if (empty($friend_array) && empty($result_filter)) {
+    echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>";
+} else {
+$friend_array_to_string = implode(" AND user_id != ", $friend_array);
 if ($request_method == 'POST') {
 
     if ($category_id == 1) {
@@ -146,4 +156,5 @@ if ($request_method == 'POST') {
     }
     echo '</div>';
     echo '</div>';
+}
 }
