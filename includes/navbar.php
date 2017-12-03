@@ -46,7 +46,6 @@
                                 endforeach;
                                 ?>
                             </a>
-
                         </div>
                     </div>
                 </li>                            
@@ -60,7 +59,7 @@
         e.preventDefault();
         $(".form-search").css('display', 'list-item');
     });
-    
+
     $(".btn-close-search").click(function (e) {
         $(".form-search").css('display', 'none');
     });
