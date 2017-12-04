@@ -89,7 +89,7 @@ if (!isset($_SESSION['user_id'])) {
                                     foreach ($users as $user):
                                         $player_info = get_room_player_info($db, $user["user_id"]);
 
-                                        echo "<img class='player' src='images/profiles/" . $player_info["profile_pic"] . "' title='" . $player_info["first_name"] . " " . $player_info["last_name"] . "' alt='" . $player_info["first_name"] . " " . $player_info["last_name"] . "'>";
+                                        echo "<a href='profile.php?id=" . $user["user_id"] . "'><img class='player' src='images/profiles/" . $player_info["profile_pic"] . "' title='" . $player_info["first_name"] . " " . $player_info["last_name"] . "' alt='" . $player_info["first_name"] . " " . $player_info["last_name"] . "'></a>";
                                     endforeach;
                                     echo "</div>";
                                     echo "<form action='ghost/enter_room_action.php' method='post'>";
