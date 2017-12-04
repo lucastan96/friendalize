@@ -45,18 +45,19 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
     echo $_SESSION['result_message'];
 } else {
     if (isset($_SESSION['die']) && $_SESSION['die'] == true && $count != 1) {
+        echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>Your game is over because the majority of the players voted you as the ghost even if you are not!</p></div>";
         echo "<p><strong>Game over! Please wait for the next game...</strong></p>";
         echo '<input type="hidden" id = "diff" value="0">';
     }
     if ($count != 1) {
         if (!isset($_SESSION['next_round'])) {
-            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 5);
+            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 10);
         } else if (isset($_SESSION["next_round"])) {
             $wordTime = date("Y-m-d H:i:s", strtotime($start_time));
         }
-        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 5);
+        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 10);
         for ($i = 2; $i <= $count; $i++) {
-            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 5);
+            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 30);
         }
 
         if ($wordTime > $start_time_s && $curTime < $wordTime) {
@@ -64,7 +65,8 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             $from_time = strtotime($curTime);
             $diff = abs($to_time - $from_time);
             echo '<input type="hidden" id = "diff" value="' . $diff . '">';
-            echo "<p><strong>Please remember this word given!</strong></p>";
+            echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>You will only be shown this word once!<br><br>Also, of all the players, only one person will get a unique word, and we call him the <strong>GHOST</strong>!</p></div>";
+            echo "<p><strong>Please remember the word given!</strong></p>";
             echo '<h1>';
             echo $player["word"];
             echo '</h1>';
@@ -115,6 +117,7 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
                 $statement6->execute(array(":room_id" => $_SESSION["room_id"]));
                 $players = $statement6->fetchAll();
                 $statement6->closeCursor();
+                echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>Vote someone who you think is the ghost! If you think it's you, vote someone else!</p></div>";
                 echo '<p><strong>Who is the ghost?</strong></p>';
                 echo '<form>';
                 foreach ($players as $p) {
@@ -226,13 +229,16 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             $statement5->closeCursor();
 
             if ($curr_player["user_id"] == $_SESSION["user_id"]) {
-                echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>If you think you are the ghost (the person with a different word), don't let the other figure it out!</p></div>";
+                echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>If you think you are the ghost (the person with a different word), try to hide your identity!</p></div>";
                 echo "<p><strong>It's your turn! Please describe your word to the others...</strong></p>";
             } else if (!empty($curr_player)) {
+                echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>You can still communicate with the other players if you want!</p></div>";
                 echo "<p><strong>It's " . $curr_player["first_name"] . "'s turn to describe their word!</strong></p>";
             }
         }
     } else {
+        //query
+        echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>The ghost wins if there are only 2 players remaining!</p></div>";
         echo '<p><strong>The ghost has won, it was PLACEHOLDER!</strong></p>';
         echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Start New Game</a>';
     }

@@ -161,7 +161,7 @@ function get_user_interests_settings($db, $user_id) {
 }
 
 function get_rooms($db) {
-    $query = 'SELECT * FROM ghost_room';
+    $query = 'SELECT * FROM ghost_room ORDER BY room_id DESC';
     $statement = $db->prepare($query);
     $statement->execute();
     $rooms = $statement->fetchAll();
