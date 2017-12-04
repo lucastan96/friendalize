@@ -243,6 +243,11 @@ h1 {
     text-decoration: underline;
 }
 
+.feed #message {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 @media only screen and (min-width: 768px) {
     .form-post {
         padding-top: 10px;

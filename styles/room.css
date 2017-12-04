@@ -13,6 +13,10 @@
     padding-left: 25px;
 }
 
+h1 span {
+    color: red;
+}
+
 .room-info-right {
     position: relative;
     float: right;

@@ -16,13 +16,14 @@ function checkReady() {
         success: function (data) {
             var response = jQuery.parseJSON(data);
             if (response["user_ready"] == 1 && response["num_ready"] != 3) {
-                $(".timer-container").html('<p><strong>Waiting for players to get ready...</strong></p>');
+                $(".timer-container").html('<p><strong>Waiting for players...</strong></p>');
             } else if (response["num_ready"] != 3) {
                 var s = '<input type="hidden" name ="room_id" id="room_id" value=' + response["room_id"] + '><button type="button" class="btn btn-square" onclick="readyButton()" id="ready-btn">Ready</button>';
                 $('.ready').html(s);
                 $(".timer-container").html('<p><strong>When you are ready, click ready!</strong></p>');
             } else if (response["num_ready"] == 3) {
                 clearInterval(ready_button_interval);
+                clearInterval(profile_info_interval);
                 $(".timer-container").load("timer.php");
             }
         },

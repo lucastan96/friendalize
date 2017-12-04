@@ -108,7 +108,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div class="col-sm-10 content">
                     <div class='room-info'>
-                        <h1>Who's the Ghost?</h1>
+                        <h1>Who's the Ghost?<?php if ($player["room_name"] != "") {echo " - <span>" . $player["room_name"] . "</span>"; } ?></h1>
                         <div class="room-info-right">
                             <div class='ready'></div>
                             <div class="player-info"></div>
