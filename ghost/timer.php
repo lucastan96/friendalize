@@ -183,9 +183,10 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
                         $statement9->closeCursor();
 
                         if ($ghost_word == $die_user["word"]) {
+                            ob_end_clean();
                             // $_SESSION['result_message'] = "<p>The <b>ghost</b> was found, it was " . $die_user["username"] . "!</p>";
                             echo "<p><strong>The ghost was found, it was " . $die_user["first_name"] . "!</strong></p>";
-                            echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Next Game</a>';
+                            echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Start New Game</a>';
                         } else if ($count != 1) {
                             if ($die_id == $_SESSION['user_id']) {
                                 $_SESSION['die'] = true;
@@ -232,7 +233,7 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             }
         }
     } else {
-        echo '<p><strong>The ghost has won!</strong></p>';
+        echo '<p><strong>The ghost has won, it was PLACEHOLDER!</strong></p>';
         echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Start New Game</a>';
     }
 }

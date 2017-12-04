@@ -109,8 +109,9 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <div class='room-info'>
                         <h1>Who's the Ghost?</h1>
-                        <div class='ready'>
-
+                        <div class="room-info-right">
+                            <div class='ready'></div>
+                            <div class="player-info"></div>
                         </div>
                     </div>
                     <div class="col-sm-8 room-chat">

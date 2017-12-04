@@ -13,14 +13,29 @@
     padding-left: 25px;
 }
 
-.ready {
+.room-info-right {
     position: relative;
+    float: right;
+    margin-top: -43px;
+    right: 15px;
 }
 
-#ready-btn {
-    position: absolute;
-    right: 15px;
-    margin-top: -43.5px;
+.ready {
+    display: inline-block;
+}
+
+.player-info {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.player-info img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 1px solid #95989A;
+    margin-left: 6px;
 }
 
 .room-chat {
@@ -159,10 +174,12 @@
 
 input[type="radio"] {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 label {
     font-weight: normal;
+    cursor: pointer;
 }
 
 #vote-btn, #start-new-btn {

@@ -6,6 +6,10 @@ var message_interval = setInterval(function () {
     load_new_stuff();
 }, 1000);
 
+var profile_info_interval = setInterval(function () {
+    $(".player-info").load("player-info.php");
+}, 1000);
+
 function checkReady() {
     $.ajax({
         url: "ready.php",
@@ -13,8 +17,6 @@ function checkReady() {
             var response = jQuery.parseJSON(data);
             if (response["user_ready"] == 1 && response["num_ready"] != 3) {
                 $(".timer-container").html('<p><strong>Waiting for players to get ready...</strong></p>');
-//                var players_display = ;
-//                $(".ready").html(player_display);
             } else if (response["num_ready"] != 3) {
                 var s = '<input type="hidden" name ="room_id" id="room_id" value=' + response["room_id"] + '><button type="button" class="btn btn-square" onclick="readyButton()" id="ready-btn">Ready</button>';
                 $('.ready').html(s);
@@ -130,6 +132,7 @@ function reset(seconds) {
 $(document).ready(function () {
     scTop();
     checkReady();
+    $(".player-info").load("player-info.php");
     $("#msg_form").on("submit", function () {
         t = $(this);
         id = $("#room_id").val();
