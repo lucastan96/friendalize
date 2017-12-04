@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once('../includes/connection.php');
 
@@ -10,9 +11,9 @@ $statement6->closeCursor();
 unset($_SESSION["start_time"]);
 unset($_SESSION["vote"]);
 unset($_SESSION["next_round"]);
-unset( $_SESSION['die']);
-unset( $_SESSION['result_message']);
-$_SESSION['die_num']=0;
+unset($_SESSION['die']);
+unset($_SESSION['result_message']);
+$_SESSION['die_num'] = 0;
 $id = $r3["room_id"];
 if ($id == $_SESSION["room_id"]) {
     $query = 'DELETE FROM ghost_game_time WHERE room_id = :room_id';
@@ -39,7 +40,7 @@ if ($id == $_SESSION["room_id"]) {
     $word_pair = array();
     foreach ($r1 as $value) {
 
-        array_push($word_pair,$value["word_pair_id"]);
+        array_push($word_pair, $value["word_pair_id"]);
     }
 
     $query5 = 'SELECT * from ghost_room r, ghost_word_pair wp WHERE r.word_pair_id = wp.word_pair_id AND r.room_id = :room_id';

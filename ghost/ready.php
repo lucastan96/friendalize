@@ -1,9 +1,13 @@
 <?php
+
 require_once('../includes/connection.php');
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$data=array();
+
+$data = array();
+
 $query2 = 'SELECT * FROM ghost_room_players WHERE user_id=:user_id AND room_id=:room_id';
 $statement2 = $db->prepare($query2);
 $statement2->execute(array(":user_id" => $_SESSION["user_id"], ":room_id" => $_SESSION["room_id"]));
@@ -17,7 +21,7 @@ $result = $statement3->fetch();
 $statement3->closeCursor();
 $data["num_ready"] = $result["num_ready"];
 $data["user_ready"] = $player['ready'];
-$data["room_id"] =  $_SESSION["room_id"];
+$data["room_id"] = $_SESSION["room_id"];
 
 echo json_encode($data);
 ?>

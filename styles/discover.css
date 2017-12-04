@@ -197,13 +197,11 @@ h1 {
     background: #FF5252;
 }
 
-.feed #message {
+#viewList #message {
     margin-top: 0;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
-.feed #message a {
+#viewList #message a {
     color: #FF5252;
     font-style: italic;
     font-weight: bold;

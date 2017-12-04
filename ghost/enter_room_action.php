@@ -29,16 +29,6 @@ if ($request_method == 'POST') {
 
     if (empty($results3)) {
         if ($results2["users_joined"] < $results1["member_num"]) {
-            $query4 = 'INSERT INTO ghost_room_players (room_id, user_id) VALUES (:room_id, :user_id)';
-            $statement4 = $db->prepare($query4);
-            $statement4->execute(array(":room_id" => $room_id, ":user_id" => $_SESSION["user_id"]));
-            $statement4->closeCursor();
-
-            $query5 = 'INSERT INTO ghost_answer_submit (room_id, voter,voted) VALUES (:room_id, :voter,0)';
-            $statement5 = $db->prepare($query5);
-            $statement5->execute(array(":voter" => $_SESSION["user_id"], ":room_id" => $room_id));
-            $statement5->closeCursor();
-
             header("Location: room.php?room_id=" . $room_id);
             exit();
         } else {
@@ -54,3 +44,5 @@ if ($request_method == 'POST') {
     header("Location: challenges.php");
     exit();
 }
+
+

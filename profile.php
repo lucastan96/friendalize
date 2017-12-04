@@ -192,7 +192,7 @@ if (!isset($_SESSION['user_id'])) {
                                     endforeach;
                                 } else {
                                     ?>
-                                    <div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by <a href='friends.php'>adding friends</a> and also by adding your own post!</div>
+                                    <div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No posts just yet, get started by adding your own post!</div>
                                 <?php } ?>
                             </div>
                         </div>

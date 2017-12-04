@@ -63,40 +63,44 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class='col-sm-8 col-sm-pull-4 challenges-list'>
                         <?php
-                        foreach ($rooms as $room) {
-                            $room_id = $room["room_id"];
-                            $users = get_room_players($db, $room_id);
-                            $is_joined = check_is_joined($db, $room_id, $_SESSION['user_id']);
+                        if (!empty($rooms)) {
+                            foreach ($rooms as $room) {
+                                $room_id = $room["room_id"];
+                                $users = get_room_players($db, $room_id);
+                                $is_joined = check_is_joined($db, $room_id, $_SESSION['user_id']);
 
-                            if (sizeof($users) < $room["member_num"] || $is_joined == true) {
-                                $spaces_available = $room["member_num"] - sizeof($users);
+                                if (sizeof($users) < $room["member_num"] || $is_joined == true) {
+                                    $spaces_available = $room["member_num"] - sizeof($users);
 
-                                if ($is_joined == true) {
-                                    $btn_join = "Rejoin";
-                                } else {
-                                    $btn_join = "Join";
+                                    if ($is_joined == true) {
+                                        $btn_join = "Rejoin";
+                                    } else {
+                                        $btn_join = "Join";
+                                    }
+
+                                    echo "<div class='item'>";
+                                    echo "<div class='item-type'>Who's the Ghost?";
+                                    if ($room["room_name"] != null) {
+                                        echo " - <span class='item-name'>" . $room["room_name"] . "</span>";
+                                    }
+                                    echo "</div>";
+                                    echo "<div class='item-spaces'>Spaces available: " . $spaces_available . "</div>";
+                                    echo "<div class='players'>";
+                                    foreach ($users as $user):
+                                        $player_info = get_room_player_info($db, $user["user_id"]);
+
+                                        echo "<img class='player' src='images/profiles/" . $player_info["profile_pic"] . "' title='" . $player_info["first_name"] . " " . $player_info["last_name"] . "' alt='" . $player_info["first_name"] . " " . $player_info["last_name"] . "'>";
+                                    endforeach;
+                                    echo "</div>";
+                                    echo "<form action='ghost/enter_room_action.php' method='post'>";
+                                    echo "<input type='hidden' name='room_id' value='" . $room_id . "'>";
+                                    echo "<button type='submit' class='btn btn-item'>" . $btn_join . "<i class='fa fa-chevron-right' aria-hidden='true'></i></button>";
+                                    echo "</form>";
+                                    echo "</div>";
                                 }
-
-                                echo "<div class='item'>";
-                                echo "<div class='item-type'>Who's the Ghost?";
-                                if ($room["room_name"] != null) {
-                                    echo " - <span class='item-name'>" . $room["room_name"] . "</span>";
-                                }
-                                echo "</div>";
-                                echo "<div class='item-spaces'>Spaces available: " . $spaces_available . "</div>";
-                                echo "<div class='players'>";
-                                foreach ($users as $user):
-                                    $player_info = get_room_player_info($db, $user["user_id"]);
-
-                                    echo "<img class='player' src='images/profiles/" . $player_info["profile_pic"] . "' title='" . $player_info["first_name"] . " " . $player_info["last_name"] . "' alt='" . $player_info["first_name"] . " " . $player_info["last_name"] . "'>";
-                                endforeach;
-                                echo "</div>";
-                                echo "<form action='ghost/enter_room_action.php' method='post'>";
-                                echo "<input type='hidden' name='room_id' value='" . $room_id . "'>";
-                                echo "<button type='submit' class='btn btn-item'>" . $btn_join . "<i class='fa fa-chevron-right' aria-hidden='true'></i></button>";
-                                echo "</form>";
-                                echo "</div>";
                             }
+                        } else {
+                            echo "<div id='message'><i class='fa fa-info-circle' aria-hidden='true'></i>No rooms available at the moment. Refresh or open yours now!</div>";
                         }
                         ?>
                     </div>

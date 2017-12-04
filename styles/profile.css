@@ -185,6 +185,24 @@ h2 {
     background: #FF5252;
 }
 
+#message {
+    background: #454545;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
+}
+
 @media only screen and (min-width: 768px) {
     .content {
         padding: 0;

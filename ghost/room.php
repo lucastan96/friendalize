@@ -40,6 +40,22 @@ if (!isset($_SESSION['user_id'])) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="57x57" href="../images/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../images/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../images/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../images/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../images/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../images/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../images/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../images/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../images/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../images/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../images/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../images/favicons/manifest.json">
+        <meta name="msapplication-TileColor" content="#454545">
+        <meta name="msapplication-TileImage" content="../images/favicons/ms-icon-144x144.png">
         <meta name="theme-color" content="#454545">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../styles/common.css" rel="stylesheet">
@@ -77,26 +93,24 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-2 nav-desktop">
                     <ul>
                         <li><a href="../index.php">Home</a></li>
-                        <li><a href="../explore.php">Explore</a></li>
+                        <li><a href="../discover.php">Discover</a></li>
                         <li><a href="../friends.php">Friends</a></li>
                         <li><a href="../challenges.php">Challenges</a></li>
-                        <li><a href="../messages.php">Messages</a></li>
                         <li><a href="../settings.php">Settings</a></li>
                     </ul>
                 </div>
                 <div class="nav-mobile navbar-fixed-top">
                     <a href="../index.php">Home</a>
-                    <a href="../explore.php">Explore</a>
+                    <a href="../discover.php">Discover</a>
                     <a href="../friends.php">Friends</a>
                     <a href="../challenges.php">Challenges</a>
-                    <a href="../messages.php">Messages</a>
                     <a href="../settings.php">Settings</a>
                 </div>
                 <div class="col-sm-10 content">
                     <div class='room-info'>
                         <h1>Who's the Ghost?</h1>
                         <div class='ready'>
-                        
+
                         </div>
                     </div>
                     <div class="col-sm-8 room-chat">
@@ -112,10 +126,14 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                     <div class="col-sm-4 room-game">
-                        <span id="countdown" class="timer"></span>
-                        <div class='timer timer-container'>
-                          
+                        <div id="countdown-container">
+                            <span id="countdown" class="timer"></span>
                         </div>
+                        <div class='timer timer-container'>
+
+                        </div>
+                        <p id="btn-tips-desc"><i class='fa fa-lightbulb-o' aria-hidden='true'></i>Game help is turned <strong><span>ON</span></strong>.</p>
+                        <button class="btn btn-square btn-tips tips-on" type="button">Disable</button>
                     </div>
                 </div>
             </div>
@@ -128,6 +146,22 @@ if (!isset($_SESSION['user_id'])) {
 
             var width = $('.nav-mobile a:nth-child(1)').width() + $('.nav-mobile a:nth-child(2)').width() + $('.nav-mobile a:nth-child(3)').width();
             $('.nav-mobile').scrollLeft(width);
+
+            $(".btn-tips").click(function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass("tips-on")) {
+                    $(this).removeClass("tips-on");
+                    $(this).prev().find("span").text("OFF");
+                    $(this).text("Enable");
+                    $(".tip").hide();
+                } else {
+                    $(this).addClass("tips-on");
+                    $(this).prev().find("span").text("ON");
+                    $(this).text("Disable");
+                    $(".tip").show();
+                }
+            });
         </script>
         <script>
             if (jQuery(".nav-mobile").css('display') == 'none') {

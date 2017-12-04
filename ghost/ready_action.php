@@ -1,13 +1,56 @@
 <?php
+
 session_start();
+
 require_once('../includes/connection.php');
+
 $room_id = $_POST["room_id"];
 $_SESSION["die_num"] = 0;
+
 unset($_SESSION["start_time"]);
 unset($_SESSION["vote"]);
 unset($_SESSION["next_round"]);
-unset( $_SESSION['die']);
-unset( $_SESSION['result_message']);
+unset($_SESSION['die']);
+unset($_SESSION['result_message']);
+
+$query6 = 'SELECT member_num FROM ghost_room WHERE room_id = :room_id';
+$statement6 = $db->prepare($query6);
+$statement6->execute(array(":room_id" => $room_id));
+$results6 = $statement6->fetch();
+$statement6->closeCursor();
+
+$query7 = "SELECT COUNT(*) AS users_joined FROM ghost_room_players WHERE room_id = :room_id";
+$statement7 = $db->prepare($query7);
+$statement7->execute(array(":room_id" => $room_id));
+$results7 = $statement7->fetch();
+$statement7->closeCursor();
+
+$query8 = "SELECT room_id FROM ghost_room_players WHERE user_id = :user_id AND room_id = :room_id";
+$statement8 = $db->prepare($query8);
+$statement8->bindValue(":user_id", $_SESSION["user_id"]);
+$statement8->bindValue(":room_id", $room_id);
+$statement8->execute();
+$results8 = $statement8->fetch();
+$statement8->closeCursor();
+
+if (empty($results8)) {
+    if ($results7["users_joined"] < $results6["member_num"]) {
+        $query9 = 'INSERT INTO ghost_room_players (room_id, user_id) VALUES (:room_id, :user_id)';
+        $statement9 = $db->prepare($query9);
+        $statement9->execute(array(":room_id" => $room_id, ":user_id" => $_SESSION["user_id"]));
+        $statement9->closeCursor();
+
+        $query10 = 'INSERT INTO ghost_answer_submit (room_id, voter,voted) VALUES (:room_id, :voter,0)';
+        $statement10 = $db->prepare($query10);
+        $statement10->execute(array(":voter" => $_SESSION["user_id"], ":room_id" => $room_id));
+        $statement10->closeCursor();
+    } else {
+        header("Location: ../challenges.php");
+        exit();
+    }
+    unset($_SESSION["start_time"]);
+}
+
 $query = 'UPDATE ghost_room_players SET ready=1 WHERE room_id=:room_id AND user_id=:user_id';
 $statement = $db->prepare($query);
 $statement->execute(array(":room_id" => $room_id, ":user_id" => $_SESSION["user_id"]));

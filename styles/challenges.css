@@ -104,6 +104,22 @@ h1 {
     color: white;
 }
 
+#message {
+    background: #454545;
+    color: white;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+    text-align: center;
+}
+
+#message i {
+    margin-right: 8px;
+}
+
 .challenges-add {
     background: #454545;
     padding: 20px;
@@ -126,8 +142,8 @@ h1 {
 }
 
 .challenges-add .btn {
-    background: white;
-    color: #454545;
+    background: #FF5252;
+    color: white;
     margin-top: 30px;
     margin-bottom: 25px;
 }
