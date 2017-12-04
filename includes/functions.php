@@ -426,7 +426,7 @@ function get_notification_comments($db, $user_id) {
     $statement->closeCursor();
 
     if ($results['comment_id'] != $user_id) {
-        $sql2 = "SELECT * FROM post_comments pc, posts p WHERE p.post_id = pc.post_id AND p.user_id = $user_id ORDER BY pc.time DESC";
+        $sql2 = "SELECT * FROM post_comments WHERE user_id != $user_id ORDER BY time DESC";
         $statement2 = $db->prepare($sql2);
         $statement2->execute();
         $result2 = $statement2->fetchAll();
