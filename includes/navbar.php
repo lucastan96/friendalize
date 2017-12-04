@@ -40,8 +40,8 @@
                         </a>
                         <div class="dropdown-content">
                             <?php
-                            foreach ($result2 as $row) {
-                                echo '<a href="../post.php?id=' . $row[''] . '">';
+                           foreach ($result2 as $row) {
+                                echo '<a href="./index.php?id=' . '">';
                                 echo $row["comment"] . "<br>";
                                 echo '</a>';
                             }
