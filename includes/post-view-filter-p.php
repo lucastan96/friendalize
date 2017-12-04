@@ -19,14 +19,16 @@ $request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_S
 
 if ($request_method == 'POST') {
     if ($category_id == 1) {
-        $query = "SELECT * FROM posts where (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+        $query = "SELECT * FROM posts where (user_id != :user_id AND user_id !=" . $friend_array_to_string . ") ORDER BY post_id DESC";
         $statement = $db->prepare($query);
+        $statement->bindValue(":user_id", $_SESSION['user_id']);
         $statement->execute();
         $result_filter = $statement->fetchAll();
         $statement->closeCursor();
     } else {
-        $query = "SELECT * FROM posts WHERE category_id = :category_id AND (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+        $query = "SELECT * FROM posts WHERE category_id = :category_id AND (user_id != :user_id AND user_id !=" . $friend_array_to_string . ") ORDER BY post_id DESC";
         $statement = $db->prepare($query);
+        $statement->bindValue(":user_id", $_SESSION['user_id']);
         $statement->bindValue(":category_id", $category_id);
         $statement->execute();
         $result_filter = $statement->fetchAll();
@@ -88,8 +90,9 @@ if ($request_method == 'POST') {
     echo '</div>';
     echo '</div>';
 } else {
-    $query = "SELECT * FROM posts WHERE (user_id != " . $friend_array_to_string . ") ORDER BY post_id DESC";
+    $query = "SELECT * FROM posts WHERE (user_id != :user_id AND user_id !=" . $friend_array_to_string . ") ORDER BY post_id DESC";
     $statement = $db->prepare($query);
+    $statement->bindValue(":user_id", $_SESSION['user_id']);
     $statement->execute();
     $result_filter = $statement->fetchAll();
     $statement->closeCursor();
