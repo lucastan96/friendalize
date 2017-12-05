@@ -23,6 +23,7 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     foreach ($user_details_array as $user_details):
+        $id = $user_details["user_id"];
         $email = $user_details["email"];
         $friend_first_name = $user_details["first_name"];
         $last_name = $user_details["last_name"];
@@ -129,7 +130,7 @@ if (!isset($_SESSION['user_id'])) {
                         <?php
                         $query = "SELECT * FROM posts WHERE user_id = :user_id ORDER BY post_id DESC";
                         $statement = $db->prepare($query);
-                        $statement->bindValue(":user_id", $_SESSION['user_id']);
+                        $statement->bindValue(":user_id", $id);
                         $statement->execute();
                         $result_filter = $statement->fetchAll();
                         $statement->closeCursor();
