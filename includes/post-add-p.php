@@ -44,15 +44,34 @@ if (!empty($_FILES['picture']['name'])) {
             include 'index.php';
             exit();
         } else {
-            if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-                $query3 = "INSERT INTO posts (content, images, category_id, user_id) VALUES (:content, :images, :category_id, :user_id )";
-                $statement3 = $db->prepare($query3);
-                $statement3->bindValue(":content", $content);
-                $statement3->bindValue(":images", $target_name);
-                $statement3->bindValue(":category_id", $category_id);
-                $statement3->bindValue(":user_id", $user_id);
-                $statement3->execute();
-                $statement3->closeCursor();
+            $query3 = "INSERT INTO posts (content, category_id, user_id) VALUES (:content, :category_id, :user_id )";
+            $statement3 = $db->prepare($query3);
+            $statement3->bindValue(":content", $content);
+            $statement3->bindValue(":category_id", $category_id);
+            $statement3->bindValue(":user_id", $user_id);
+            $statement3->execute();
+            $statement3->closeCursor();
+
+            $query5 = "SELECT post_id FROM posts WHERE content = :content AND category_id = :category_id AND user_id = :user_id";
+            $statement5 = $db->prepare($query5);
+            $statement5->bindValue(":content", $content);
+            $statement5->bindValue(":category_id", $category_id);
+            $statement5->bindValue(":user_id", $user_id);
+            $statement5->execute();
+            $result_array5 = $statement5->fetch();
+            $statement5->closeCursor();
+            
+            $post_id = $result_array5["post_id"];
+
+            $pic_name = $target_dir . "post_" . $post_id . "." . $imageFileType;
+            if (move_uploaded_file($_FILES["picture"]["tmp_name"], $pic_name)) {
+                $fileName = "post_" . $post_id . "." . $imageFileType;
+                $query4 = "UPDATE posts SET images = :images where post_id = :post_id )";
+                $statement4 = $db->prepare($query4);
+                $statement4->bindValue(":images", $fileName);
+                $statement4->bindValue(":post_id", $post_id);
+                $statement4->execute();
+                $statement4->closeCursor();
 
                 $_SESSION['postAdded'] = 1;
 
