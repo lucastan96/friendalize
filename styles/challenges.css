@@ -13,33 +13,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-.filter-box {
+.clear {
     clear: both;
-    border: 1px solid #95989A;
-    color: #454545;
-    margin-bottom: 20px;
-    font-size: 14px;
-    padding-left: 15px;
-    position: relative;
-}
-
-.filter-box p {
-    line-height: 39px;
-    margin: 0;
-}
-
-.filter-box .form-select {
-    width: 77px;
-    height: 40px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: 0;
-    border-radius: 0;
-    background: #454545;
-    color: white;
-    padding-left: 22px;
-    cursor: pointer;
 }
 
 .challenges-list, .challenges-add {

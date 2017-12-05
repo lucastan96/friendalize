@@ -66,20 +66,16 @@ if ($request_method == 'POST') {
             }
             echo '</div>';
             echo '<div class="item-options">';
-            echo "<form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>";
-            echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
             echo '<p class="item-category" title="Category: ' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
-                echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
-            } else {
-                echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
-            }
+                    echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+                } else {
+                    echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+                }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
-            echo '<input type="hidden" name="user_id" value="' . htmlspecialchars($_SESSION["user_id"]) . '">';
-            echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
-            echo '</div>';
-            echo '</form>';
+            echo "<a href='profile.php?id=" . $result["user_id"] . "' role='button' class='btn btn-square btn-add' type='submit' title='Be friendalized!'>Add " . $post_first_name . "<i class = 'fa fa-chevron-right' aria-hidden = 'true'></i></a>";
+            echo "</div>";
             echo '</div>';
             echo '</div>';
             echo '</div>';
@@ -127,20 +123,16 @@ if ($request_method == 'POST') {
             }
             echo '</div>';
             echo '<div class="item-options">';
-            echo "<form class='form-horizontal item-comment' action='includes/comment-add-p.php' method='post'>";
-            echo '<input class="form-control form-input" type="text" name="comment" id="comment" placeholder="Type a comment..." required>';
             echo '<div>';
             echo '<p class="item-category" title="Category: ' . $post_category . '">' . $post_category . '</p>';
             if ($post_like_status == 0) {
-                echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
-            } else {
-                echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
-            }
+                    echo '<button class="btn btn-square btn-like" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Like</span></button>';
+                } else {
+                    echo '<button class="btn btn-square btn-like btn-liked" type="button"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Liked</span></button>';
+                }
             echo '<input type="hidden" name = "post_id" value="' . $result["post_id"] . '">';
-            echo '<input type="hidden" name="user_id" value="' . htmlspecialchars($_SESSION["user_id"]) . '">';
-            echo '<button class="btn btn-square btn-post" type="submit" title="Post comment">Comment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>';
-            echo '</div>';
-            echo '</form>';
+            echo "<a href='profile.php?id=" . $result["user_id"] . "' role='button' class='btn btn-square btn-add' type='submit' title='Be friendalized!'>Add " . $post_first_name . "<i class = 'fa fa-chevron-right' aria-hidden = 'true'></i></a>";
+            echo "</div>";
             echo '</div>';
             echo '</div>';
             echo '</div>';

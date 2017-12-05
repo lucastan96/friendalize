@@ -26,12 +26,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="col-sm-10 content">
                     <h1>Challenges</h1>
                     <a href="javascript:window.location.reload(true)" role='button' class='btn btn-square btn-refresh'>Refresh</a>
-                    <div class="filter-box">
-                        <p>Showing all challenges</p>
-                        <select class="form-control form-select" id="filter-select" name="filter-select" required>
-                            <option value="" selected="selected">Filter</option>
-                        </select>
-                    </div>
+                    <div class="clear"></div>
                     <div class='col-sm-4 col-sm-push-8 challenges-add'>
                         <h2>Create a New Room</h2>
                         <form class="form-horizontal" action="includes/challenge-add-p.php" method="post">

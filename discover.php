@@ -62,15 +62,6 @@ if (!isset($_SESSION['user_id'])) {
                     <div id="viewList">
                         <?php include 'includes/post-view-filter-p.php'; ?>
                     </div>
-
-                    <!-- USE THIS CODE -->
-                    <!--                    <div class="item-options">
-                                            <div>
-                                                <p class='item-category'>Sports</p>
-                                                <button class="btn btn-square btn-like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</button>
-                                                <button class="btn btn-square btn-add" type="submit" title='Be friendalized!'>Add Elaine<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                                            </div>
-                                        </div>-->
                 </div>
             </div>
         </div>
@@ -79,6 +70,38 @@ if (!isset($_SESSION['user_id'])) {
                                 $(document).ready(function () {
                                     $('.nav-desktop li:nth-child(2)').addClass("nav-active");
                                     $('.nav-mobile a:nth-child(2)').addClass("nav-active");
+                                });
+
+                                $(".btn-like").click(function (e) {
+                                    e.preventDefault();
+
+                                    var post_id = $(this).next().val();
+                                    var action = 1;
+
+                                    if ($(this).hasClass("btn-liked")) {
+                                        action = 2;
+                                        $(this).removeClass("btn-liked");
+                                        $(this).find("span").text("Like");
+                                        var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                                        post_likes_count--;
+                                    } else {
+                                        $(this).addClass("btn-liked");
+                                        $(this).find("span").text("Liked");
+                                        var post_likes_count = parseInt($(this).closest(".item").find(".item-info").find(".item-likes").find("span").text());
+                                        post_likes_count++;
+                                    }
+
+                                    $(this).closest(".item").find(".item-info").find(".item-likes").find("span").text(post_likes_count);
+                                    $(this).closest(".item").find(".item-info").find(".item-likes").prop('title', post_likes_count += " Likes");
+
+                                    $.ajax({
+                                        url: "includes/post-like-p.php",
+                                        type: "POST",
+                                        data: {
+                                            post_id: post_id,
+                                            action: action
+                                        }
+                                    });
                                 });
         </script>
     </body>

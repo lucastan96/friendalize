@@ -174,19 +174,20 @@ h1 {
     margin-left: -4px;
     margin-top: -1px;
     height: 100%;
-    background: #f2f2f2;
-    color: #454545;
     border-left: 1px solid #454545;
     border-right: 1px solid #454545;
-}
-
-.btn-like:hover {
-    color: #454545;
+    background: #f2f2f2 !important;
+    color: #454545 !important;
 }
 
 .btn-like i {
     margin: 0;
     margin-right: 5px;
+}
+
+.btn-liked {
+    background: #FF5252 !important;
+    color: white !important;
 }
 
 .item-options .btn-add {
