@@ -66,7 +66,7 @@ if (!empty($_FILES['picture']['name'])) {
             $pic_name = $target_dir . "post_" . $post_id . "." . $imageFileType;
             if (move_uploaded_file($_FILES["picture"]["tmp_name"], $pic_name)) {
                 $fileName = "post_" . $post_id . "." . $imageFileType;
-                $query4 = "UPDATE posts SET images = :images where post_id = :post_id )";
+                $query4 = "UPDATE posts SET images = :images where post_id = :post_id";
                 $statement4 = $db->prepare($query4);
                 $statement4->bindValue(":images", $fileName);
                 $statement4->bindValue(":post_id", $post_id);

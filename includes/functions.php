@@ -70,7 +70,7 @@ function get_first_name($db, $user_id) {
 }
 
 function get_user_details($db, $user_id) {
-    $query = "SELECT email, first_name, last_name, gender, age, country_id, DATE(join_date), profile_pic FROM users WHERE user_id = :user_id";
+    $query = "SELECT user_id,email, first_name, last_name, gender, age, country_id, DATE(join_date), profile_pic FROM users WHERE user_id = :user_id";
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();
