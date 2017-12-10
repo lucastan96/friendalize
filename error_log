@@ -1,8 +1,0 @@
-[05-Dec-2017 16:31:11 Europe/Dublin] PHP Notice:  Undefined index: fileToUpload in /home/e572108/public_html/friendalize/profile-picture-update-p.php on line 12
-[05-Dec-2017 16:31:11 Europe/Dublin] PHP Notice:  Undefined index: fileToUpload in /home/e572108/public_html/friendalize/profile-picture-update-p.php on line 22
-[09-Dec-2017 20:40:02 Europe/Dublin] PHP Warning:  include(db_error.php): failed to open stream: No such file or directory in /home/e572108/public_html/friendalize/includes/connection.php on line 15
-[09-Dec-2017 20:40:02 Europe/Dublin] PHP Warning:  include(db_error.php): failed to open stream: No such file or directory in /home/e572108/public_html/friendalize/includes/connection.php on line 15
-[09-Dec-2017 20:40:02 Europe/Dublin] PHP Warning:  include(): Failed opening 'db_error.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/e572108/public_html/friendalize/includes/connection.php on line 15
-[09-Dec-2017 20:40:05 Europe/Dublin] PHP Warning:  include(db_error.php): failed to open stream: No such file or directory in /home/e572108/public_html/friendalize/includes/connection.php on line 15
-[09-Dec-2017 20:40:05 Europe/Dublin] PHP Warning:  include(db_error.php): failed to open stream: No such file or directory in /home/e572108/public_html/friendalize/includes/connection.php on line 15
-[09-Dec-2017 20:40:05 Europe/Dublin] PHP Warning:  include(): Failed opening 'db_error.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/e572108/public_html/friendalize/includes/connection.php on line 15

@@ -32,6 +32,23 @@ if (!isset($_SESSION['user_id'])) {
     $statement2->closeCursor();
 
     $_SESSION['room_id'] = $room_id;
+
+    $query3 = "SELECT name FROM interests WHERE interest_id = :interest_id";
+    $statement3 = $db->prepare($query3);
+    $statement3->bindValue(":interest_id", $player["interest_id"]);
+    $statement3->execute();
+    $interest_result = $statement3->fetch();
+    $statement3->closeCursor();
+
+    $interest = $interest_result["name"];
+
+    if ($player["difficulty_id"] == 1) {
+        $difficulty = "Easy";
+    } else if ($player["difficulty_id"] == 2) {
+        $difficulty = "Medium";
+    } else {
+        $difficulty = "Hard";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -108,7 +125,9 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div class="col-sm-10 content">
                     <div class='room-info'>
-                        <h1>Who's the Ghost?<?php if ($player["room_name"] != "") {echo " - <span>" . $player["room_name"] . "</span>"; } ?></h1>
+                        <h1>Who's the Ghost?<?php if ($player["room_name"] != "") {
+    echo " - <span id='room_name'>" . $player["room_name"] . "</span>";
+} ?><span id="interest_difficulty"><?php echo $interest; ?> | Difficulty: <?php echo $difficulty; ?></span></h1>
                         <div class="room-info-right">
                             <div class='ready'></div>
                             <div class="player-info"></div>
@@ -117,7 +136,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="col-sm-8 room-chat">
                         <div class="chat">
                             <div class='msgs'>
-                                <?php include ("msgs.php"); ?>
+<?php include ("msgs.php"); ?>
                             </div>
                             <form id="msg_form">
                                 <input name="msg" class="form-control form-input" size="30" type="text" placeholder="Type a message..."/>

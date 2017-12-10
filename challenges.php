@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     require_once('includes/essentials.php');
 
     $rooms = get_rooms($db);
+
     $query1 = "SELECT interests FROM user_interests  WHERE user_id = :user_id";
     $statement1 = $db->prepare($query1);
     $statement1->bindValue(":user_id", $_SESSION['user_id']);
@@ -15,18 +16,15 @@ if (!isset($_SESSION['user_id'])) {
     $results_array1 = $statement1->fetch();
     $statement1->closeCursor();
 
-  $interest_ids = $results_array1["interests"];
-if(empty($interest_ids)){
-  $interests_array=[];
-  $size_array=  0;
-}else{
+    $interest_ids = $results_array1["interests"];
 
-  $interests_array = explode(",", $interest_ids);
-    $size_array= sizeof($interests_array);
-}
-
-
-
+    if (empty($interest_ids)) {
+        $interests_array = [];
+        $size_array = 0;
+    } else {
+        $interests_array = explode(",", $interest_ids);
+        $size_array = sizeof($interests_array);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -64,25 +62,30 @@ if(empty($interest_ids)){
                             <div class="form-group">
                                 <label class="control-label" for="member_num">Interest:</label>
                                 <select class='form-control form-select' id="int_id" name="int_id" required>
-
                                     <?php
-                                    if($size_array==0){
-                                      echo '<option value="2" selected="selected" >Music</option>';
-
-                                    }
-                                  else{
-                                         for ($i = 0; $i < $size_array; $i++) {
+                                    if ($size_array == 0) {
+                                        echo '<option value="2" selected="selected" >Music</option>';
+                                    } else {
+                                        for ($i = 0; $i < $size_array; $i++) {
                                             $query2 = "SELECT name FROM interests WHERE interest_id = :interest_id";
                                             $statement2 = $db->prepare($query2);
                                             $statement2->bindValue(":interest_id", $interests_array[$i]);
                                             $statement2->execute();
                                             $results_array2 = $statement2->fetch();
                                             $statement2->closeCursor();
-                                            echo '<option value="'. $interests_array[$i].'">'. htmlspecialchars($results_array2["name"]).'</option>';
+                                            echo '<option value="' . $interests_array[$i] . '">' . htmlspecialchars($results_array2["name"]) . '</option>';
                                         }
-                                      }
-                                      ?>
-
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="difficulty">Difficulty Level:</label>
+                                <select class='form-control form-select' id="difficulty" name="difficulty" required>
+                                    <option value="" selected="selected">Easy, medium, or hard?</option>
+                                    <option value="1">Easy</option>
+                                    <option value="2">Medium</option>
+                                    <option value="3">Hard</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -110,6 +113,23 @@ if(empty($interest_ids)){
                                 if (sizeof($users) < $room["member_num"] || $is_joined == true) {
                                     $spaces_available = $room["member_num"] - sizeof($users);
 
+                                    $query3 = "SELECT name FROM interests WHERE interest_id = :interest_id";
+                                    $statement3 = $db->prepare($query3);
+                                    $statement3->bindValue(":interest_id", $room["interest_id"]);
+                                    $statement3->execute();
+                                    $interest_result = $statement3->fetch();
+                                    $statement3->closeCursor();
+                                    
+                                    $interest = $interest_result["name"];
+                                    
+                                    if ($room["difficulty_id"] == 1) {
+                                        $difficulty = "Easy";
+                                    } else if ($room["difficulty_id"] == 2) {
+                                        $difficulty = "Medium";
+                                    } else {
+                                        $difficulty = "Hard";
+                                    }
+
                                     if ($is_joined == true) {
                                         $btn_join = "Rejoin";
                                     } else {
@@ -121,8 +141,9 @@ if(empty($interest_ids)){
                                     if ($room["room_name"] != null) {
                                         echo " - <span class='item-name'>" . $room["room_name"] . "</span>";
                                     }
+                                    echo "<a href='#' role='button' class='btn btn-default btn-help' data-toggle='tooltip' data-placement='bottom' data-html='true' title='<h5>Game Rules</h5><br><p>At the beginning of the game, every player will receive a word.</p><p>Every player will have the same word, except one whom he or she will get a similar but different word, and we call him the <b>ghost</b>!</p><p>Players will take turns to describe their word without giving the actual word away. After one full round, players will need to vote who’s the ghost. The player with the highest vote will not be able to continue the game.</p><p>If he is the ghost, the game is over. If he is not, the game continues for another round.</p>'>?</a>";
                                     echo "</div>";
-                                    echo "<div class='item-spaces'>Spaces available: " . $spaces_available . "</div>";
+                                    echo "<div class='item-spaces'>Spaces available: " . $spaces_available . " | " . $interest . " | Difficulty: " . $difficulty . "</div>";
                                     echo "<div class='players'>";
                                     foreach ($users as $user):
                                         $player_info = get_room_player_info($db, $user["user_id"]);
@@ -150,6 +171,7 @@ if(empty($interest_ids)){
             $(document).ready(function () {
                 $('.nav-desktop li:nth-child(4)').addClass("nav-active");
                 $('.nav-mobile a:nth-child(4)').addClass("nav-active");
+                $('[data-toggle="tooltip"]').tooltip();   
             });
 
             var width = $('.nav-mobile a:nth-child(1)').width() + $('.nav-mobile a:nth-child(2)').width() + $('.nav-mobile a:nth-child(3)').width();

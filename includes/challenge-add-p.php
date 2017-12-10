@@ -11,6 +11,8 @@ if ($request_method == 'POST') {
     $room_name = filter_input(INPUT_POST, 'room_name', FILTER_SANITIZE_STRING);
     $member_num = filter_input(INPUT_POST, 'member_num', FILTER_VALIDATE_INT);
     $interest_id= filter_input(INPUT_POST, 'int_id', FILTER_VALIDATE_INT);
+    $difficulty_id= filter_input(INPUT_POST, 'difficulty', FILTER_VALIDATE_INT);
+    
     if ($challenge == 1) {
 
         $query5 = "SELECT word_pair_id FROM ghost_word_pair WHERE  interest_id= :interest_id ORDER BY RAND() LIMIT 1";
@@ -21,13 +23,14 @@ if ($request_method == 'POST') {
         $statement5->closeCursor();
 
         $word_pair_id = $result3['word_pair_id'];
-        $query1 = 'INSERT INTO ghost_room (room_name, word_pair_id, member_num, created_by,interest_id) VALUES (:room_name, :word_pair_id, :member_num, :created_by,:interest_id)';
+        $query1 = 'INSERT INTO ghost_room (room_name, word_pair_id, member_num, created_by, interest_id, difficulty_id) VALUES (:room_name, :word_pair_id, :member_num, :created_by, :interest_id, :difficulty_id)';
         $statement1 = $db->prepare($query1);
         $statement1->bindValue(":room_name", $room_name);
         $statement1->bindValue(":word_pair_id", $word_pair_id);
         $statement1->bindValue(":member_num", $member_num);
         $statement1->bindValue(":created_by", $_SESSION["user_id"]);
         $statement1->bindValue(":interest_id", $interest_id);
+        $statement1->bindValue(":difficulty_id", $difficulty_id);
         $statement1->execute();
         $statement1->closeCursor();
 

@@ -22,6 +22,7 @@ if (!isset($message)) {
             <div class="row">
                 <div class="col-sm-7 col-intro">
                     <a href=""><div id="logo"><img src="images/logos/white_transparent.png" alt="Friendalize Logo">friendalize</div></a>
+                    <p id="slogan">A social media application with a fun twist!</p>
                     <div class="images">
                         <div class='col-sm-7 col-img'>
                             <img id="img-signin-1" src='images/signin/signin_1.png' alt='Clubbing'>

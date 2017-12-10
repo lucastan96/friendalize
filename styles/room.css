@@ -13,8 +13,13 @@
     padding-left: 25px;
 }
 
-h1 span {
+#room_name {
     color: red;
+}
+
+#interest_difficulty {
+    font-size: 14px;
+    margin-left: 15px;
 }
 
 .room-info-right {

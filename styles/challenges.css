@@ -52,6 +52,32 @@ h1 {
     color: #FF5252;
 }
 
+.btn-help {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 15px;
+    margin-left: 10px;
+    border: 1px solid #95989A;
+    transform: scale(0.9);
+}
+
+.tooltip-inner {
+    text-align: left;
+    white-space: pre-line;
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.tooltip-inner p {
+    line-height: 16px;
+    font-size: 15px;
+}
+
 .players {
     padding-left: 10px;
     padding-top: 15px;
