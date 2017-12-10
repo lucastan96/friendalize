@@ -58,13 +58,13 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
     if ($count != 2) {
         if (!isset($_SESSION['next_round'])) {
 
-            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 2);
+            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 15);
         } else if (isset($_SESSION["next_round"])) {
             $wordTime = date("Y-m-d H:i:s", strtotime($start_time));
         }
-        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 2);
+        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 25);
         for ($i = 2; $i <= $count; $i++) {
-            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 2);
+            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 25);
         }
 
         if ($wordTime > $start_time_s && $curTime < $wordTime) {

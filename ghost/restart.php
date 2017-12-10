@@ -15,7 +15,7 @@ unset($_SESSION['die']);
 unset($_SESSION['result_message']);
 $_SESSION['die_num'] = 0;
 $id = $r3["room_id"];
-$interest_id =$r3['interest_id'];
+$interest_id = $r3['interest_id'];
 if ($id == $_SESSION["room_id"]) {
     $query = 'DELETE FROM ghost_game_time WHERE room_id = :room_id';
     $statement = $db->prepare($query);
@@ -35,10 +35,11 @@ if ($id == $_SESSION["room_id"]) {
 
     $query4 = 'SELECT word_pair_id FROM ghost_word_pair WHERE  interest_id= :interest_id ORDER BY RAND() LIMIT 5';
     $statement4 = $db->prepare($query4);
-    $statement4->execute(array(":interest_id"=>$interest_id));
+    $statement4->execute(array(":interest_id" => $interest_id));
     $r1 = $statement4->fetchAll();
-    $statement4->closeCursor();s
-        $new_word=2;
+    $statement4->closeCursor();
+    $new_word = 2;
+    
     foreach ($r1 as $value) {
         if ($r3["word_pair_id"] != $value['word_pair_id']) {
             $new_word = $value['word_pair_id'];
