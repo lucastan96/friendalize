@@ -3,6 +3,14 @@ require_once('../includes/connection.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+$query16 = 'SELECT * FROM ghost_room gr WHERE gr.room_id = :room_id ';
+$statement16 = $db->prepare($query16);
+$statement16->execute(array(":room_id" => $_SESSION["room_id"]));
+$room = $statement16->fetch();
+$statement16->closeCursor();
+
+$mem_num =$room['member_num'];
+
 $query2 = 'SELECT * FROM ghost_room_players rm, ghost_answer_submit gas  WHERE rm.room_id = gas.room_id and rm.room_id = :room_id AND  rm.user_id=:user_id AND gas.voter =:voter_id';
 $statement2 = $db->prepare($query2);
 $statement2->execute(array(":room_id" => $_SESSION["room_id"], ":user_id" => $_SESSION["user_id"], ":voter_id" => $_SESSION["user_id"]));
@@ -31,8 +39,6 @@ $r3 = $statement13->fetch();
 $statement13->closeCursor();
 $count = $r3['count_died'];
 if ($start_time_s == '1970-01-01 01:00:00') {
-    // header("Location: room.php?room_id=".$_SESSION["room_id"]);
-    // exit();
     echo "<script>top.window.location = 'restart.php' </script>";
     die;
 }
@@ -49,15 +55,16 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
         echo "<p><strong>Game over! Please wait for the next game...</strong></p>";
         echo '<input type="hidden" id = "diff" value="0">';
     }
-    if ($count != 1) {
+    if ($count != 2) {
         if (!isset($_SESSION['next_round'])) {
-            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 10);
+
+            $wordTime = date("Y-m-d H:i:s", strtotime($start_time) + 2);
         } else if (isset($_SESSION["next_round"])) {
             $wordTime = date("Y-m-d H:i:s", strtotime($start_time));
         }
-        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 10);
+        $playerTime[1] = date("Y-m-d H:i:s", strtotime($wordTime) + 2);
         for ($i = 2; $i <= $count; $i++) {
-            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 30);
+            $playerTime[$i] = date("Y-m-d H:i:s", strtotime($playerTime[$i - 1]) + 2);
         }
 
         if ($wordTime > $start_time_s && $curTime < $wordTime) {
@@ -95,21 +102,22 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             $diff = abs($to_time - $from_time);
             echo '<input type="hidden" id = "diff" value="' . $diff . '">';
         }
-        //    else if (!empty($_SESSION['start_time']) && $curTime < $playerTime[4]) {
-        //        $queryStart = true;
-        //        $query5 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND r.game_order=4 AND p.user_id = r.user_id';
-        //        $to_time = strtotime($playerTime[4]);
-        //        $from_time = strtotime($curTime);
-        //        $diff = abs($to_time - $from_time);
-        //        echo '<input type="hidden" id = "diff" value="' . $diff . '">';
-        //    } else if (!empty($_SESSION['start_time']) && $curTime < $playerTime[5]) {
-        //        $queryStart = true;
-        //        $query5 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND r.game_order=5 AND p.user_id = r.user_id';
-        //        $to_time = strtotime($playerTime[5]);
-        //        $from_time = strtotime($curTime);
-        //        $diff = abs($to_time - $from_time);
-        //        echo '<input type="hidden" id = "diff" value="' . $diff . '">';
-        //    }
+            else if (isset($playerTime[4]) && $curTime >= $playerTime[3] && $curTime < $playerTime[4]) {
+                $queryStart = true;
+            $query5 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND r.game_order=(SELECT game_order FROM ghost_room_players r, users p WHERE r.room_id=:min_room_id AND p.user_id = r.user_id AND r.died=0 order by game_order Limit 3,1 ) AND p.user_id = r.user_id';
+            $to_time = strtotime($playerTime[4]);
+            $from_time = strtotime($curTime);
+            $diff = abs($to_time - $from_time);
+            echo '<input type="hidden" id = "diff" value="' . $diff . '">';
+            }
+//        else if (!empty($_SESSION['start_time']) && $curTime < $playerTime[5]) {
+//                $queryStart = true;
+//                $query5 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND r.game_order=5 AND p.user_id = r.user_id';
+//                $to_time = strtotime($playerTime[5]);
+//                $from_time = strtotime($curTime);
+//                $diff = abs($to_time - $from_time);
+//                echo '<input type="hidden" id = "diff" value="' . $diff . '">';
+//            }
         else if ($curTime >= $playerTime[$count]) {
             if (!isset($_SESSION["vote"]) && !isset($_SESSION['die'])) {
                 $query6 = 'SELECT * FROM ghost_room_players r, users p WHERE r.room_id=:room_id AND p.user_id = r.user_id AND r.died =0';
@@ -157,8 +165,8 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
                     }
                     if ($draw) {
                         $_SESSION["next_round"] = true;
-                        $_SESSION['result_message'] = "<p><strong>The ghost was not found! The game continues...</strong></p>";
-                        if (isset($_SESSION['result_message']) && isset($_SESSION["next_round"]) && $_SESSION['next_round'] && $player['vote_order'] == (3 - $_SESSION['die_num'])) {
+                        $_SESSION['result_message'] = "<p><strong>The ghost was not found! The number of votes was a draw! The game continues...</strong></p>";
+                        if (isset($_SESSION['result_message']) && isset($_SESSION["next_round"]) && $_SESSION['next_round'] && $player['vote_order'] == ($mem_num - $_SESSION['die_num'])) {
 
                             $newTime = date("Y-m-d H:i:s", time() + 5);
                             $query12 = 'UPDATE  ghost_game_time SET start_time=:start_time WHERE room_id=:room_id';
@@ -187,8 +195,10 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
 
                         if ($ghost_word == $die_user["word"]) {
                             ob_end_clean();
-                            // $_SESSION['result_message'] = "<p>The <b>ghost</b> was found, it was " . $die_user["username"] . "!</p>";
+                            echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>Most of you voted " . $die_user["first_name"] . ", and you got it right!</p></div>";
                             echo "<p><strong>The ghost was found, it was " . $die_user["first_name"] . "!</strong></p>";
+                            echo '<p><strong>The ghost word was ' . $die_user['word'] . '!</strong></p>';
+                            echo '<br>';
                             echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Start New Game</a>';
                         } else if ($count != 1) {
                             if ($die_id == $_SESSION['user_id']) {
@@ -200,7 +210,7 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
                             $statement11 = $db->prepare($query11);
                             $statement11->execute(array(":user_id" => $die_id, ":room_id" => $_SESSION["room_id"]));
                             $statement11->closeCursor();
-                            if (isset($_SESSION['result_message']) && isset($_SESSION["next_round"]) && $_SESSION['next_round'] && $player['vote_order'] == (3 - $_SESSION['die_num'])) {
+                            if (isset($_SESSION['result_message']) && isset($_SESSION["next_round"]) && $_SESSION['next_round'] && $player['vote_order'] == (4 - $_SESSION['die_num'])) {
 
                                 $newTime = date("Y-m-d H:i:s", time() + 5);
                                 $query12 = 'UPDATE  ghost_game_time SET start_time=:start_time WHERE room_id=:room_id';
@@ -228,6 +238,7 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             $curr_player = $statement5->fetch();
             $statement5->closeCursor();
 
+
             if ($curr_player["user_id"] == $_SESSION["user_id"]) {
                 echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>If you think you are the ghost (the person with a different word), try to hide your identity!</p></div>";
                 echo "<p><strong>It's your turn! Please describe your word to the others...</strong></p>";
@@ -237,9 +248,23 @@ if ($curTime < $start_time_s && isset($_SESSION['result_message']) && isset($_SE
             }
         }
     } else {
-        //query
+              $query14 = 'SELECT * from ghost_room gr , ghost_word_pair wp where gr.room_id=:room_id and wp.word_pair_id = gr.word_pair_id';
+                        $statement14 = $db->prepare($query14);
+                        $statement14->execute(array(":room_id" => $_SESSION["room_id"]));
+                        $result9 = $statement14->fetch();
+                          $die_word = $result9["ghost_word"];
+
+
+                        $query18 = 'SELECT * FROM  ghost_room_players rp, users u WHERE u.user_id = rp.user_id AND rp.room_id = :room_id AND rp.word = :word';
+                                  $statement18= $db->prepare($query18);
+                                  $statement18->execute(array(":word" => $die_word, ":room_id" => $_SESSION["room_id"]));
+                                  $die_user_ = $statement18->fetch();
+                                  $statement18->closeCursor();
+                                  ob_end_clean();
         echo "<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>The ghost wins if there are only 2 players remaining!</p></div>";
-        echo '<p><strong>The ghost has won, it was PLACEHOLDER!</strong></p>';
+        echo '<p><strong>The ghost has won, it was '.$die_user_['first_name'].'!</strong></p>';
+        echo '<p><strong>The ghost word was ' . $die_word . '!</strong></p>';
+        echo '<br>';
         echo '<a href="restart.php" role="button" class="btn btn-square" id="start-new-btn">Start New Game</a>';
     }
 }

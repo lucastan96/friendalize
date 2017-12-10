@@ -3,7 +3,7 @@
 session_start();
 require_once('../includes/connection.php');
 
-$query6 = 'SELECT * FROM ghost_game_time WHERE room_id = :room_id';
+$query6 = 'SELECT * from ghost_game_time gt, ghost_room r, ghost_word_pair wp  WHERE gt.room_id=r.room_id AND r.word_pair_id = wp.word_pair_id and r.room_id = :room_id';
 $statement6 = $db->prepare($query6);
 $statement6->execute(array(":room_id" => $_SESSION["room_id"]));
 $r3 = $statement6->fetch();
@@ -15,6 +15,7 @@ unset($_SESSION['die']);
 unset($_SESSION['result_message']);
 $_SESSION['die_num'] = 0;
 $id = $r3["room_id"];
+$interest_id =$r3['interest_id'];
 if ($id == $_SESSION["room_id"]) {
     $query = 'DELETE FROM ghost_game_time WHERE room_id = :room_id';
     $statement = $db->prepare($query);
@@ -32,26 +33,15 @@ if ($id == $_SESSION["room_id"]) {
     $statement2->closeCursor();
 
 
-    $query4 = 'SELECT * from ghost_word_pair';
+    $query4 = 'SELECT word_pair_id FROM ghost_word_pair WHERE  interest_id= :interest_id ORDER BY RAND() LIMIT 5';
     $statement4 = $db->prepare($query4);
-    $statement4->execute(array(":room_id" => $_SESSION["room_id"]));
+    $statement4->execute(array(":interest_id"=>$interest_id));
     $r1 = $statement4->fetchAll();
     $statement4->closeCursor();
-    $word_pair = array();
+        $new_word=2;
     foreach ($r1 as $value) {
-
-        array_push($word_pair, $value["word_pair_id"]);
-    }
-
-    $query5 = 'SELECT * from ghost_room r, ghost_word_pair wp WHERE r.word_pair_id = wp.word_pair_id AND r.room_id = :room_id';
-    $statement5 = $db->prepare($query5);
-    $statement5->execute(array(":room_id" => $_SESSION["room_id"]));
-    $r2 = $statement5->fetch();
-    $statement5->closeCursor();
-    $new_word = 2;
-    foreach ($word_pair as $value) {
-        if ($r2["word_pair_id"] != $value) {
-            $new_word = $value;
+        if ($r3["word_pair_id"] != $value['word_pair_id']) {
+            $new_word = $value['word_pair_id'];
         }
     }
 

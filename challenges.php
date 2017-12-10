@@ -8,6 +8,25 @@ if (!isset($_SESSION['user_id'])) {
     require_once('includes/essentials.php');
 
     $rooms = get_rooms($db);
+    $query1 = "SELECT interests FROM user_interests  WHERE user_id = :user_id";
+    $statement1 = $db->prepare($query1);
+    $statement1->bindValue(":user_id", $_SESSION['user_id']);
+    $statement1->execute();
+    $results_array1 = $statement1->fetch();
+    $statement1->closeCursor();
+
+  $interest_ids = $results_array1["interests"];
+if(empty($interest_ids)){
+  $interests_array=[];
+  $size_array=  0;
+}else{
+
+  $interests_array = explode(",", $interest_ids);
+    $size_array= sizeof($interests_array);
+}
+
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -41,6 +60,30 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="form-group">
                                 <label class="control-label" for="room_name">Room Name (Optional):</label>
                                 <input class='form-control form-input' type='text' name='room_name' placeholder="Type a name for the room, be creative!">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="member_num">Interest:</label>
+                                <select class='form-control form-select' id="int_id" name="int_id" required>
+
+                                    <?php
+                                    if($size_array==0){
+                                      echo '<option value="2" selected="selected" >Music</option>';
+
+                                    }
+                                  else{
+                                         for ($i = 0; $i < $size_array; $i++) {
+                                            $query2 = "SELECT name FROM interests WHERE interest_id = :interest_id";
+                                            $statement2 = $db->prepare($query2);
+                                            $statement2->bindValue(":interest_id", $interests_array[$i]);
+                                            $statement2->execute();
+                                            $results_array2 = $statement2->fetch();
+                                            $statement2->closeCursor();
+                                            echo '<option value="'. $interests_array[$i].'">'. htmlspecialchars($results_array2["name"]).'</option>';
+                                        }
+                                      }
+                                      ?>
+
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="member_num">Players Allowed:</label>

@@ -25,7 +25,7 @@ $statement7->execute(array(":room_id" => $room_id));
 $results7 = $statement7->fetch();
 $statement7->closeCursor();
 
-$query8 = "SELECT room_id FROM ghost_room_players WHERE user_id = :user_id AND room_id = :room_id";
+$query8 = "SELECT rp.room_id, gr.member_num FROM ghost_room gr, ghost_room_players rp WHERE  rp.room_id=gr.room_id AND rp.user_id=:user_id AND rp.room_id=:room_id";
 $statement8 = $db->prepare($query8);
 $statement8->bindValue(":user_id", $_SESSION["user_id"]);
 $statement8->bindValue(":room_id", $room_id);
@@ -63,8 +63,7 @@ $result = $statement3->fetch();
 $statement3->closeCursor();
 
 $ready = $result["num_ready"];
-
-if ($ready == 3) {
+if ($ready == $results6["member_num"]) {
     $query2 = 'SELECT wp.civilian_word,wp.ghost_word FROM ghost_room r , ghost_word_pair wp WHERE r.room_id = :room_id AND r.word_pair_id = wp.word_pair_id';
     $statement2 = $db->prepare($query2);
     $statement2->execute(array(":room_id" => $room_id));
@@ -90,7 +89,6 @@ if ($ready == 3) {
             $word = $civilian_word;
         } else {
             $word = $ghost_word;
-            echo $word;
         }
         $query4 = 'UPDATE ghost_room_players SET word=:word,game_order=:order WHERE room_id=:room_id AND user_id=:user_id';
         $statement4 = $db->prepare($query4);
@@ -103,5 +101,4 @@ if ($ready == 3) {
     $statement5 = $db->prepare($query5);
     $statement5->execute(array(":room_id" => $room_id, ":start_time" => $curTime));
     $statement5->closeCursor();
-}  
-
+}

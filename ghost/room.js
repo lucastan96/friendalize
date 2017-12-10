@@ -15,13 +15,14 @@ function checkReady() {
         url: "ready.php",
         success: function (data) {
             var response = jQuery.parseJSON(data);
-            if (response["user_ready"] == 1 && response["num_ready"] != 3) {
-                $(".timer-container").html('<p><strong>Waiting for players...</strong></p>');
-            } else if (response["num_ready"] != 3) {
+            // alert(response["num_ready"]);
+            if (response["user_ready"] == 1 && response["num_ready"] != response["mem_num"]) {
+                $(".timer-container").html("<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>Dont' worry if you don't know how to play! Tip boxes such as this one will help you along the way!<br><br>Or, you could disable them on the bottom right of the screen.</p></div><p><strong>Waiting for players...</strong></p>");
+            } else if (response["num_ready"] != response["mem_num"]) {
                 var s = '<input type="hidden" name ="room_id" id="room_id" value=' + response["room_id"] + '><button type="button" class="btn btn-square" onclick="readyButton()" id="ready-btn">Ready</button>';
                 $('.ready').html(s);
-                $(".timer-container").html('<p><strong>When you are ready, click ready!</strong></p>');
-            } else if (response["num_ready"] == 3) {
+                $(".timer-container").html("<div class='tip'><p><i class='fa fa-lightbulb-o' aria-hidden='true'></i><strong>Game Tip</strong></p><p>Dont' worry if you don't know how to play! Tip boxes such as this one will help you along the way!<br><br>Or, you could disable them on the bottom right of the screen.</p></div><p><strong>When you are ready, click ready!</strong></p>");
+            } else if (response["num_ready"] == response["mem_num"]) {
                 clearInterval(ready_button_interval);
                 clearInterval(profile_info_interval);
                 $(".timer-container").load("timer.php");
@@ -41,7 +42,7 @@ function readyButton() {
         data: {
             room_id: room_id
         },
-        success: function (data) {
+        success: function () {
             $("#ready-btn").remove();
         },
         error: function () {
