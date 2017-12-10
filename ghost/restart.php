@@ -37,7 +37,7 @@ if ($id == $_SESSION["room_id"]) {
     $statement4 = $db->prepare($query4);
     $statement4->execute(array(":interest_id"=>$interest_id));
     $r1 = $statement4->fetchAll();
-    $statement4->closeCursor();
+    $statement4->closeCursor();s
         $new_word=2;
     foreach ($r1 as $value) {
         if ($r3["word_pair_id"] != $value['word_pair_id']) {

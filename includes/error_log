@@ -1,5 +1,0 @@
-[05-Dec-2017 16:39:45 Europe/Dublin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2053  in /home/e572108/public_html/friendalize/includes/notifications-p.php:8
-Stack trace:
-#0 /home/e572108/public_html/friendalize/includes/notifications-p.php(8): PDOStatement->fetchAll()
-#1 {main}
-  thrown in /home/e572108/public_html/friendalize/includes/notifications-p.php on line 8
