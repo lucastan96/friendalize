@@ -6,6 +6,9 @@ The main objective of this project is to encourage interaction between introvert
 Friendalize is a college project for the Universal Design Principles module. It was a team effort consisting of 4 people:
 
 Elaine Pei Ling Chong - Project Manager, Security Tester, Back-end Programmer
+
 Jun Chieh Tan (Lucas)(me) - UX/UI Designer, Documentation
+
 Farwa Javed - Back-end Programmer, Documentation
+
 Alvin Khai Ming Teo - Application Tester, Back-end Programmer
