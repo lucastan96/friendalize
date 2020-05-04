@@ -43,10 +43,10 @@ if ($request_method == 'POST') {
             $institution_id = $institution_id_array["institution_id"];
 
             if ($institution_id == NULL) {
-                header("Location: setup-institution.php");
+                header("Location: http://localhost/friendalize/setup-institution");
                 exit();
             } else {
-                header("Location: index.php");
+                header("Location: http://localhost/friendalize/");
                 exit();
             }
         }
@@ -59,6 +59,7 @@ if ($request_method == 'POST') {
         exit();
     }
 } else {
-    header("Location: index.php");
-    exit();
+    echo "NOT POST";
+    // header("Location: http://localhost/friendalize/");
+    // exit();
 }

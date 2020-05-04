@@ -53,6 +53,6 @@ if ($request_method == 'POST') {
         }
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: http://localhost/friendalize/");
     exit();
 }

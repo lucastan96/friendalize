@@ -22,7 +22,7 @@ if ($request_method == 'POST') {
     if ($pass == false) {
 	$message = "<i class='fa fa-info-circle' aria-hidden='true'></i>The comment contains prohibited words.<div><i class='fa fa-times' aria-hidden='true'></i></div>";
 
-	header("Location: ../index.php");
+	header("Location: http://localhost/friendalize/");
 	exit();
     } else {
 	$query2 = "INSERT INTO post_comments (comment , user_id , post_id) VALUES (:comment , :id , :post_id);";
@@ -35,10 +35,10 @@ if ($request_method == 'POST') {
 	
 	$_SESSION["commentAdded"] = 1;
 
-	header('Location: ../index.php');
+	header('Location: http://localhost/friendalize/');
 	exit();
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: http://localhost/friendalize/");
     exit();
 }

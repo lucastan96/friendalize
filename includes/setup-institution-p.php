@@ -37,10 +37,10 @@ if ($request_method == 'POST') {
 
     $_SESSION['first_login'] = 1;
 
-    header("Location: ../get-started.php");
+    header("Location: http://localhost/friendalize/get-started");
     exit();
 } else {
-    header("Location: ../signin.php");
+    header("Location: http://localhost/friendalize/signin");
     exit();
 }
 

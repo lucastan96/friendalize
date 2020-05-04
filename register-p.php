@@ -100,7 +100,7 @@ if ($request_method == 'POST') {
             $statement6->execute();
             $statement6->closeCursor();
             
-            header("Location: setup-institution.php");
+            header("Location: http://localhost/friendalize/setup-institution");
             exit();
         } else {
             $register_message = "<i class='fa fa-info-circle' aria-hidden='true'></i>Your username or email has already been used.";
@@ -114,7 +114,7 @@ if ($request_method == 'POST') {
         exit();
     }
 } else {
-    header("Location: signin.php");
+    header("Location: http://localhost/friendalize/signin");
     exit();
 }
 

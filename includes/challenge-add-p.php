@@ -56,10 +56,10 @@ if ($request_method == 'POST') {
 
         $_SESSION["die_num"] = 0;
 
-        header("Location: ../ghost/room.php?room_id=" . $room_id);
+        header("Location: http://localhost/friendalize/ghost/room?room_id=" . $room_id);
         exit();
     }
 } else {
-    header("Location: ../challenges.php");
+    header("Location: http://localhost/friendalize/challenges");
     exit();
 }

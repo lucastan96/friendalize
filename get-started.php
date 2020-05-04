@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['first_login'])) {
-    header("Location: index.php");
+    header("Location: http://localhost/friendalize/");
     exit();
 }
 ?>

@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.php");
+    header("Location: http://localhost/friendalize/signin");
     exit();
 } else {
     require_once('includes/essentials.php');

@@ -57,10 +57,10 @@ if ($request_method == 'POST') {
         $statement3->closeCursor();
     }
 
-    header("Location: ../settings.php");
+    header("Location: http://localhost/friendalize/settings");
     exit();
 } else {
-    header("Location: ../settings.php");
+    header("Location: http://localhost/friendalize/settings");
     exit();
 }
 

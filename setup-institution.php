@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.php");
+    header("Location: http://localhost/friendalize/signin");
     exit();
 } else {
     require_once('includes/connection.php');
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     $institution_id = get_institution_id($db, $_SESSION['user_id']);
 
     if ($institution_id != NULL) {
-        header("Location: index.php");
+        header("Location: http://localhost/friendalize/");
         exit();
     }
 }

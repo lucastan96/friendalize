@@ -21,7 +21,7 @@ if ($request_method == 'POST') {
     $friends_array = explode(",", $friend_ids);
 
     if (in_array($friend_id, $friends_array)) {
-        header("Location: ../profile.php?id=$friend_id");
+        header("Location: http://localhost/friendalize/profile?id=$friend_id");
         exit();
     } else {
         $query2 = "SELECT requests FROM user_friends WHERE user_id = :user_id";
@@ -95,10 +95,10 @@ if ($request_method == 'POST') {
         $statement7->execute();
         $statement7->closeCursor();
 
-        header("Location: ../profile.php?id=$friend_id");
+        header("Location: http://localhost/friendalize/profile?id=$friend_id");
         exit();
     }
 } else {
-    header("Location: ../profile.php?id=$friend_id");
+    header("Location: http://localhost/friendalize/profile?id=$friend_id");
     exit();
 }    

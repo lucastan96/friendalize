@@ -18,10 +18,10 @@ if ($request_method == 'POST') {
     $statement4->execute();
     $statement4->closeCursor();
 
-    header("Location: settings.php");
+    header("Location: http://localhost/friendalize/settings");
     exit();
 } else {
-    header("Location: settings.php");
+    header("Location: http://localhost/friendalize/settings");
     exit();
 }
 

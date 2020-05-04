@@ -66,13 +66,13 @@ if ($request_method == 'POST') {
             $statement4->closeCursor();
         }
 
-        header("Location: ../profile.php?id=$friend_id");
+        header("Location: http://localhost/friendalize/profile?id=$friend_id");
         exit();
     } else {
-        header("Location: ../profile.php?id=$friend_id");
+        header("Location: http://localhost/friendalize/profile?id=$friend_id");
         exit();
     }
 } else {
-    header("Location: ../profile.php?id=$friend_id");
+    header("Location: http://localhost/friendalize/profile?id=$friend_id");
     exit();
 }

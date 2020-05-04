@@ -75,12 +75,12 @@ if (!empty($_FILES['picture']['name'])) {
 
                 $_SESSION['postAdded'] = 1;
 
-                header("Location: ../index.php");
+                header("Location: http://localhost/friendalize/");
                 exit();
             }
         }
     } else {
-        header("Location: ../index.php");
+        header("Location: http://localhost/friendalize/");
         exit();
     }
 } else {
@@ -94,6 +94,6 @@ if (!empty($_FILES['picture']['name'])) {
 
     $_SESSION['postAdded'] = 1;
 
-    header("Location: ../index.php");
+    header("Location: http://localhost/friendalize/");
     exit();
 }

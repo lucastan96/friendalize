@@ -6,7 +6,7 @@ require_once('includes/functions.php');
 $institution_id = get_institution_id($db, $_SESSION['user_id']);
 
 if ($institution_id == NULL) {
-    header("Location: setup-institution.php");
+    header("Location: http://localhost/friendalize/setup-institution");
     exit();
 }
 
